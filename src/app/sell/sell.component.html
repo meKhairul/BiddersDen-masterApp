@@ -1,0 +1,72 @@
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h3>Sell your item to us</h3>
+                    <p>Fill in the data below.</p>
+                    <form class="requires-validation" novalidate>
+  
+                        <div class="col-md-12">
+                           <input class="form-control" type="text" name="product-name" placeholder="Product Name" [(ngModel)] = "product.product_name" [ngModelOptions] = "{standalone: true}"required >
+                           <div class="valid-feedback">Product name field is valid!</div>
+                           <div class="invalid-feedback">Product name field cannot be blank!</div>
+                        </div>
+  
+                        <div class="col-md-12">
+                            <input class="form-control" type="number" name="Base Price" placeholder="Base Price" [(ngModel)] = "product.base_price" [ngModelOptions] = "{standalone: true}"required>
+                             <div class="valid-feedback">Base Price field is valid!</div>
+                             <div class="invalid-feedback">Base Price field cannot be blank!</div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input class="form-control" type="number" name="Bidding Time" placeholder="Enter Bidding Time - number of days" [(ngModel)] = "product.time_to_bid" [ngModelOptions] = "{standalone: true}"required>
+                             <div class="valid-feedback"> This Field is valid!</div>
+                             <div class="invalid-feedback"> This field cannot be blank!</div>
+                        </div>
+  
+                       <div class="col-md-12">
+                            <select class="form-select mt-3" [(ngModel)] = "product.product_category" [ngModelOptions]= "{standalone: true}" required>
+                                  <option selected disabled value="">Categories</option>
+                                  <option value="electronics">Electronics</option>
+                                  <option value="cloths">Cloths</option>
+                                  <option value="foods">Foods</option>
+                                  <option value="accessories">Accessories</option>
+                           </select>
+                            <div class="valid-feedback">You selected a Category!</div>
+                            <div class="invalid-feedback">Please select a Category!</div>
+                       </div>
+  
+  
+                       <div class="col-md-12">
+                          <input class="form-control" type="text" name="defects" placeholder="Product defects" [(ngModel)] = "product.product_details" [ngModelOptions] = "{standalone: true}" required>
+                           <div class="valid-feedback">Product defects field is valid!</div>
+                           <div class="invalid-feedback">Product defects field cannot be blank!</div>
+                       </div>
+  
+  
+                      <div class="col-md-12 mt-3">
+                        Product Photo:
+                        <input class="form-control" type="file" placeholder="Choose File"  (change) = "onChanged($event)"  required>
+                           <div class="valid-feedback">Product photos field is valid!</div>
+                           <div class="invalid-feedback">Product photos field cannot be blank!</div>
+                      </div>
+                      
+  
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                      <label class="form-check-label">I confirm that all data are correct</label>
+                     <div class="invalid-feedback">Please confirm that the entered data are all correct!</div>
+                    </div>
+              
+  
+                        <div class="form-button mt-3">
+                            <button id="submit" type="submit" class="btn btn-primary" (click)="addProduct()">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

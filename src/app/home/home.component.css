@@ -1,0 +1,47 @@
+
+
+
+ .d-block{
+     margin: 0px auto;
+     width: 50%;
+     height: 400px;
+     position: relative;
+ }
+ span{
+     background-color: black;
+ }
+ div.col{
+     background-color: black;
+ }
+ 
+ .top-list{
+    width: 150px;
+    height:150px;
+    margin:10px 10px;
+    position: relative;
+    
+ }
+ .categories-list{
+    display: inline;
+ }
+ .top-categories-block{
+     width: 64px;
+ }
+ .top-categories-inner{
+    text-align: center;
+    margin: 10px 10px;
+ }
+ .bid-products{
+     height: 200px;
+     width: 100%;
+ }
+
+ .card img:hover{
+    transition: 0.3s ease-in-out;
+    transform: scale(1.1);
+ }
+ .card{
+     height: 400px;
+ }
+ 
+ 

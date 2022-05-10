@@ -1,0 +1,234 @@
+<!-- <body class="h-nav">
+<div class="horizontal-nav">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+        <form class="d-flex" action="search.php">
+          <input class="search-box" id="search" type="search" placeholder= "search" aria-label="Search">
+          <button class="btn" type="submit">
+            <a class="nav-link-icon" routerLink="">
+              <img src="assets/search.png" alt="english" class="nav-icon">
+            </a>
+          </button>
+        </form>
+        
+        
+        <div class="right-align">
+          <ul class="navbar-nav ">
+            <li class="nav-item">
+              <a class="nav-link-icon" routerLink="bangla">
+                <img src="assets/bell.png" alt="bengali" class="nav-icon">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-icon" routerLink="bangla">
+                <img src="assets/chat.png" alt="bengali" class="nav-icon">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-icon" routerLink="bangla">
+                <img src="assets/shopping-cart.png" alt="bengali" class="nav-icon">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-icon" routerLink="bangla">
+                <img src="assets/user.png" alt="bengali" class="nav-icon">
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+        <div class="language">
+          <ul class="navbar-nav ">
+            <li class="nav-item">
+              <a class="nav-link-icon" routerLink="">
+                <img src="assets/united-kingdom.png" alt="english" class="nav-icon">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link-icon" routerLink="bangla">
+                <img src="assets/bangladesh.png" alt="bengali" class="nav-icon">
+              </a>
+            </li>
+          </ul>
+        </div>
+            
+      </div>
+        
+    </div>
+    
+</nav>
+</div>
+</body>
+ -->
+ <nav class="flex-div">
+  <div class="nav-left flex-div">
+    <img
+      src="assets/align-justify.png"
+      class="menu-icon"
+      
+    />
+    <h5><a routerLink=""><b>BiddersDen</b></a></h5>
+    <!-- <img src="assets/images/logo.png" class="logo" alt="" /> -->
+  </div>
+
+  <div class="nav-middle flex-div">
+    <div class="search-box flex-div">
+      <input type="text" placeholder="Search" [(ngModel)] = "searchData" [ngModelOptions] = "{standalone: true}"/>
+      <a (click)="search()">
+      <img src="assets/search.png" alt="" />
+      </a>
+      <!--img src="assets/images/voice-search.png" class="mic-icon" alt=""> -->
+    </div>
+  </div>
+
+  <div *ngIf="authenticated" class="authenticate-check">
+    <div  class="nav-right flex-div">
+    <div class="dropdown">
+      <div class="dropbtn" >
+        <a (click)="toggle()">
+          <img src="assets/notification.png" class="user-icon" alt="notification-Icon" />
+        </a>
+      </div>
+      <!-- <div class="dropdown-content">
+        <p>You have notifications</p>
+      </div> -->
+    </div>
+    
+
+    <div class="dropdown">
+      <div class="dropbtn" >
+        <a routerLink="chat">
+          <img src="assets/chat.png" class="user-icon" alt="chat-Icon" />
+        </a>
+      </div>
+      
+      <!-- <div class="dropdown-content">
+        <p>Chat with us</p>
+      </div> -->
+    </div>
+        
+    <div class="dropdown">
+      <div class="dropbtn" >
+        <a (click)="toggle()">
+          <img src="assets/user.png" class="user-icon" alt="user-Icon" />
+          
+        </a>
+        
+        
+      </div>
+      <!-- <div class="dropdown-content">
+        <p >{{user.username}}</p>
+        <a routerLink="userprofile">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Order</a>
+      </div> -->
+    </div>
+
+    <div class="dropdown" *ngIf="authenticated">
+      <div class="dropbtn" >
+        
+        <a routerLink="userprofile">
+          <p  >{{user.username}}</p>
+        </a>
+        
+        
+      </div>
+      <!-- <div class="dropdown-content">
+        <p >{{user.username}}</p>
+        <a routerLink="userprofile">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Order</a>
+      </div> -->
+    </div>
+  
+  </div>
+  </div>
+  
+  <div class="language">
+    <img src="assets/united-kingdom.png" class="language-icon" alt="english-Icon" />
+    <img src="assets/bangladesh.png" class="language-icon" alt="bd-Icon" />
+  </div>
+</nav>
+
+<!--sidebar-->
+<div class="sidebar" [class.small-sidebar]="click == 0">
+  <div class="shortcut-links">
+    <a routerLink="" >
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAcRJREFUSEuNle1ZwzAMhF9tkBWYgDJB20mgkwCT0E3SblAmYIVsIB5/xJZsp0/yq4hY5zvdKUJ4BND4qzyx1NVtQRDUH/P/jg2kq3UoHtheoQPoXl0BtlByPbOZUOb8+4yybEG7O457Z/oVYFKYgUM+/AA5C7qsyg5Ujtr3Eo0Rr8B7PFB1D7XLiIVrsWMGuXnvBoGrCpcw6bEpUj0/VvBS+kL57Aabu0U2wjfKVwXwYhkAjwN8AD/ew2Ols1SBaeP6IGlh7g7n5u2BQWQqm4sK1y5PnXbCAZVZ0CkFbfPWLpbRUUKw78PSaGdwQJhRpkFmYtor3CDVwoJyhgySl8TaKzT9g7b5HgZWfFlAXyAF0cyAh8BrCs72ztlyS+PGINPbEwAvUJcVb9MqXX3xlzRLx8AOTa3gT0XqbL+ZA7cGmuW9Z60VbRt39RsgzCAxaP3mYH3y61/2om5dO2ojBtXSaQbmEm7fNBZxhNZcidatWe4WSpaUM1zHoBhhLK/J7wAgnTEsC3vxK33kovRuD+A2bwtQkhNlbG09WJhyAz0acneEUyPRTeBoaNyBU/NRst+D3Vb0X5cuJJs52ALwdtxzDQvxD/O42CJA8DvnAAAAAElFTkSuQmCC"/>
+      <P><strong>Home</strong></P>
+    </a>
+    <a  *ngIf="authenticated" routerLink="sell">
+      <img src="assets/shopping-bag.png" />
+      <p><strong>Sell</strong></p>
+    </a>
+    <a  *ngIf="authenticated" href="#">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAkFJREFUSEuFlY112zAMhL+bINqg2SDOBJEnSDqBO0IyQd0NukHlCdpMEGeCKhO0IyQToA8kJZEi5eo9P+uHBHB3OFD4JcDC3XzfeJUWTGu2VqT32d+8Md+yRMvvhLC5lvLLVGNaUyfIN9dVRIDbJWx9UfjQ+Lp6tUMcMB4E14nNv8Av4ASMK/4Kqi+R32H6CdZPATaYPwOfgfc13xFBmWJaswNegE7wYeKI4YHGxFQv6E08YlyF4GKPaVx0EgVFSzLtwELwRMFjrK7JtK/xxDeId4z9Qpnr2mxNnYXdWeT3S7tbiredsLN5kpjMk8yh1x3Zg17APoDrgteIIGc0B+VIXHina484O/e1BmLAOADfgOM6uzxDZCqiL/UbgIPgZAl5kSBhGrEAda5iZYGEQGqYzhvjd9LgdmK/rCLtEqjlj7n2iaiY3YFNdGUUFl2kAcypCY4NecQJK0VeurroqJwuT+D6dTHOcsV2EzfJGG+AGyyap+rQ5lwKFAleLe6thNpZaLMQrUe4HvFpa+KWiY+gr8IuiDypD0NJ84bll7nYmfiDBXO6D9wPpdEqKvKhWiGoOAstCrwGaqe9C/wmp+7iO+CpHhVz9g7jB/CQxPUZNZZubMwLgUN2DT4lob+DnsGm0eyC3gM+p5wW7xwXdlyDXZs1f/aNg+C+nrgFRc8pkY+Kwt/FsKusv8TwysJP4J12BXpLaJz7c6OLZ+81EVw4J7ZPzrwpshl1iaLc1cvJdHFHiSVzcnno54Ps/2i2XfgPSXT1H5ZmudMAAAAASUVORK5CYII="/>
+      
+      <p><strong>Bid History</strong> </p>
+    </a>
+    <a href="#">
+      <img src="assets/categories.png" />
+      <p><strong>Categories</strong></p>
+    </a>
+    <a href="#">
+      <img src="assets/about.png" />
+      <p><strong>About</strong></p>
+    </a>
+    <a *ngIf = "!authenticated" routerLink="signin">
+      <img src="assets/login.png" />
+      <p><strong>Sign in</strong></p>
+    </a>
+    <a *ngIf = "authenticated" routerLink="signin" (click) = "logout()"
+      ><img src="assets/login.png" />
+      <p><strong>Sign Out</strong></p>
+    </a>
+                        
+    <hr />
+  </div>
+</div>
+
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="">BlogBee</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto ">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="">Home</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" routerLink="About">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="Help">Help</a>
+          </li>
+        
+        </ul>
+        <form class="d-flex">
+          <input class="search-box" id="search" type="search" placeholder= "search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <button class="nav-button" routerLink="signin" style="width:auto;">Sign in</button>
+          </li>
+          <!-- This is Signup button part -->
+<!-- <li class="nav-item">
+            <button class="nav-button" routerLink="signup" style="width:auto;">Sign Up</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <router-outlet></router-outlet> -->
