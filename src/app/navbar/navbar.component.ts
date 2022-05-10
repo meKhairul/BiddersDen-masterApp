@@ -63,9 +63,11 @@ export class NavbarComponent implements OnInit {
       this.products = data;
       this.productService.setSearchTextProducts(this.products);
       this.productService.setSearchText(this.searchData);
+      this.router.navigate(['search']);
+      
+    
+      console.log(this.products)
     });
-    this.router.navigate(['search']);
-    console.log(this.products)
   }
   
 }
