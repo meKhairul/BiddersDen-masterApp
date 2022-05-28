@@ -15,12 +15,17 @@ export class SearchComponent implements OnInit {
   products: Product[]=[];
   userdata!: any;
   searchText!:String;
-  constructor(private userService:UserService,private productService:ProductService,private router:Router) { }
+  flag!:number;
+  constructor(private userService:UserService,private productService:ProductService,private router:Router) { 
+    this.products = this.productService.getSearchTextProducts();
+    this.searchText = this.productService.getSearchText();
+    this.getSearchProduct();
+    this.flag = this.productService.getFlag();
+  }
 
   ngOnInit(): void {
     this.authenticate();
-    this.products = this.productService.getSearchTextProducts();
-    this.searchText = this.productService.getSearchText();
+    
   }
   authenticate(){
     this.userService.authenticate().subscribe(response => {
@@ -44,5 +49,13 @@ export class SearchComponent implements OnInit {
     this.productService.setBidProductToBeShown(product);
     this.router.navigate(['bid']);
   }
+  getSearchProduct():Product[]{
+    
+    this.productService.searchProducts(this.searchText).subscribe(data=>{
+      this.products = data;
+      
+  });
+  return this.products;
 
+  }
 }

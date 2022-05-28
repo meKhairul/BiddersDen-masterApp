@@ -9,7 +9,8 @@
 <body class="home" >
 
 <div class="album py-5 bg-light ">
-  <h3 style="text-align: center;"><b>Your search result for{{" '"+searchText+"'"}}</b></h3>
+  <h3 *ngIf="flag" style="text-align: center;"><b>Your search result for{{" '"+searchText+"'"}}</b></h3>
+  <h3 *ngIf="!flag" style="text-align: center;"><b>Categories for{{" '"+searchText+"'"}}</b></h3>
   <div class="container">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >

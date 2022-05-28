@@ -14,6 +14,7 @@ export class ProductService {
   API_URL = 'http://127.0.0.1:8000';
   productToBeShown  = new Product();
   bidProductToBeShown  = new Product();
+  flag!:number;
 
 constructor(private http: HttpClient) { }
 
@@ -52,7 +53,7 @@ getProductToBeShown():Product{
   return JSON.parse(JSON.stringify(this.productToBeShown));
 }
 getBidProductToBeShown():Product{
-  return this.bidProductToBeShown;
+  return JSON.parse(JSON.stringify(this.bidProductToBeShown));
 }
 showProduct(){
   console.log("product: "+this.productToBeShown);
@@ -68,6 +69,13 @@ setSearchText(data : String){
 }
 getSearchText():String{
   return this.searchText;
+}
+setFlag(flag:number)
+{
+  this.flag = flag;
+}
+getFlag():number{
+  return this.flag;
 }
 
 

@@ -10,7 +10,7 @@
                 <img src="{{'assets/'+productShow.uid+'.jpg'}}" alt="{{productShow.product_name}}">
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{productShow.product_name}}</h5>
                 <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{productShow.product_details}}</p>
-                <p><strong>Price:</strong> ${{productShow.base_price}}</p>
+                <p><strong>Price:</strong> ${{productShow.current_price}}</p>
                 <button class="btn btn-primary" (click)="showBidProduct()" >Bid</button>
             </div>
 

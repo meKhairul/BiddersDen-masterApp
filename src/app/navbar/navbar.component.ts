@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit {
   user : User = new User();
   products : Product[] = []
   searchData!:String;
+  flag!:number;
   
   /*menuButtonClickEvent() {
     if (this.click == 0) this.click = 1;
@@ -56,14 +57,23 @@ export class NavbarComponent implements OnInit {
     }
   }
   
-  search(){
-    var searchText = { text : this.searchData}
+  search(searchData:String,flag:number){
+    var searchText = { text : searchData}
     console.log(this.searchData);
     this.productService.searchProducts(searchText).subscribe(data=>{
       this.products = data;
       this.productService.setSearchTextProducts(this.products);
-      this.productService.setSearchText(this.searchData);
-      this.router.navigate(['search']);
+      this.productService.setSearchText(searchData);
+      this.productService.setFlag(flag);
+      if(this.router.url == "/search"){
+        
+        console.log("we are here:" +this.router.url);
+        let currentUrl = this.router.url;
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
+      }
+      else {this.router.navigate(['search']);}
       
     
       console.log(this.products)

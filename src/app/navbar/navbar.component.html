@@ -80,7 +80,7 @@
   <div class="nav-middle flex-div">
     <div class="search-box flex-div">
       <input type="text" placeholder="Search" [(ngModel)] = "searchData" [ngModelOptions] = "{standalone: true}"/>
-      <a (click)="search()">
+      <a (click)="search(searchData,1)">
       <img src="assets/search.png" alt="" />
       </a>
       <!--img src="assets/images/voice-search.png" class="mic-icon" alt=""> -->
@@ -159,32 +159,67 @@
 <!--sidebar-->
 <div class="sidebar" [class.small-sidebar]="click == 0">
   <div class="shortcut-links">
-    <a routerLink="" >
+    <div class="links">
+
+    
+    <a class="outer-link" routerLink="" >
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAcRJREFUSEuNle1ZwzAMhF9tkBWYgDJB20mgkwCT0E3SblAmYIVsIB5/xJZsp0/yq4hY5zvdKUJ4BND4qzyx1NVtQRDUH/P/jg2kq3UoHtheoQPoXl0BtlByPbOZUOb8+4yybEG7O457Z/oVYFKYgUM+/AA5C7qsyg5Ujtr3Eo0Rr8B7PFB1D7XLiIVrsWMGuXnvBoGrCpcw6bEpUj0/VvBS+kL57Aabu0U2wjfKVwXwYhkAjwN8AD/ew2Ols1SBaeP6IGlh7g7n5u2BQWQqm4sK1y5PnXbCAZVZ0CkFbfPWLpbRUUKw78PSaGdwQJhRpkFmYtor3CDVwoJyhgySl8TaKzT9g7b5HgZWfFlAXyAF0cyAh8BrCs72ztlyS+PGINPbEwAvUJcVb9MqXX3xlzRLx8AOTa3gT0XqbL+ZA7cGmuW9Z60VbRt39RsgzCAxaP3mYH3y61/2om5dO2ojBtXSaQbmEm7fNBZxhNZcidatWe4WSpaUM1zHoBhhLK/J7wAgnTEsC3vxK33kovRuD+A2bwtQkhNlbG09WJhyAz0acneEUyPRTeBoaNyBU/NRst+D3Vb0X5cuJJs52ALwdtxzDQvxD/O42CJA8DvnAAAAAElFTkSuQmCC"/>
       <P><strong>Home</strong></P>
     </a>
-    <a  *ngIf="authenticated" routerLink="sell">
+    <a class="outer-link" *ngIf="authenticated" routerLink="sell">
       <img src="assets/shopping-bag.png" />
       <p><strong>Sell</strong></p>
     </a>
-    <a  *ngIf="authenticated" href="#">
+    <!-- <a  *ngIf="authenticated" href="#">
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAkFJREFUSEuFlY112zAMhL+bINqg2SDOBJEnSDqBO0IyQd0NukHlCdpMEGeCKhO0IyQToA8kJZEi5eo9P+uHBHB3OFD4JcDC3XzfeJUWTGu2VqT32d+8Md+yRMvvhLC5lvLLVGNaUyfIN9dVRIDbJWx9UfjQ+Lp6tUMcMB4E14nNv8Av4ASMK/4Kqi+R32H6CdZPATaYPwOfgfc13xFBmWJaswNegE7wYeKI4YHGxFQv6E08YlyF4GKPaVx0EgVFSzLtwELwRMFjrK7JtK/xxDeId4z9Qpnr2mxNnYXdWeT3S7tbiredsLN5kpjMk8yh1x3Zg17APoDrgteIIGc0B+VIXHina484O/e1BmLAOADfgOM6uzxDZCqiL/UbgIPgZAl5kSBhGrEAda5iZYGEQGqYzhvjd9LgdmK/rCLtEqjlj7n2iaiY3YFNdGUUFl2kAcypCY4NecQJK0VeurroqJwuT+D6dTHOcsV2EzfJGG+AGyyap+rQ5lwKFAleLe6thNpZaLMQrUe4HvFpa+KWiY+gr8IuiDypD0NJ84bll7nYmfiDBXO6D9wPpdEqKvKhWiGoOAstCrwGaqe9C/wmp+7iO+CpHhVz9g7jB/CQxPUZNZZubMwLgUN2DT4lob+DnsGm0eyC3gM+p5wW7xwXdlyDXZs1f/aNg+C+nrgFRc8pkY+Kwt/FsKusv8TwysJP4J12BXpLaJz7c6OLZ+81EVw4J7ZPzrwpshl1iaLc1cvJdHFHiSVzcnno54Ps/2i2XfgPSXT1H5ZmudMAAAAASUVORK5CYII="/>
       
       <p><strong>Bid History</strong> </p>
-    </a>
-    <a href="#">
-      <img src="assets/categories.png" />
-      <p><strong>Categories</strong></p>
-    </a>
-    <a href="#">
+    </a> -->
+  </div>
+    
+    <ul class="category-menu">
+      <li>
+        <a class="outer-link" href="#">
+          <img src="assets/categories.png" />
+          <p><strong>Categories</strong></p>
+        </a>
+        <ul class="submenu">
+          <li><a href="#">Electronics</a>
+            <ul class="submenu2">
+              <li><a href="#">Desktop</a></li>  
+              <li><a (click)="search('laptops',0)">Laptops</a></li>
+              <li><a href="#">Smartphones</a></li>
+              <li><a href="#">Accessories</a></li>
+              <li><a href="#">Tablet</a></li>
+              <li><a href="#">Sports</a></li>
+              <li><a (click)="search('bike',0)">Bikes</a></li>
+              <li><a href="#">Cars</a></li>
+              <li><a href="#">Fridge</a></li>
+              <li><a href="#">Television</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Foods</a></li>
+          <li><a href="#">Cloths</a></li>
+          <li><a href="#">Hardware Accessories</a></li>
+          <li><a href="#">Beauty & Cosmetics</a></li>
+          <li><a href="#">Sports</a></li>
+          <li><a href="#">Books</a></li>
+        </ul>
+      </li>
+    </ul>
+    
+    
+
+    
+    <a class="outer-link" href="#" data-toggle="tooltip" data-placement="bottom" title="know more about us">
       <img src="assets/about.png" />
       <p><strong>About</strong></p>
     </a>
-    <a *ngIf = "!authenticated" routerLink="signin">
+    <a class="outer-link" *ngIf = "!authenticated" routerLink="signin">
       <img src="assets/login.png" />
       <p><strong>Sign in</strong></p>
     </a>
-    <a *ngIf = "authenticated" routerLink="signin" (click) = "logout()"
+    <a class="outer-link" *ngIf = "authenticated" routerLink="signin" (click) = "logout()"
       ><img src="assets/login.png" />
       <p><strong>Sign Out</strong></p>
     </a>

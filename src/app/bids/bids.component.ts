@@ -41,8 +41,8 @@ export class BidsComponent implements OnInit {
   {
     this.newBid.bidderId = this.user.username;
     this.newBid.productId = this.productShow.uid;
-    this.newBid.bidAmount = this.productShow.current_price + parseInt(this.bid_price.toString(),10);
-    this.productShow.current_price = this.productShow.current_price + parseInt(this.bid_price.toString(),10);
+    this.newBid.bidAmount = parseInt(this.bid_price.toString(),10);
+    this.productShow.current_price = parseInt(this.bid_price.toString(),10);
     this.productService.setBid(this.newBid).subscribe(response=>{
       alert(response.toString())
     });
