@@ -20,6 +20,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BidsComponent } from './bids/bids.component';
 import { ChatComponent } from './chat/chat.component';
 import { SearchComponent } from './search/search.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SearchComponent } from './search/search.component';
     BidsComponent,
     ChatComponent,
     SearchComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,

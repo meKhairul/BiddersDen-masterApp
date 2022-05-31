@@ -5,11 +5,11 @@
                 <div class="form-items">
                     <h3>Sell your item to us</h3>
                     <p>Fill in the data below.</p>
-                    <form class="requires-validation" novalidate>
+                    <form class="requires-validation" >
   
                         <div class="col-md-12">
                            <input class="form-control" type="text" name="product-name" placeholder="Product Name" [(ngModel)] = "product.product_name" [ngModelOptions] = "{standalone: true}"required >
-                           <div class="valid-feedback">Product name field is valid!</div>
+                           <div *ngIf="product.product_name.length>8" class="valid-feedback">Product name field is valid!</div>
                            <div class="invalid-feedback">Product name field cannot be blank!</div>
                         </div>
   
@@ -42,7 +42,8 @@
   
   
                        <div class="col-md-12">
-                          <input class="form-control" type="text" name="defects" placeholder="Product defects" [(ngModel)] = "product.product_details" [ngModelOptions] = "{standalone: true}" required>
+                           
+                          <textarea class="form-control" type="text" name="defects" placeholder="Product defects" [(ngModel)] = "product.product_details" [ngModelOptions] = "{standalone: true}" required></textarea>
                            <div class="valid-feedback">Product defects field is valid!</div>
                            <div class="invalid-feedback">Product defects field cannot be blank!</div>
                        </div>

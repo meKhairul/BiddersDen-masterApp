@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SellComponent } from './sell/sell.component';
 import { HomeComponent } from './home/home.component';
@@ -13,6 +13,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BidsComponent } from './bids/bids.component';
 import { ChatComponent } from './chat/chat.component';
 import { SearchComponent } from './search/search.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path: 'userprofile',component:UserProfileComponent},
   {path: 'bid',component:BidsComponent},
   {path:'chat',component:ChatComponent},
-  {path:'search',component:SearchComponent}
+  {path:'search',component:SearchComponent},
+  {path:'payment',component:PaymentComponent},
 ];
 
 @NgModule({

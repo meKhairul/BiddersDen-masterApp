@@ -79,5 +79,21 @@ export class NavbarComponent implements OnInit {
       console.log(this.products)
     });
   }
+
+  sorting(sortValue:number)
+  {
+    this.productService.setSortValue(sortValue);
+    if(this.router.url == "/sort"){
+        
+      console.log("we are here:" +this.router.url);
+      let currentUrl = this.router.url;
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+  });
+    }
+    else {this.router.navigate(['sort']);}
+    
+  }
+
   
 }

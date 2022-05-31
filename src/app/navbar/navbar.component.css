@@ -98,16 +98,19 @@ div.nav-middle{
   
 }
 
+form{
+  display: flex;
+}
 
 /*sidebar component css*/
 
 .sidebar{
   background-color: rgb(69, 124, 129);
-  width: 12%;
+  width: 13%;
   height: 150vh;
   position: fixed;
   top: 0;
-  padding-left: 2%;
+  padding-left: 1%;
   padding-top: 80px;
   display: block;
   
@@ -119,15 +122,18 @@ div.nav-middle{
 .outer-link img{
   width: 20px;
   margin-right: 20px;
-}
-
-.outer-link a:hover{
-  color: #000;
   
 }
-.outer-link p:hover{
-  background-color: #5a5a5a;
+.direct-icon{
+  margin-left: -1px;
 }
+
+ .outer-link:hover{
+  color: #000;
+}
+/* .outer-link p:hover{
+  background-color: #5a5a5a;
+} */
 
 .outer-link{
   display: flex;
@@ -263,7 +269,7 @@ div.nav-middle{
   color: rgb(250, 246, 246);
 } 
 .category-menu>li:hover>.submenu li:hover{
-  background-color: #c4b0b0;
+  background-color: #7b8488;
   color: rgb(255, 255, 255);
 }
 
@@ -286,9 +292,9 @@ div.nav-middle{
 .submenu2{
   position: absolute;
   background-color: rgb(255, 255, 255);
-  width: 95%;
+  width: 92%;
   height: 100%;
-  left: 100%;
+  left: 90%;
   top: 0;
   display: none;
 }

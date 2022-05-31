@@ -79,10 +79,13 @@
 
   <div class="nav-middle flex-div">
     <div class="search-box flex-div">
-      <input type="text" placeholder="Search" [(ngModel)] = "searchData" [ngModelOptions] = "{standalone: true}"/>
-      <a (click)="search(searchData,1)">
-      <img src="assets/search.png" alt="" />
-      </a>
+      <form>
+        <input type="text" placeholder="Search" [(ngModel)] = "searchData" [ngModelOptions] = "{standalone: true}" required/>
+        <button type="submit" (click)="search(searchData,1)">
+        <img src="assets/search.png" alt="" />
+        </button>
+      </form>
+      
       <!--img src="assets/images/voice-search.png" class="mic-icon" alt=""> -->
     </div>
   </div>
@@ -179,30 +182,34 @@
     
     <ul class="category-menu">
       <li>
-        <a class="outer-link" href="#">
+        <a  class="outer-link" href="#">
           <img src="assets/categories.png" />
           <p><strong>Categories</strong></p>
+          <img class="direct-icon" src="assets/direction.png" /> 
         </a>
         <ul class="submenu">
-          <li><a href="#">Electronics</a>
+          <li><a class="direct-icon" href="#">Electronics
+          <img class="direct-icon" src="assets/direction.png" />
+          </a>
             <ul class="submenu2">
-              <li><a href="#">Desktop</a></li>  
-              <li><a (click)="search('laptops',0)">Laptops</a></li>
-              <li><a href="#">Smartphones</a></li>
-              <li><a href="#">Accessories</a></li>
-              <li><a href="#">Tablet</a></li>
-              <li><a href="#">Sports</a></li>
-              <li><a (click)="search('bike',0)">Bikes</a></li>
-              <li><a href="#">Cars</a></li>
-              <li><a href="#">Fridge</a></li>
+              <li><a href="#">Desktop</a></li> <hr>
+              <li><a (click)="search('laptops',0)">Laptops</a></li><hr>
+              <li><a href="#">Smartphones</a></li><hr>
+              <li><a href="#">Accessories</a></li><hr>
+              <li><a href="#">Tablet</a></li><hr>
+              <li><a href="#">Sports</a></li><hr>
+              <li><a (click)="search('bike',0)">Bikes</a></li><hr>
+              <li><a href="#">Cars</a></li><hr>
+              <li><a href="#">Fridge</a></li><hr>
               <li><a href="#">Television</a></li>
             </ul>
           </li>
-          <li><a href="#">Foods</a></li>
-          <li><a href="#">Cloths</a></li>
-          <li><a href="#">Hardware Accessories</a></li>
-          <li><a href="#">Beauty & Cosmetics</a></li>
-          <li><a href="#">Sports</a></li>
+          <hr>
+          <li><a href="#">Foods</a></li><hr>
+          <li><a href="#">Cloths</a></li><hr>
+          <li><a href="#">Hardware Accessories</a></li><hr>
+          <li><a href="#">Beauty & Cosmetics</a></li><hr>
+          <li><a href="#">Sports</a></li><hr>
           <li><a href="#">Books</a></li>
         </ul>
       </li>
@@ -210,11 +217,37 @@
     
     
 
-    
+    <ul class="category-menu">
+      <li>
+        <a class="outer-link" href="#">
+          <img src="assets/sort.png" />
+          <p><strong>Sorting</strong></p>
+          <img class="direct-icon" src="assets/direction.png" />
+        </a>
+        <ul class="submenu">
+          <li><a href="#">By price
+            <img class="direct-icon" src="assets/direction.png" /> 
+          </a>
+            <ul class="submenu2">
+              <li><a (click)="sorting(1)" >Lower to higher</a></li>  
+              <hr>
+              <li><a (click)="sorting(0)" >Higher to lower</a></li>
+              
+            </ul>
+          </li>
+          <hr>
+          <li><a (click)="sorting(2)">By name</a></li>
+          <hr>
+          <li><a (click)="sorting(3)">By date</a></li>
+          
+        </ul>
+      </li>
+    </ul>
     <a class="outer-link" href="#" data-toggle="tooltip" data-placement="bottom" title="know more about us">
       <img src="assets/about.png" />
       <p><strong>About</strong></p>
     </a>
+
     <a class="outer-link" *ngIf = "!authenticated" routerLink="signin">
       <img src="assets/login.png" />
       <p><strong>Sign in</strong></p>

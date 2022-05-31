@@ -14,6 +14,7 @@ export class ProductService {
   API_URL = 'http://127.0.0.1:8000';
   productToBeShown  = new Product();
   bidProductToBeShown  = new Product();
+  sortValue!:number;
   flag!:number;
 
 constructor(private http: HttpClient) { }
@@ -76,6 +77,14 @@ setFlag(flag:number)
 }
 getFlag():number{
   return this.flag;
+}
+setSortValue(sortValue:number)
+{
+  this.sortValue = sortValue;
+}
+getSortValue():number
+{
+  return this.sortValue;
 }
 
 

@@ -23,7 +23,7 @@ export class BidsComponent implements OnInit {
   minBid = Math.max(this.productShow.base_price,5);
   constructor(private productService:ProductService,private userService:UserService) { 
     
-    this.productShow.current_price = this.productShow.base_price;
+    
     for(let i=this.minBid;this.bids.length<=50;i+=(this.minBid/10))
     {
       
