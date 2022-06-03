@@ -17,7 +17,7 @@ export class SellComponent implements OnInit {
   seller = new User();
   image:any
   uid:any
-
+  sub_category!:any;
   constructor(private userService : UserService, private productService: ProductService, private route:Router) { }
 
   ngOnInit(): void {
@@ -33,15 +33,22 @@ export class SellComponent implements OnInit {
     
     this.seller = this.userService.getUser();
     this.product.seller = this.seller.username;
-    
-    console.log(this.product)
+    this.product.current_price=this.product.base_price;
+    this.product.product_category = this.product.product_category +','+ this.sub_category;
+    console.log(this.product);
 
-    this.productService.addProduct(this.product).subscribe(response=>{
-      this.uid = response.toString()
-      this.uploadata.append('image', this.image);
-      this.uploadata.append('file_name', this.uid);
-      this.uploadPhoto()
-    });
+    if(this.product.base_price==null || this.product.product_name.length==0 || this.product.product_details.length==0 || this.product.product_category.length==0 )
+    {
+      alert("Product is not uploaded successfully.Try Again");
+    }
+    else{
+      this.productService.addProduct(this.product).subscribe(response=>{
+        this.uid = response.toString()
+        this.uploadata.append('image', this.image);
+        this.uploadata.append('file_name', this.uid);
+        this.uploadPhoto();
+      });
+    }
   }
 
   uploadPhoto(){

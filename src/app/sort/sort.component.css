@@ -43,4 +43,44 @@ div.col{
 .card{
     height: 400px;
 }
+.outer-link img{
+    width: 20px;
+    margin-right: 20px;
+    
+  }
+  .direct-icon{
+    margin-left: -1px;
+  }
+  
+   .outer-link:hover{
+    color: #000;
+  }
+  /* .outer-link p:hover{
+    background-color: #5a5a5a;
+  } */
+  
+  .outer-link{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: fit-content;
+    flex-wrap: wrap;
+    color: #ffffff;
+  } 
+
+  .sorting-button{
+      margin-left: 88%;
+  }
+  .dropdown-menu{
+      display: block;
+      min-width: 6.5rem;
+  }
+  .subdrop{
+      display: none;
+      margin-left: 83%;
+      margin-top: -35%;
+  }
+  .dropdown-menu>.dropforprice:hover > .subdrop{
+    display: block;
+}
 

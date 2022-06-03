@@ -9,7 +9,26 @@
 <body class="home" >
 
 <div class="album py-5 bg-light ">
+  <div class="sorting-bar">
+    <div class="sorting-button">
+      <button type="button" class="btn btn-secondary">Sort by</button>
+      <button (click)="drop()" type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown-toggle-split">
+      </button>
+      <div *ngIf="isdrop" class="dropdown-menu">
+        <a class="dropdown-item dropforprice" >By Price
+          <div class="subdrop dropdown-menu">
+            <a class="dropdown-item" (click)="sorting(1)">Low > High</a>
+            <a class="dropdown-item" (click)="sorting(0)">High > Low</a>
+          </div>
+        </a>
+        
+        <a class="dropdown-item" (click)="sorting(2)">By Name</a>
+        <a class="dropdown-item" (click)="sorting(3)">By Date</a>
+      </div>
+    </div>
+  </div>
   <h3 style="text-align: center;"><b>Upcoming Products</b></h3>
+  
   <div class="container">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >

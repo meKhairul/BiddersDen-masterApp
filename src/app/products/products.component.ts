@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Bid } from '../bid';
+import { Emitters } from '../emiiters/Emitter';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
@@ -13,13 +14,21 @@ import { UserService } from '../user.service';
 export class ProductsComponent implements OnInit {
 
   productShow = this.productService.getProductToBeShown();
-  user = this.userService.getUser()
+  user !:any;
   newBid = new Bid();
   currentBids : Bid[] = [];
-  
+  authenticated :boolean = false;
+
   constructor(private productService:ProductService, private userService: UserService,private router:Router) { }
 
   ngOnInit(): void {
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        this.authenticated = auth; 
+        this.user = this.userService.getUser();
+      }
+
+    );
     this.getBids();
   }
   addBid(){
@@ -39,8 +48,15 @@ export class ProductsComponent implements OnInit {
   }
   showBidProduct()
   {
-    this.productService.setBidProductToBeShown(this.productShow);
-    this.router.navigate(['bid']);
+    if(this.authenticated)
+    {
+      this.productService.setBidProductToBeShown(this.productShow);
+      this.router.navigate(['bid']);
+    }
+    else
+    {
+      alert("You are not allowed to bid.Please sign in first!!");
+    }
   }
 
   

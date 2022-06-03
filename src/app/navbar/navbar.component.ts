@@ -19,6 +19,14 @@ export class NavbarComponent implements OnInit {
   products : Product[] = []
   searchData!:String;
   flag!:number;
+  date : Date = new Date();
+  day!:any;
+  hour!:any;
+  ampm!:any;
+  mins!:any;
+  sec!:any;
+  daysArray = ["Sunday","Monday","Tuesday","Wednesday","Thurshday","Friday","Saturday"];
+
   
   /*menuButtonClickEvent() {
     if (this.click == 0) this.click = 1;
@@ -36,6 +44,11 @@ export class NavbarComponent implements OnInit {
       }
 
     );
+    setInterval(()=>{
+      const date = new Date();
+      this.updateDate(date);
+    },1000);
+    this.day = this.daysArray[this.date.getDay()];
   }
 
   
@@ -95,5 +108,22 @@ export class NavbarComponent implements OnInit {
     
   }
 
+  updateDate(date:Date)
+  {
+    const hours = date.getHours();
+    this.ampm = hours>12?"PM":"AM";
+    this.hour = hours%12;
+    this.hour = this.hour?this.hour:12;
+    this.hour = this.hour < 10 ? '0' + this.hour : this.hour;
+
+    const minutes = date.getMinutes();
+
+    this.mins = minutes<10?'0'+minutes:minutes.toString();
+
+    const seconds = date.getSeconds();
+
+    this.sec = seconds<10?'0'+seconds:seconds.toString();
+
+  }
   
 }

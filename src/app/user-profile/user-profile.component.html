@@ -71,7 +71,12 @@
     <div class="row">
       <div class="col-md-3 mb-3">
         <div class="card bg-primary text-white h-100">
-          <div class="card-body py-5">Total Sells</div>
+          <div class="card-body py-5 fw ">
+            <p class="fw-bold">Total Sells</p>
+            <p class="fw-bold">{{totalSells}}</p>
+            <p class="fw-bold">Total income : {{totalIncome}}</p>
+
+          </div>
           <div class="card-footer d-flex">
             <button (click)="swapValue()" class="view-details btn">View Details</button> 
             <span class="ms-auto">
@@ -82,7 +87,11 @@
       </div>
       <div class="col-md-3 mb-3">
         <div class="card bg-warning text-dark h-100">
-          <div class="card-body py-5">Total Buys</div>
+          <div class="card-body py-5">Total Buys
+            <p class="fw-bold">Total Buys</p>
+            <p class="fw-bold">{{totalBuys}}</p>
+            <p class="fw-bold">Total money spent : {{totalMoneySpent}}</p>
+          </div>
           <div class="card-footer d-flex">
             View Details
             <span class="ms-auto">
@@ -93,9 +102,9 @@
       </div>
       <div class="col-md-3 mb-3">
         <div class="card bg-success text-white h-100">
-          <div class="card-body py-5">Total Money Spend</div>
+          <div class="card-body py-5">Payment Requests</div>
           <div class="card-footer d-flex">
-            View Details
+            <button (click)="swapValue()" class="view-details btn">View Details</button> 
             <span class="ms-auto">
               <i class="bi bi-chevron-right"></i>
             </span>
@@ -106,7 +115,7 @@
         <div class="card bg-danger text-white h-100">
           <div class="card-body py-5">Recent Bids</div>
           <div class="card-footer d-flex">
-            View Details
+            <button (click)="swapValue()" class="view-details btn">View Details</button> 
             <span class="ms-auto">
               <i class="bi bi-chevron-right"></i>
             </span>

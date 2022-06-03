@@ -16,6 +16,7 @@ export class SortComponent implements OnInit {
   products: Product[]=[];
   link:string[] = [];
   sortValue!:number;
+  isdrop:number=0;
 
   constructor(private userService:UserService,private productService:ProductService,private router:Router) { }
 
@@ -61,6 +62,7 @@ export class SortComponent implements OnInit {
     
     this.productService.getAllProducts().subscribe(data=>{
       this.products = data;
+      
       if(this.sortValue==0){
         this.products = this.products.sort((a, b) => 0-(a.current_price - b.current_price)); 
       }
@@ -82,6 +84,42 @@ export class SortComponent implements OnInit {
     
       
     
+    
+  }
+  drop()
+  {
+      if(this.isdrop==0)
+      {
+        this.isdrop=1;
+      }
+      else
+      {
+        this.isdrop=0;
+      }
+  }
+  sortby(val : number)
+  {
+    this.productService.getAllProducts().subscribe(data=>{
+      this.products = data;
+      
+      if(val==0){
+        this.products = this.products.sort((a, b) => 0-(a.current_price - b.current_price)); 
+      }
+      else if(val==1)
+      {
+        console.log(val);
+        this.products = this.products.sort((a, b) => (a.current_price > b.current_price?1:-1));
+      }
+      else if(val==2)
+      {
+        this.products = this.products.sort((a, b) => (a.product_name > b.product_name?1:-1));
+      }
+      else if(val==3)
+      {
+        this.products = this.products.sort((a, b) => (a.recieved_date > b.recieved_date?1:-1));
+      }
+      console.log(this.products);
+    });
     
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
@@ -11,11 +12,30 @@ import { UserService } from '../user.service';
 export class PaymentComponent implements OnInit {
 
 
-  winningProduct!:Product;
+  winningProducts!:any;
+  totalAmount:number = 0;
 
-  constructor(userService:UserService,productService:ProductService) { }
+  constructor(private userService:UserService,private productService:ProductService,private router:Router) { }
 
   ngOnInit(): void {
+    this.getWinningProducts();
+    
+  }
+
+  showProduct(product:Product)
+  {
+    this.productService.setProductToBeShown(product);
+    this.router.navigate(['product']);
+  }
+  getWinningProducts(){
+    this.productService.getAllProducts().subscribe(data=>{
+      this.winningProducts = data;
+      for(let product of this.winningProducts)
+      {
+        this.totalAmount = this.totalAmount + product.current_price;
+        console.log(product.current_price);
+      }
+    });
   }
 
 }

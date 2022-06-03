@@ -43,5 +43,122 @@
  .card{
      height: 400px;
  }
+ul{
+    list-style: none;
+}
+.category-menu >li,.category-menu>a{
+    display: inline-block;
+  }
+  .category-menu a{
+    text-decoration: none;
+    color: #fff;
+    
+  }
+  .category-menu a:hover{
+    
+    color: rgb(250, 246, 246);
+  } 
+  .category-menu>li:hover>.submenu li:hover{
+    background-color: #7b8488;
+    color: rgb(255, 255, 255);
+  }
+  
+  
+  .submenu{
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    width: 70%;
+    left: 70%;
+    height: auto;
+    display: none;
+  }
+  .submenu li,.submenu2 li{
+    
+    color: #ffffff;
+    background-color: #181313;
+    padding-left: 10%;
+  }
+  .submenu2{
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 92%;
+    height: 100%;
+    left: 90%;
+    top: 0;
+    display: none;
+  }
+  .submenu>ul>li>a:hover{
+    background-color: rgb(214, 46, 46);
+    /* text-decoration: underline; */
+    color: #912222;
+    background-size: 50%;
+  }
+  .submenu2>ul>li>a:hover{
+    background-color: rgb(209, 43, 43);
+    /* text-decoration: underline; */
+    color: #e9dada;
+    background-size: 95%;
+    
+  }
+  .category-menu>li:hover>.submenu{
+    margin-top: -15%;
+    display: block;
+    size: 15%;
+    border: 1px solid rgb(255, 255, 255);
+  } 
+  .submenu>li:hover>.submenu2{
+    display: block;
+    size: 15%;
+    border: 1px solid rgb(255, 255, 255);
+  } 
+  .outer-link img{
+    width: 20px;
+    margin-right: 20px;
+    
+  }
+  .direct-icon{
+    margin-left: -1px;
+  }
+  
+   .outer-link:hover{
+    color: #000;
+  }
+  /* .outer-link p:hover{
+    background-color: #5a5a5a;
+  } */
+  
+  .outer-link{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: fit-content;
+    flex-wrap: wrap;
+    color: #ffffff;
+  } 
+
+  .sorting-button{
+    margin-left: 88%;
+    margin-top: -6%;
+  }
+  .dropdown-menu{
+      display: block;
+      min-width: 6.5rem;
+  }
+  .subdrop{
+      display: none;
+      margin-left: 83%;
+      margin-top: -35%;
+  }
+  .dropdown-menu>.dropforprice:hover > .subdrop{
+    display: block;
+}
+
+.card-text{
+  font-size: 12px;
+  font-style: initial;
+}
+
+
  
  

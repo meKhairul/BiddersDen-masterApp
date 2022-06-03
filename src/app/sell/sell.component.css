@@ -89,10 +89,11 @@ html, body {
     background-color: rgb(227, 241, 243);
     font-size: 15px;
     font-weight: 300;
-    color: #8D8D8D;
+    color: #1b1b1b;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    margin-top: 16px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .form-content input.details{
@@ -121,23 +122,23 @@ html, body {
     padding: 8px 20px;
     border-radius: 6px;
     text-align: left;
-    background-color: rgb(61, 31, 31);
+    background-color: rgb(227, 241, 243);
     border: 0;
     font-size: 15px;
     font-weight: 300;
-    color: #eee5e5;
+    color: #1b1b1b;
     outline: none;
     resize: none;
     height: 120px;
     -webkit-transition: none;
     transition: none;
-    margin-bottom: 14px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .form-content textarea:hover, .form-content textarea:focus {
     border: 0;
-    background-color: #15171a;
-    color: #8D8D8D;
+    color: #1b1b1b;
 }
 
 .mv-up{
@@ -145,10 +146,17 @@ html, body {
     margin-bottom: 8px !important;
 }
 
-.invalid-feedback{
+.red{
     color: #ff606e;
 }
 
-.valid-feedback{
+.green{
    color: #2acc80;
+}
+
+optgroup{
+    display: none;
+}
+.form-select::after{
+    display: block;
 }

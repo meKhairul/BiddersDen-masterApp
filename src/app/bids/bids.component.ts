@@ -11,7 +11,7 @@ import { UserService } from '../user.service';
 export class BidsComponent implements OnInit {
 
   clicked : number = 0;
-  bid_price : number = 0;
+  bid_price !: number;
   bids : number[] = [];
   user = this.userService.getUser()
   newBid = new Bid();
@@ -20,14 +20,14 @@ export class BidsComponent implements OnInit {
   
   productShow = this.productService.getBidProductToBeShown();
   
-  minBid = Math.max(this.productShow.base_price,5);
+  minBid = Math.max(this.productShow.current_price,5);
   constructor(private productService:ProductService,private userService:UserService) { 
     
     
     for(let i=this.minBid;this.bids.length<=50;i+=(this.minBid/10))
     {
-      
-      this.bids.push(i);
+      if(i==this.minBid)continue;
+      this.bids.push(Math.round(i));
       
     }
     
@@ -39,6 +39,12 @@ export class BidsComponent implements OnInit {
 
   makeBid()
   {
+
+    if(this.bid_price<=this.minBid)
+    {
+      alert("You can't bid less than current price!!");
+    }
+    else{
     this.newBid.bidderId = this.user.username;
     this.newBid.productId = this.productShow.uid;
     this.newBid.bidAmount = parseInt(this.bid_price.toString(),10);
@@ -49,6 +55,7 @@ export class BidsComponent implements OnInit {
     console.log("Bid price: "+this.bid_price);
     console.log("current price: "+this.productShow.current_price);
     console.log("today : "+this.current_date);
+  }
   }
 
   getBids(){

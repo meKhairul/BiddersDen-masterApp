@@ -109,11 +109,15 @@
                                 <div class="input-group-prepend">
                                   <label class="input-group-text" for="inputGroupSelect01">Your maximum Bid</label>
                                 </div>
-                                <select class="custom-select" id="inputGroupSelect01" [(ngModel)] = "bid_price" [ngModelOptions] = "{standalone: true}">
+                                <input type="number" placeholder="Enter bid amount"  [(ngModel)] = "bid_price" [ngModelOptions] = "{standalone: true}">
+                                <div *ngIf="bid_price<=productShow.current_price" class="red"> You must bid more than current price</div>
+                                <div *ngIf="bid_price>productShow.current_price" class="green"> Its a valid amount</div>
+                                <!-- <select class="custom-select" id="inputGroupSelect01" [(ngModel)] = "bid_price" [ngModelOptions] = "{standalone: true}" required>
                                   <option selected>Select Bids</option>
+                                  
                                   <option *ngFor="let bid of bids" value="{{bid}}">{{"BDT "+bid}}</option>
                                   
-                                </select>
+                                </select> -->
                             </div>
                             
                             <div class="place-bid">

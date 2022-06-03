@@ -10,9 +10,10 @@ import { UserService } from '../user.service';
 export class UserProfileComponent implements OnInit {
 
   user = new User();
-  totalSells !: any;
+  totalSells : number = 12;
   totalBuys !: any;
-  totalMoneySpent!:any;
+  totalIncome : number = 20000;
+  totalMoneySpent:number = 550000;
   recentBids!:any;
   show :number = 0;
 
