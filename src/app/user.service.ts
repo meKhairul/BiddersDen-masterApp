@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http"
 import { Observable } from "rxjs";
 import { Emitters } from "./emiiters/Emitter";
 import { User } from "./user";
+import { Message } from "./message";
 @Injectable({
     providedIn: 'root'
 })
@@ -48,5 +49,13 @@ export class UserService {
     }
     getUser():User{
         return this.user;
+    }
+
+    sendMessage(messageWithHeader:any){
+        return this.http.post(this.API_URL + '/message/', messageWithHeader);
+    }
+      
+    getMessages(data:any): Observable<any[]>{
+        return this.http.post<any[]>(this.API_URL + '/chat/', data);
     }
 }

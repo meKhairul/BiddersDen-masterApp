@@ -23,6 +23,7 @@ import { SearchComponent } from './search/search.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { PaypalComponent } from './paypal/paypal.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     PaymentComponent,
     ChangePasswordComponent,
     ForgotPasswordComponent,
+    PaypalComponent,
   ],
   imports: [
     BrowserModule,
