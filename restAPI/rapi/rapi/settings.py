@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = '/assets/'
 #MEDIA_ROOT = 'D:/CODES/Angular/BiddersDen-master/src/assets'
-MEDIA_ROOT = 'E:/5th semester/SplTwo/BiddersDen-master/src/assets'
+MEDIA_ROOT = 'F:/SPL2/BiddersDen-master/src/assets'
 #print(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
@@ -33,6 +33,8 @@ DEBUG = True
 ALLOWED_HOSTS=[]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+STORE_ID = "spect629723b0a62b1"
+STORE_PASS =  "spect629723b0a62b1@ssl"
 
 # Application definition
 

@@ -15,5 +15,7 @@ urlpatterns=[
     re_path(r'^bids/$', views.getPreviousBidsForProduct),
     re_path(r'^bidhistory/$', views.getPreviousBidsForUser),
     re_path(r'^addBid/$', views.addBid),
+    re_path(r'^chat/$', views.getMessages),
+    re_path(r'^message/$', views.addMessages),
     re_path(r'^searchProducts/$', views.searchProduct),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

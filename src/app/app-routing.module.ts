@@ -14,6 +14,8 @@ import { BidsComponent } from './bids/bids.component';
 import { ChatComponent } from './chat/chat.component';
 import { SearchComponent } from './search/search.component';
 import { PaymentComponent } from './payment/payment.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -28,6 +30,8 @@ const routes: Routes = [
   {path:'chat',component:ChatComponent},
   {path:'search',component:SearchComponent},
   {path:'payment',component:PaymentComponent},
+  {path:'forgot-password',component:ForgotPasswordComponent},
+  {path:'change-password',component:ChangePasswordComponent}
 ];
 
 @NgModule({

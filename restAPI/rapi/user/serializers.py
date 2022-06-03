@@ -1,9 +1,10 @@
 from rest_framework import serializers
+from user.models import Transactions
 from user.models import Bids
 from user.models import Product
 from user.models import Users
 from user.models import Users, File, credentials
-from user.models import Bids
+from user.models import Bids,Messages
     
 class LoginSerializer(serializers.ModelSerializer):
     class Meta:
@@ -55,3 +56,23 @@ class BidsSerializer(serializers.ModelSerializer):
         fields = ('productId',
                   'bidderId',
                   'bidAmount',)
+
+
+class TransactionsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Transactions
+        fields = ('productId',
+                  'buyerId',
+                  'sellerId',
+                  'amount',
+                  'transactionId',)
+
+class MessagesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Messages
+        fields = ('text',
+                  'room',
+                  'time',
+                  'sender',)

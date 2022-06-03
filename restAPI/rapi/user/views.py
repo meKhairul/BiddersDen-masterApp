@@ -1,21 +1,22 @@
+from email import message
 from itertools import product
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
-from user.models import Product
+from user.models import Product, Messages
 from user.serializers import FileSerializer
 from user.serializers import ProductSerializer, BidsSerializer
-from user.models import Users, Bids
-from user.serializers import UsersSerializer, LoginSerializer
+from user.models import Users, Bids, Transactions
+from user.serializers import UsersSerializer, LoginSerializer, MessagesSerializer
 from rest_framework.parsers import FileUploadParser
 from django.core.files.storage import default_storage
 from django.contrib.auth.hashers import make_password, check_password
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
-
+from decimal import Decimal
 import uuid
 from django.conf import settings
 from django.core.mail import send_mail
@@ -53,6 +54,7 @@ def register(request,id=0):
 
         sendMail(email, uid)
         return JsonResponse("Please check your mail to verify your account", safe=False)
+
 
 @csrf_exempt
 def sendMail(email_to, uid):
@@ -230,7 +232,40 @@ def getPreviousBidsForUser(request):
 def searchProduct(request):
     if request.method == 'POST':
         data=JSONParser().parse(request)
-        searchData = " " + data['text'] + " " 
-        products = Product.objects.filter(product_details__icontains = searchData)| Product.objects.filter(product_details__icontains = searchData )
-        prooduct_serializer = ProductSerializer(products, many = True)
-        return JsonResponse(prooduct_serializer.data, safe = False)
+        searchData = data['text'] 
+        products = Product.objects.filter(product_name__icontains = searchData)| Product.objects.filter(product_details__icontains = searchData )
+        product_serializer = ProductSerializer(products, many = True)
+        return JsonResponse(product_serializer.data, safe = False)
+
+@api_view(['POST'])
+@csrf_exempt
+def getMessages(request):
+    if request.method == 'POST':
+        data=JSONParser().parse(request)
+        room = data['username']
+        messages = Messages.objects.filter(room = room)
+        message_serialized = MessagesSerializer(messages, many = True)
+        return JsonResponse(message_serialized.data, safe = False)
+
+
+@api_view(['POST'])
+@csrf_exempt
+def addMessages(request):
+    if request.method == 'POST':
+        data=JSONParser().parse(request)
+        Messages.objects.create(text = data['text'], room = data['username'], sender = data['username'])
+        messages = Messages.objects.filter(room = data['username'])
+        message_serialized = MessagesSerializer(messages, many = True)
+        return JsonResponse(message_serialized.data, safe = False)
+
+@api_view(['POST'])
+@csrf_exempt
+def passwordRecovery(email_to):
+    rnd = str(uuid.uuid4())
+    subject = 'Change your password'
+    body = 'Please click the link to change your password http://127.0.0.1:8000/verify/' + rnd
+    email_from = settings.EMAIL_HOST_USER
+    recipient = [email_to]
+    send_mail(subject, body , email_from, recipient)
+    print("mail sent") 
+

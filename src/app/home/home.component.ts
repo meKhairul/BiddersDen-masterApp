@@ -13,6 +13,7 @@ import { NgIf } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
+  
 
   date : Date = new Date();
   day!:any;
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
   constructor(private userService:UserService,private productService:ProductService,private router:Router) { }
 
   ngOnInit(): void {
+    
     setInterval(()=>{
       const date = new Date();
       this.updateDate(date);

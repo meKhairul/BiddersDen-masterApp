@@ -1,3 +1,4 @@
+from datetime import datetime
 from itertools import product
 from tkinter import CASCADE
 from django.db import models
@@ -34,6 +35,7 @@ class Product(models.Model):
     delivered_date = models.CharField(max_length=100)
     isApproved = models.BooleanField(default=False)
     seller = models.ForeignKey(Users, related_name="seller", on_delete=models.CASCADE)
+    isSold = models.BooleanField()
     buyerID = models.CharField(max_length=100)
     bidder = models.ManyToManyField(Users)
     
@@ -53,3 +55,22 @@ class Bids(models.Model):
        
     def __str__(self):
         return self.bidAmount
+
+class Transactions(models.Model):
+    productId = models.CharField(max_length=100)
+    buyerId = models.CharField(max_length=100)
+    sellerId = models.CharField(max_length=100)
+    amount = models.IntegerField()
+    transactionId = models.CharField(max_length=100)
+       
+    def __str__(self):
+        return self.transactionId
+
+class Messages(models.Model):
+    text = models.CharField(max_length=100)
+    room = models.CharField(max_length=100)
+    time = models.DateTimeField(default=datetime.now, blank=True)
+    sender = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.text

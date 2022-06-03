@@ -21,6 +21,8 @@ import { BidsComponent } from './bids/bids.component';
 import { ChatComponent } from './chat/chat.component';
 import { SearchComponent } from './search/search.component';
 import { PaymentComponent } from './payment/payment.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { PaymentComponent } from './payment/payment.component';
     ChatComponent,
     SearchComponent,
     PaymentComponent,
+    ChangePasswordComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
