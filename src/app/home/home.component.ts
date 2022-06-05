@@ -148,5 +148,9 @@ export class HomeComponent implements OnInit {
     this.sec = seconds;
 
   }
+  login()
+  {
+    this.router.navigate(['signin']);
+  }
 
 }

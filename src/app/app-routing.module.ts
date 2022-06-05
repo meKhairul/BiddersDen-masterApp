@@ -17,6 +17,8 @@ import { PaymentComponent } from './payment/payment.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PaypalComponent } from './paypal/paypal.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -33,7 +35,9 @@ const routes: Routes = [
   {path:'payment',component:PaymentComponent},
   {path:'forgot-password',component:ForgotPasswordComponent},
   {path:'change-password',component:ChangePasswordComponent},
-  {path:'paypal',component:PaypalComponent}
+  {path:'paypal',component:PaypalComponent},
+  {path:'home-page',component:HomePageComponent},
+  {path:'category',component:CategoriesComponent}
 ];
 
 @NgModule({

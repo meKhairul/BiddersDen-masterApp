@@ -9,7 +9,15 @@
 <body class="home" >
 
 <div class="album py-5 bg-light ">
+  
   <div class="container">
+
+    <div class="flex-div margin-bottom">
+      
+      <a routerLink="" class="links">Home > </a>
+      <a (click)="getCategoricalProducts(splitCategory)" class="links">{{splitCategory}} > </a>
+      <a (click)="getCategoricalProducts(category)" class="links">{{subCategory}} </a>
+    </div>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
       <div *ngFor="let product of products;" >

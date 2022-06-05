@@ -141,16 +141,16 @@ ul{
     margin-left: 88%;
     margin-top: -6%;
   }
-  .dropdown-menu{
+  /* .dropdown-menu{
       display: block;
       min-width: 6.5rem;
-  }
-  .subdrop{
+  } */
+  .ssubdrop{
       display: none;
       margin-left: 83%;
       margin-top: -35%;
   }
-  .dropdown-menu>.dropforprice:hover > .subdrop{
+  .dropdown-menu>.dropforprice:hover > .ssubdrop{
     display: block;
 }
 
@@ -158,10 +158,6 @@ ul{
   font-size: 12px;
   font-style: initial;
 }
-
-
-
-
 
 
 

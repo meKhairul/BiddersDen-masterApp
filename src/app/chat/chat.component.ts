@@ -12,7 +12,7 @@ import { Emitters } from '../emiiters/Emitter';
 })
 export class ChatComponent implements OnInit {
   messages: Message[] = [];
-  user  !:any;
+  user = new User();
   newMessageText = "";
   newMessage : Message = new Message();
   nomessage:boolean = false;
@@ -22,10 +22,16 @@ export class ChatComponent implements OnInit {
   
   ngOnInit(): void {
     this.getMessages();
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        this.authenticated = auth; 
+        this.user = this.userService.getUser();
+      }
+
+    );
   }
   getMessages(){
-    this.userService.authenticate().subscribe(response => {
-      this.user = response;
+    
       var req  = {
         username : this.user.username,
     }
@@ -38,13 +44,9 @@ export class ChatComponent implements OnInit {
       console.log(this.messages);
     });
       //this.userService.setUser(this.user);
-      Emitters.authEmitter.emit(true);
-    },
-    err => {
-      //alert("not Logged In")
-      Emitters.authEmitter.emit(false);
-    }
-  );
+      
+    
+    
     
   }
   sendMessage(){
@@ -69,13 +71,13 @@ export class ChatComponent implements OnInit {
       this.messages = data;
       if(this.router.url == "/chat"){
         
-         console.log("we are here:" +this.router.url);
-         window.location.reload();
-         
-        
-       }
-       else {this.router.navigate(['chat']);}
-      console.log(this.messages);
+        console.log("we are here:" +this.router.url);
+        let currentUrl = this.router.url;
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
+      }
+      else {this.router.navigate(['chat']);}
     });
   }
 

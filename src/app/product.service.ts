@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
+  category!:any;
   products: Product[] = [] ;
   searchText!:String;
   searchTextProducts: Product[] = [];
@@ -106,6 +107,15 @@ createEvent(event:String, username : String,product:Product){
     price : price
   }
   return this.http.post(this.API_URL + '/addEvent/', data);
+}
+
+setCategory(category:String)
+{
+  this.category = category;
+}
+getCategory()
+{
+  return this.category;
 }
 
 

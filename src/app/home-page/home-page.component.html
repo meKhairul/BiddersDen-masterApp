@@ -1,0 +1,183 @@
+
+<div class="main-content row">
+    
+    <hr>
+    <div class="navbar">
+        
+        <div class="flex-div dropdown-menu full-size">
+            <a class="dropdown-item dropforprice fw-bold" >Electronics
+                <div class="subdrop dropdown-menu">
+                    <div class="flex-div">
+                        <div class="links">
+                            <a href="#" class="dropdown-item fw-bold" >Laptops</a>
+                            <a href="#" class="dropdown-item fw-bold" >Desktops</a>
+                            <a class="dropdown-item fw-bold" >Smartphones</a>
+                            <a class="dropdown-item fw-bold" >Bikes</a>
+                            <a class="dropdown-item fw-bold" >Cars</a>
+                            <a class="dropdown-item fw-bold" >Televison</a>
+                            <a class="dropdown-item fw-bold" >Fridges</a>
+                        </div>
+                        <div class="image">
+                            <img src="assets/electronics.png" alt="">
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </a>
+            <a class="dropdown-item dropforprice fw-bold" >Cloths
+                <div class="subdrop dropdown-menu">
+                    <div class="flex-div">
+                        <div class="links">
+                            <a class="dropdown-item fw-bold" >Men</a>
+                            <a class="dropdown-item fw-bold" >Women</a>
+                            <a class="dropdown-item fw-bold" >Kids</a>
+                        </div>
+                        <div class="image">
+                            <img src="assets/cloth.png" alt="">
+                        </div>
+                    </div>
+                    
+                </div>
+            </a>
+            <a class="dropdown-item dropforprice fw-bold" >Foods</a>
+            <a class="dropdown-item dropforprice fw-bold" >Sports</a>
+            <a class="dropdown-item fw-bold" >Hardware Accessories</a>
+            <a class="dropdown-item fw-bold" >Books</a>
+            <a class="dropdown-item fw-bold" >Beauty and Cosmetics</a>
+        </div>
+    </div>
+    <div class="start-page">
+        <div class="intro-part flex-div">
+            <div class="text-item">
+                <p class="p-green fs-4">Welcome to Bidder'sDen</p>
+                <P class="fs-4 fw-bold">Auction started</P>
+                <p class="fs-4 fw-bold"></p>
+                <p class="text-muted mb-4">Make bid and get your desired product</p>
+            </div>
+            <!--clock-->
+            <div id="clock" class="light">
+                <div class="remaining-time">
+                    <p class="remaining-time fs-4 fw-bold text-muted">Remaining time</p>
+                </div>
+                <div class="display flex-div">
+                    <div class="hours">{{rhour+':'}}</div>
+                    <div class="mins">{{rmins+':'}}</div>
+                    <div class="sec">{{rsec}}</div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    <div class="categorical-products ">
+        <div class="popular-items fw-bold fs-4">
+            <p class="popular-text">Popular Categories</p>
+        </div>
+        <div class="flex-div move-left">
+            <div class="image-links">
+                <a href="" class="category-link">
+                    <img src="assets/icons/desktop.png" alt="link">
+                    <p class="link-name fw-bold">Desktop</p>
+                </a>
+            </div>
+            <div class="image-links">
+                <a href="" class="category-link">
+                    <img src="assets/icons/laptop.png" alt="link">
+                    <p class="link-name fw-bold">Laptops</p>
+                </a>
+            </div>
+            <div class="image-links">
+                <a href="" class="category-link">
+                    <img src="assets/icons/motorcycle.png" alt="link">
+                    <p class="link-name fw-bold bikes">Bikes</p>
+                </a>
+            </div>
+            <div class="image-links">
+                <a href="" class="category-link">
+                    <img src="assets/icons/smartphone.png" alt="link">
+                    <p class="link-name fw-bold smartphones">Smartphones</p>
+                </a>
+            </div>
+            <div class="image-links">
+                <a href="" class="category-link">
+                    <img src="assets/icons/t-shirt.png" alt="link">
+                    <p class="link-name fw-bold">Cloths</p>
+                </a>
+            </div>
+            <div class="image-links">
+                <a href="" class="category-link">
+                    <img src="assets/icons/sports.png" alt="link">
+                    <p class="link-name fw-bold">Sports</p>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+  <div class="album py-5 bg-light home ">
+    <div class="sorting-bar">
+      <div class="sorting-button">
+        <button type="button" class="btn btn-secondary">Sort by</button>
+        <button (click)="drop()" type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown-toggle-split">
+        </button>
+        <div *ngIf="isdrop" class="usedrop" id="sort">
+          <a class="dropdown-item dropforprice" >By Price
+            <div class="ssubdrop dropdown-menu">
+              <a class="dropdown-item" (click)="sorting(1)">Low > High</a>
+              <a class="dropdown-item" (click)="sorting(0)">High > Low</a>
+            </div>
+          </a>
+          
+          <a class="dropdown-item" (click)="sorting(2)">By Name</a>
+          <a class="dropdown-item" (click)="sorting(3)">By Date</a>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    <div *ngIf="isBidAble" class="container">
+      <h3 class="fs-4 fw-bold some-space"><b>Ongoing Products</b></h3>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+        <div *ngFor="let product of products;" >
+        
+        <div class="col" >
+          
+            <div class="card shadow-sm " >
+              <button (click)="showProduct(product)" >
+                <img src="{{'assets/'+product.uid+'.jpg'}}" alt="{{product.product_name}}" class="bid-products">
+              </button>
+              
+              <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="assets/laptop.png" role="img" aria-label="Placeholder: laptops " preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Laptops</text></svg> -->
+    
+              <div class="card-body ">
+                <p class="card-text"><small>{{product.product_name}}</small></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button (click)="showBidProduct(product)"  type="button" class="btn btn-sm btn-outline-secondary">Bid</button>
+                    <button (click)="showProduct(product)" type="button" class="btn btn-sm btn-outline-secondary">Product Details</button>
+                  </div>
+                <small class="text-muted"><i><b>{{"BDT "+product.current_price}}</b></i></small>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+      </div>  
+      
+        
+      </div>
+    </div>
+  </div>
+  
+  <app-footer></app-footer>
+  
+  
+  

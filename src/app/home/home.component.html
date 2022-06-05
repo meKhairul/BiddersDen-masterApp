@@ -1,5 +1,18 @@
 
-          
+
+<div class=" d-lg-flex flex-lg-row d-flex flex-column-reverse bg-light mt-5">
+  <div class="p-5" id="2">
+      <p class="p-green fs-4">Welcome</p>
+      <P class="fs-4 fw-bold">Enjoy your bidding time</P>
+      <p class="fs-4 fw-bold">100% Trusted</p>
+      <p class="text-muted mb-4">Make bid and get your desired product</p>
+      <div (click)="login()" class="btn btn-success px-4">Get Started</div>
+  </div>
+  <div id="1">
+      <img src="assets/logo.png"
+          class="w-75 h-75" alt="">
+  </div>
+</div>
 
 <div class="album py-5 bg-light home ">
   <div class="sorting-bar">
@@ -7,9 +20,9 @@
       <button type="button" class="btn btn-secondary">Sort by</button>
       <button (click)="drop()" type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown-toggle-split">
       </button>
-      <div *ngIf="isdrop" class="dropdown-menu">
+      <div *ngIf="isdrop" class="dropdown-menu" id="sort">
         <a class="dropdown-item dropforprice" >By Price
-          <div class="subdrop dropdown-menu">
+          <div class="ssubdrop dropdown-menu">
             <a class="dropdown-item" (click)="sorting(1)">Low > High</a>
             <a class="dropdown-item" (click)="sorting(0)">High > Low</a>
           </div>

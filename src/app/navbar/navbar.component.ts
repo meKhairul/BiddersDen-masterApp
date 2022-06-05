@@ -238,6 +238,7 @@ export class NavbarComponent implements OnInit {
     var reqData = {
       category : category
     }
+    this.productService.setCategory(category);
     this.productService.getCategoricalProducts(reqData).subscribe(data=>{
       this.products = data;
       console.log(this.products)
