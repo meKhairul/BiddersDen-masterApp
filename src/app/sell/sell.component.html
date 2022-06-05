@@ -9,8 +9,9 @@
   
                         <div class="col-md-12">
                             <label for="product-name">Product name</label>
-                            <input class="form-control" type="text" name="product-name" [(ngModel)] = "product.product_name" [ngModelOptions] = "{standalone: true}"required >
+                            <input class="form-control" type="text" name="product-name" [(ngModel)] = "product.product_name" [ngModelOptions] = "{standalone: true}"required minlength="6" maxlength="80">
                             <div *ngIf="product.product_name.length>8" class="green">Product name field is valid!</div>
+                            <!-- <div *ngIf="product.product_name.length>14" class="red">Product name field is too large!</div> -->
                             <div *ngIf="product.product_name.length==0" class="red">Product name field cannot be blank!</div>
                         </div>
   
@@ -30,7 +31,7 @@
   
                        <div class="col-md-12">
                             <label for="">Category</label>
-                            <select  class="form-select mt-3" [(ngModel)] = "product.product_category" [ngModelOptions]= "{standalone: true}" required>
+                            <select class="form-select mt-3" [(ngModel)] = "product.product_category" [ngModelOptions]= "{standalone: true}" required>
                                   
                                   <option value="electronics">Electronics</option>
                                   <option value="cloths">Cloths</option>

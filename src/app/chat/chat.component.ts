@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { Message } from '../message';
 import { User } from '../user';
+import { Emitters } from '../emiiters/Emitter';
 
 @Component({
   selector: 'app-chat',
@@ -11,21 +12,40 @@ import { User } from '../user';
 })
 export class ChatComponent implements OnInit {
   messages: Message[] = [];
-  user  = new User()
+  user  !:any;
   newMessageText = "";
+  newMessage : Message = new Message();
+  nomessage:boolean = false;
+  authenticated : boolean = false;
+  clicked:boolean = false;
   constructor(private userService: UserService,private router:Router) { }
   
   ngOnInit(): void {
     this.getMessages();
   }
   getMessages(){
-    this.user = this.userService.getUser();
-    var req  = {
+    this.userService.authenticate().subscribe(response => {
+      this.user = response;
+      var req  = {
         username : this.user.username,
     }
     this.userService.getMessages(req).subscribe(data=>{
       this.messages = data;
+      if(this.messages.length==0)
+      {
+        this.nomessage=true;
+      }
+      console.log(this.messages);
     });
+      //this.userService.setUser(this.user);
+      Emitters.authEmitter.emit(true);
+    },
+    err => {
+      //alert("not Logged In")
+      Emitters.authEmitter.emit(false);
+    }
+  );
+    
   }
   sendMessage(){
     var messageWithHeader = {
@@ -37,9 +57,40 @@ export class ChatComponent implements OnInit {
     var req  = {
       username : this.user.username
     }
+    this.newMessage.room = this.user.username;
+    this.newMessage.sender = this.user.username;
+    this.newMessage.text = this.newMessageText;
+    
+    this.newMessage.time = new Date();
+    
+    console.log(this.newMessage.time)
+    this.messages.push(this.newMessage);
     this.userService.getMessages(req).subscribe(data=>{
       this.messages = data;
+      if(this.router.url == "/chat"){
+        
+         console.log("we are here:" +this.router.url);
+         window.location.reload();
+         
+        
+       }
+       else {this.router.navigate(['chat']);}
+      console.log(this.messages);
     });
+  }
+
+  showTime(message : Message)
+  {
+    if(this.clicked)
+    {
+      this.clicked = false;
+    }
+    else
+    {
+      this.clicked = true;
+    }
+    console.log(this.clicked);
+
   }
 
 }

@@ -1,5 +1,6 @@
 from email import message
 from itertools import product
+from unicodedata import category
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
@@ -8,8 +9,8 @@ from rest_framework.response import Response
 from user.models import Product, Messages
 from user.serializers import FileSerializer
 from user.serializers import ProductSerializer, BidsSerializer
-from user.models import Users, Bids, Transactions
-from user.serializers import UsersSerializer, LoginSerializer, MessagesSerializer
+from user.models import Users, Bids, Transactions, Events
+from user.serializers import UsersSerializer, LoginSerializer, MessagesSerializer, EventSerializer
 from rest_framework.parsers import FileUploadParser
 from django.core.files.storage import default_storage
 from django.contrib.auth.hashers import make_password, check_password
@@ -52,7 +53,7 @@ def register(request,id=0):
         
         Users.objects.create(uid= uid, name=name, phone_number = phone_number, email = email, address = address, username=username, password=hashed_password, isVerified = False)
 
-        sendMail(email, uid)
+        #sendMail(email, uid)
         return JsonResponse("Please check your mail to verify your account", safe=False)
 
 
@@ -113,10 +114,11 @@ def login(request):
             
             user = Users.objects.filter(username=username).first()
 
+
             if user is None:
                 raise AuthenticationFailed('User not found')
-            elif user.isVerified==False:
-                raise AuthenticationFailed('Please verifiy your account first')
+            #elif user.isVerified==False:
+                #raise AuthenticationFailed('Please verifiy your account first')
             elif not check_password(password, user.password):
                 raise AuthenticationFailed('Incorrect Password')
         
@@ -193,6 +195,18 @@ def sendProducts(request):
 
 @api_view(['POST'])
 @csrf_exempt
+def getCategoricalProducts(request):
+    if request.method == 'POST':
+        data=JSONParser().parse(request)
+        category = data['category'] 
+        category = category.lower()
+        print(category)
+        products = Product.objects.filter(product_category = category)
+        product_serializer = ProductSerializer(products, many = True)
+        return JsonResponse(product_serializer.data, safe = False)
+
+@api_view(['POST'])
+@csrf_exempt
 def addBid(request):
     if request.method == 'POST':
         data=JSONParser().parse(request)
@@ -233,7 +247,7 @@ def searchProduct(request):
     if request.method == 'POST':
         data=JSONParser().parse(request)
         searchData = data['text'] 
-        products = Product.objects.filter(product_name__icontains = searchData)| Product.objects.filter(product_details__icontains = searchData )
+        products = Product.objects.filter(product_category__icontains = searchData) | Product.objects.filter(product_name__icontains = searchData)| Product.objects.filter(product_details__icontains = searchData )
         product_serializer = ProductSerializer(products, many = True)
         return JsonResponse(product_serializer.data, safe = False)
 
@@ -260,12 +274,44 @@ def addMessages(request):
 
 @api_view(['POST'])
 @csrf_exempt
-def passwordRecovery(email_to):
-    rnd = str(uuid.uuid4())
-    subject = 'Change your password'
-    body = 'Please click the link to change your password http://127.0.0.1:8000/verify/' + rnd
-    email_from = settings.EMAIL_HOST_USER
-    recipient = [email_to]
-    send_mail(subject, body , email_from, recipient)
-    print("mail sent") 
+def passwordRecovery(request):
+    if request.method == 'POST':
+        rnd = str(uuid.uuid4())
+        data=JSONParser().parse(request)
+        print(data['email'])
+        subject = 'Change your password'
+        body = 'Please click the link to change your password http://localhost:4200/change-password/'
+        email_from = settings.EMAIL_HOST_USER
+        recipient = [data['email']]
+        send_mail(subject, body , email_from, recipient)
+        return JsonResponse("mail sent", safe = False) 
 
+@api_view(['POST'])
+@csrf_exempt
+def changePassword(request):
+    if request.method == 'POST':
+        data=JSONParser().parse(request)
+        email = data['email']
+        password = data['password']
+        print(email)
+        print(password)
+        user = Users.objects.filter(email=email).first()
+        print(user)
+        if user:
+            if user.isVerified:
+                user.password = password
+                user.save()
+                return JsonResponse('Your password has been changed', safe = False)
+            else :
+                return JsonResponse('Your account is not verified yet, please verifiy your account first', safe= False)
+        return JsonResponse('No user found with this email', safe = False)
+
+@api_view(['POST'])
+@csrf_exempt
+def addEvent(request):
+    if request.method == 'POST':
+        data=JSONParser().parse(request)
+        print(data)
+        
+        Events.objects.create(product_id = data['product_id'], user_id = data['user_id'], event_type = data['event_type'], category_code = data['category_code'], price = data['price'])
+        return JsonResponse("Event added successfully", safe = False)

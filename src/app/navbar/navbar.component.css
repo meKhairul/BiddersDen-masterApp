@@ -227,13 +227,13 @@ form{
 }
 
 .dropdown-content a {
-  color: black;
+  color: rgb(240, 230, 230);
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #000000}
+.dropdown-content a:hover {background-color: #e2626c}
 
 .dropdown:hover .dropdown-content {
   display: block;
@@ -342,6 +342,99 @@ ul{
   font-size: 13px;
   color: rgb(100, 61, 95);
 }
+/* .home{
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(/assets/background.jpg);
+  background-position: center;
+  background-size: cover;
+  
+  background-repeat: no-repeat;
+} */
+
+.dropdown-content{
+  border: 2px solid rgb(75, 128, 123);
+  box-shadow: 2px 2px 20px rgb(204, 197, 197);
+  height: 200px;
+  background-color: #4b5863;
+  width: 200px;
+  overflow-y: scroll;
+}
+
+.dropdown-item.dropdown-notification:active, .dropdown-item.dropdown-notification.active {
+  color: #1d1e1f;
+  text-decoration: none;
+  background-color: #f7f7f9;
+}
+
+.dropdown-notification:hover .notification-read {
+  color: #34495E;
+}
+
+.dropdown-notification-all {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-style: oblique;
+  background-color: #34495E;
+  color: white;
+}
+
+.dropdown-notification-all:hover {
+  background-color: #34495E;
+  color: white;
+}
+
+.notifications-container {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.notification-dropdown-menu {
+  padding-bottom: 0;
+  min-width: 528px;
+}
+
+.notification-img {
+  width: 48px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.notifications-body {
+  display: inline-block;
+}
+
+.notification-texte {
+  text-align: left;
+  margin: 0;
+}
+
+.notification-read {
+  margin: 0;
+  height: 48px;
+  vertical-align: top;
+  line-height: 48px;
+  padding-left: 15px;
+  color: white;
+  float: right;
+}
+
+.notification-date {
+  text-align: left;
+  color: #2980b9;
+  margin: 0;
+}
+
+.notification-solo {
+  margin-top: 1rem;
+}
+
+.notification-unread {
+  text-decoration: none;
+  background-color: #f7f7f9;
+}
+
 
 
 

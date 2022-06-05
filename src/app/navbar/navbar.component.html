@@ -1,10 +1,10 @@
- <nav class="flex-div">
+ <nav class="flex-div home">
   <div class="nav-left flex-div">
-    <img
+    <a (click)="menuButtonClickEvent()"><img
       src="assets/align-justify.png"
       class="menu-icon"
       
-    />
+    /></a>
     <h5><a routerLink=""><b>BiddersDen</b></a></h5>
     <!-- <img src="assets/images/logo.png" class="logo" alt="" /> -->
   </div>
@@ -80,6 +80,9 @@
 
   <div *ngIf="authenticated" class="authenticate-check">
     
+
+  
+
     <div  class="nav-right flex-div">
     <div class="dropdown">
       <div class="dropbtn" >
@@ -87,9 +90,15 @@
           <img src="assets/notification.png" class="user-icon" alt="notification-Icon" />
         </a>
       </div>
-      <!-- <div class="dropdown-content">
-        <p>You have notifications</p>
-      </div> -->
+      <div class="dropdown-content notification">
+        <div *ngFor="let notify of notification" class="notification">
+          <div class="notification-size">
+            <a (click)="sendNotify(notify)"> {{notify.msg}} </a>
+          </div>
+          
+        </div>
+        
+      </div>
     </div>
     
 
@@ -181,16 +190,15 @@
           <img class="direct-icon" src="assets/direction.png" />
           </a>
             <ul class="submenu2">
-              <li><a href="#">Desktop</a></li> <hr>
-              <li><a (click)="search('laptops',0)">Laptops</a></li><hr>
-              <li><a href="#">Smartphones</a></li><hr>
-              <li><a href="#">Accessories</a></li><hr>
-              <li><a href="#">Tablet</a></li><hr>
-              <li><a href="#">Sports</a></li><hr>
-              <li><a (click)="search('bike',0)">Bikes</a></li><hr>
-              <li><a href="#">Cars</a></li><hr>
-              <li><a href="#">Fridge</a></li><hr>
-              <li><a href="#">Television</a></li>
+              <li><a (click)="getCategoricalProducts('Electronics.Desktop')">Desktop</a></li> <hr>
+              <li><a (click)="getCategoricalProducts('Electronics.Laptops')">Laptops</a></li><hr>
+              <li><a (click)="getCategoricalProducts('Electronics.Smartphones')">Smartphones</a></li><hr>
+              <li><a (click)="getCategoricalProducts('Electronics.Accessories')">Accessories</a></li><hr>
+              <li><a (click)="getCategoricalProducts('Electronics.Tablet')">Tablet</a></li><hr>
+              <li><a (click)="getCategoricalProducts('Electronics.Bikes')">Bikes</a></li><hr>
+              <li><a (click)="getCategoricalProducts('Electronics.Cars')">Cars</a></li><hr>
+              <li><a (click)="getCategoricalProducts('Electronics.Fridge')">Fridge</a></li><hr>
+              <li><a (click)="getCategoricalProducts('Electronics.Television')">Television</a></li>
             </ul>
           </li>
           <hr>
@@ -199,16 +207,16 @@
             <img class="direct-icon" src="assets/direction.png" />
           </a>
             <ul class="submenu2">
-              <li><a href="#">Men</a></li> <hr>
-              <li><a (click)="search('laptops',0)">Women</a></li><hr>
-              <li><a href="#">Kids</a></li><hr>
+              <li><a (click)="getCategoricalProducts('Electronics.Men')">Men</a></li> <hr>
+              <li><a (click)="getCategoricalProducts('Electronics.Women')">Women</a></li><hr>
+              <li><a (click)="getCategoricalProducts('Electronics.Kids')">Kids</a></li><hr>
               
             </ul>
           </li><hr>
-          <li><a href="#">Hardware Accessories</a></li><hr>
-          <li><a href="#">Beauty & Cosmetics</a></li><hr>
-          <li><a href="#">Sports</a></li><hr>
-          <li><a href="#">Books</a></li>
+          <li><a (click)="getCategoricalProducts('Hardware Accessories')">Hardware Accessories</a></li><hr>
+          <li><a (click)="getCategoricalProducts('Beauty & Cosmetics')">Beauty & Cosmetics</a></li><hr>
+          <li><a (click)="getCategoricalProducts('Sports')">Sports</a></li><hr>
+          <li><a (click)="getCategoricalProducts('Books')">Books</a></li>
         </ul>
       </li>
     </ul>
@@ -259,7 +267,7 @@
   </div>
 </div>
 
-<div class="timer">
+<div class="timer flex-div">
   <div class="flex-div">
     <p class="days time">{{day}}</p>
     <p class="hours time">{{hour+':'}}</p>

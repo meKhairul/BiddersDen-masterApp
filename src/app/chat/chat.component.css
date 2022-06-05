@@ -10,6 +10,8 @@
     box-shadow: 0 2px 3px rgba(0,0,0,0.03);
     -webkit-transition: .5s;
     transition: .5s;
+    width: 90%;
+    height: 90%;
 }
 
 .padding {
@@ -88,6 +90,7 @@ h4.card-title {
     position: relative;
 }
 
+
 .ps-container {
     -ms-touch-action: auto;
     touch-action: auto;
@@ -127,6 +130,7 @@ h4.card-title {
     -webkit-box-flex: initial;
     flex: initial;
     display: table;
+    margin-left: -34%;
 }
 
 .media-body {
@@ -151,6 +155,7 @@ h4.card-title {
     background-color: transparent !important;
     padding: 0;
     opacity: .8;
+    font-size: 15px;
 }
 
 .media-meta-day {
@@ -215,7 +220,7 @@ h4.card-title {
     float: right;
     clear: right;
     background-color: #48b0f7;
-    color: #fff;
+    color: rgb(0, 0, 0);
 }
 
 .media-chat .media-body p {
@@ -326,4 +331,19 @@ button, input, optgroup, select, textarea {
     background-color: transparent;
     border: 1px solid blue;
     width: 170%;
+  }
+
+  .bidders-den{
+      margin-left:10%;
+      margin-top: 10%;
+  }
+  .admin-avatar{
+    width: 46%;
+    margin-left: 27%;
+    margin-top: -10%;
+    
+  }
+  .contact{
+    margin-top: -20%;
+    margin-left: 38%;
   }

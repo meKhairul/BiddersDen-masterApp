@@ -35,7 +35,7 @@ class Product(models.Model):
     delivered_date = models.CharField(max_length=100)
     isApproved = models.BooleanField(default=False)
     seller = models.ForeignKey(Users, related_name="seller", on_delete=models.CASCADE)
-    isSold = models.BooleanField()
+    isSold = models.BooleanField(default=False)
     buyerID = models.CharField(max_length=100)
     bidder = models.ManyToManyField(Users)
     
@@ -74,3 +74,13 @@ class Messages(models.Model):
 
     def __str__(self):
         return self.text
+
+class Events(models.Model):
+    event_type  = models.CharField(max_length=10)
+    user_id  = models.CharField(max_length=100)
+    product_id  =  models.CharField(max_length=100)                         
+    category_code = models.CharField(max_length=100)
+    price = models.IntegerField()
+
+    def __str__(self) -> str:
+        return self.event_type

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Emitters } from '../emiiters/Emitter';
+import { Notify } from '../notify';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { User } from '../user';
@@ -15,8 +16,9 @@ export class NavbarComponent implements OnInit {
   constructor(private userService:UserService, private productService: ProductService, private router:Router) { }
 
   click = 1;
+  isBidAble :boolean = true;
   user : User = new User();
-  products : Product[] = []
+  products : Product[] = [];
   searchData!:String;
   flag!:number;
   date : Date = new Date();
@@ -25,18 +27,27 @@ export class NavbarComponent implements OnInit {
   ampm!:any;
   mins!:any;
   sec!:any;
+  rday!:any;
+  rhour!:any;
+  rampm!:any;
+  rmins!:any;
+  rsec!:any;
+  one:boolean=true;
+  winningProducts:Product[] = [];
   daysArray = ["Sunday","Monday","Tuesday","Wednesday","Thurshday","Friday","Saturday"];
 
   
-  /*menuButtonClickEvent() {
+  menuButtonClickEvent() {
     if (this.click == 0) this.click = 1;
     else this.click = 0;
-  }*/
+  }
 
   
   authenticated = false;
-  
+  notification:Notify[] = [];
+  newNotify:Notify = new Notify();
   ngOnInit(): void {
+    this.getProducts();
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
         this.authenticated = auth; 
@@ -49,6 +60,28 @@ export class NavbarComponent implements OnInit {
       this.updateDate(date);
     },1000);
     this.day = this.daysArray[this.date.getDay()];
+
+    setInterval(()=>{
+      const date = new Date();
+      this.myTimer(date);
+    },1000);
+    setInterval(()=>{
+      //console.log(this.isBidAble);
+      //console.log(this.one);
+      if(!this.isBidAble && this.one)
+      {
+        this.one=false;
+        this.winOrNot();
+        //console.log(this.winningProducts);
+        this.userService.setWinnerProducts(this.winningProducts);
+        this.newNotify.type = 'win';
+        this.newNotify.msg = 'Congratulations!! Yoy have won the bid/s. Click the Link to Pay for getting the product.';
+        this.newNotify.time = this.date;
+        this.notification.push(this.newNotify);
+        
+      }
+      
+    },1000);
   }
 
   
@@ -124,6 +157,103 @@ export class NavbarComponent implements OnInit {
 
     this.sec = seconds<10?'0'+seconds:seconds.toString();
 
+
+
+  }
+  getProducts(){
+    this.productService.getAllProducts().subscribe(data=>{
+      this.products = data;
+    });
   }
   
+  winOrNot()
+  {
+    
+    for(let product of this.products)
+    {
+      //console.log(product);
+      this.productService.getBids(product).subscribe(data=>{
+        let currentBids = data;
+        currentBids = currentBids.sort((a, b) => 0-(a.bidAmount - b.bidAmount));
+        
+        
+        if(currentBids[0].bidderId==this.user.username)
+        {
+          this.winningProducts.push(product);
+        }
+        
+
+        
+
+      });
+    }
+    
+    
+  }
+  myTimer(date:Date) {
+    
+    const d = new Date();
+    d.setHours(23);
+    d.setMinutes(59);
+    d.setSeconds(59);
+    
+    d.setMilliseconds(999);
+    //console.log(date);
+    let difference = d.getTime() - date.getTime();
+    if(difference<=0)
+    {
+      this.isBidAble = false;
+      this.userService.setIsBidAble(this.isBidAble);
+      //console.log("Its time to close");
+    }
+    else
+    {
+      this.isBidAble = true;
+      this.userService.setIsBidAble(this.isBidAble);
+    }
+    this.rsec = Math.floor(difference / 1000);
+    this.rmins = Math.floor(this.rsec / 60);
+    this.rhour = Math.floor(this.rmins / 60);
+    this.rday = Math.floor(this.rhour / 24);
+
+    this.rhour %= 24;
+    this.rmins %= 60;
+    this.rsec %= 60;
+    this.rhour = this.rhour < 10 ? '0' + this.rhour : this.rhour;
+    this.rmins = this.rmins < 10 ? '0' + this.rmins : this.rmins;
+    this.rsec = this.rsec < 10 ? '0' + this.rsec : this.rsec;
+
+    //console.log(this.rhour+":"+this.rmins+":"+this.rsec);
+
+    
+  }
+  sendNotify(notify:Notify)
+  {
+    if(notify.type=='win')
+    {
+      this.router.navigate(['payment']);
+    }
+  }
+  getCategoricalProducts(category : String){
+    var reqData = {
+      category : category
+    }
+    this.productService.getCategoricalProducts(reqData).subscribe(data=>{
+      this.products = data;
+      console.log(this.products)
+      this.productService.categoricalProducts = this.products;
+      if(this.router.url == "/category"){
+        console.log("we are here:" +this.router.url);
+        let currentUrl = this.router.url;
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+        });
+      }
+      else {
+        this.router.navigate(['category']);
+      }
+    });
+    
+  }
+
 }

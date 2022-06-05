@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Bid } from '../bid';
 import { ProductService } from '../product.service';
@@ -51,6 +52,10 @@ export class BidsComponent implements OnInit {
     this.productShow.current_price = parseInt(this.bid_price.toString(),10);
     this.productService.setBid(this.newBid).subscribe(response=>{
       alert(response.toString())
+    });
+    
+    this.productService.createEvent('bid', this.user.username, this.productShow).subscribe(data=>{
+      console.log(data);
     });
     console.log("Bid price: "+this.bid_price);
     console.log("current price: "+this.productShow.current_price);

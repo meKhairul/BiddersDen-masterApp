@@ -4,15 +4,18 @@ import { Observable } from "rxjs";
 import { Emitters } from "./emiiters/Emitter";
 import { User } from "./user";
 import { Message } from "./message";
+import { Product } from "./product";
 @Injectable({
     providedIn: 'root'
 })
 
 export class UserService {
 
+    isBidAble:boolean=true;
+    
     user!:any;
     loggedIn = false;
-
+    winningProducts:Product[] = [];
     API_URL = 'http://127.0.0.1:8000'
     constructor(private http: HttpClient) { }
     /*getAllUsers(): Observable<any[]> {
@@ -57,5 +60,21 @@ export class UserService {
       
     getMessages(data:any): Observable<any[]>{
         return this.http.post<any[]>(this.API_URL + '/chat/', data);
+    }
+    setWinnerProducts(winningProducts : Product[])
+    {
+        this.winningProducts = winningProducts;
+    }
+    getWinnerProducts():Product[]
+    {
+        return this.winningProducts;
+    }
+    setIsBidAble(isBid:boolean)
+    {
+        this.isBidAble = isBid;
+    }
+    getIsBidAble():boolean
+    {
+        return this.isBidAble;
     }
 }

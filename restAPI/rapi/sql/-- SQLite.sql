@@ -1,2 +1,2 @@
 -- SQLite
-DELETE FROM user_product;
+DELETE FROM user_events ;

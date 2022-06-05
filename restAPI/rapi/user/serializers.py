@@ -1,3 +1,4 @@
+from multiprocessing import Event
 from rest_framework import serializers
 from user.models import Transactions
 from user.models import Bids
@@ -76,3 +77,14 @@ class MessagesSerializer(serializers.ModelSerializer):
                   'room',
                   'time',
                   'sender',)
+
+class EventSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Event
+        fields = ('event_type',
+                  'user_id',
+                  'product_id',
+                  'category_code',
+                  'price',
+                  )

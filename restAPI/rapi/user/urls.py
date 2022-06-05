@@ -9,6 +9,8 @@ urlpatterns=[
     re_path(r'^login/$', views.login),
     re_path(r'^logout/$', views.logout),
     path('verify/<uid>' , views.verify),
+    re_path(r'^recover/$' , views.passwordRecovery),
+    re_path(r'change-password/$' , views.passwordRecovery),
     re_path(r'^upload-product-info/$', views.addProduct),
     re_path(r'^imageUpload/$', views.imageUpload),
     re_path(r'^products/$', views.sendProducts),
@@ -18,4 +20,6 @@ urlpatterns=[
     re_path(r'^chat/$', views.getMessages),
     re_path(r'^message/$', views.addMessages),
     re_path(r'^searchProducts/$', views.searchProduct),
+    re_path(r'^categories/$', views.getCategoricalProducts),
+    re_path(r'^addEvent/$', views.addEvent),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

@@ -4,7 +4,6 @@ import { Emitters } from '../emiiters/Emitter';
 import { ProductService } from '../product.service';
 import { Product } from '../product';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -27,10 +26,12 @@ export class HomeComponent implements OnInit {
   link:string[] = [];
   isdrop:number=0;
   authenticated : boolean = false;
+  isBidAble:boolean = true;
   constructor(private userService:UserService,private productService:ProductService,private router:Router) { }
 
   ngOnInit(): void {
     
+    this.isBidAble = this.userService.getIsBidAble();
     setInterval(()=>{
       const date = new Date();
       this.updateDate(date);
@@ -71,6 +72,11 @@ export class HomeComponent implements OnInit {
   showProduct(product:Product){
     this.productService.setProductToBeShown(product);
     this.router.navigate(['product']);
+    if(this.authenticated) {
+      this.productService.createEvent('view', this.userdata.username, product).subscribe(data=>{
+      console.log(data);
+      });
+    }
   }
 
   showBidProduct(product:Product){
@@ -89,7 +95,11 @@ export class HomeComponent implements OnInit {
     else{
       alert("Bidding is not started yet!!");
     }
-
+    if(this.authenticated) {
+      this.productService.createEvent('view', this.userdata.username, product).subscribe(data=>{
+      console.log(data);
+      });
+    }
     
   }
   

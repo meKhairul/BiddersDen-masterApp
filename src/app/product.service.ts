@@ -11,6 +11,7 @@ export class ProductService {
   products: Product[] = [] ;
   searchText!:String;
   searchTextProducts: Product[] = [];
+  categoricalProducts:Product[] = [];
   API_URL = 'http://127.0.0.1:8000';
   productToBeShown  = new Product();
   bidProductToBeShown  = new Product();
@@ -85,6 +86,26 @@ setSortValue(sortValue:number)
 getSortValue():number
 {
   return this.sortValue;
+}
+getCategoricalProducts(data:any): Observable<any[]>{
+  return this.http.post<any[]>(this.API_URL + '/categories/', data);
+}
+createEvent(event:String, username : String,product:Product){
+  var event_type = event;
+  var user_id = username;
+  var product_id = product.uid;
+  var category_code = product.product_category;
+  var price = product.base_price;
+  
+  
+  var data = {
+    product_id : product_id,
+    user_id : user_id,
+    event_type : event_type,
+    category_code : category_code,
+    price : price
+  }
+  return this.http.post(this.API_URL + '/addEvent/', data);
 }
 
 

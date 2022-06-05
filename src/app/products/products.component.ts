@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { flatMap } from 'rxjs';
 import { Bid } from '../bid';
 import { Emitters } from '../emiiters/Emitter';
 import { Product } from '../product';
@@ -14,32 +15,24 @@ import { UserService } from '../user.service';
 export class ProductsComponent implements OnInit {
 
   productShow = this.productService.getProductToBeShown();
-  user !:any;
+  user = this.userService.getUser();
   newBid = new Bid();
   currentBids : Bid[] = [];
-  authenticated :boolean = false;
+  authenticated:boolean = false;
 
   constructor(private productService:ProductService, private userService: UserService,private router:Router) { }
 
   ngOnInit(): void {
-    Emitters.authEmitter.subscribe(
-      (auth: boolean) => {
-        this.authenticated = auth; 
-        this.user = this.userService.getUser();
-      }
-
-    );
+    
     this.getBids();
+    if(this.user.username !=null)
+    {
+      this.authenticated = true;
+    }
   }
-  addBid(){
-    this.newBid.bidderId = this.user.username;
-    this.newBid.productId = this.productShow.uid;
-    this.newBid.bidAmount = 500;
-    this.productService.setBid(this.newBid).subscribe(response=>{
-      alert(response.toString())
-    });
-  }
+  
 
+  
   getBids(){
     this.productService.getBids(this.productShow).subscribe(data=>{
       this.currentBids = data;

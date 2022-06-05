@@ -24,6 +24,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { PaypalComponent } from './paypal/paypal.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { PaypalComponent } from './paypal/paypal.component';
     ChangePasswordComponent,
     ForgotPasswordComponent,
     PaypalComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,
