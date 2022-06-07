@@ -1,0 +1,10 @@
+.component{
+    margin-left:20% ;
+    max-width: 1000px;
+    margin-top: 5%;
+  }
+  button{
+      margin-left: 35%;
+      margin-bottom: 1%;
+      width: 20%;
+  }

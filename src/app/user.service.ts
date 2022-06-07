@@ -12,23 +12,23 @@ import { Product } from "./product";
 export class UserService {
 
     isBidAble:boolean=true;
-    
+    recovery_email:String = "";
     user!:any;
     loggedIn = false;
     winningProducts:Product[] = [];
     API_URL = 'http://127.0.0.1:8000'
     constructor(private http: HttpClient) { }
-    /*getAllUsers(): Observable<any[]> {
-        return this.http.get<any[]>(this.API_URL + '/users/');
-    }*/
+    getAllUsers(): Observable<any[]> {
+        return this.http.post<any[]>(this.API_URL + '/users/', "users");
+    }
 
     addUser(val: any) {
         return this.http.post(this.API_URL + '/register/', val);
     }
 
-    /*deleteUser(val:any){
+    deleteUser(val:any){
         return this.http.delete(this.API_URL + '/users/'+ val);
-    }*/
+    }
     
     /*uploadPhoto(val:any){
         return this.http.post(this.API_URL+'/SaveFile/', val);
@@ -77,4 +77,25 @@ export class UserService {
     {
         return this.isBidAble;
     }
+    recover(email : String){
+        this.recovery_email = email;
+        var data = {
+            email : email
+        }
+        return this.http.post(this.API_URL + '/recover/', data);
+    }
+    logInWithRecoveryCode(code: String){
+        var data = {
+            code : code
+        }
+        return this.http.post(this.API_URL + '/loginWithCode/', data);
+    }
+    changePassword(password : String, username : String){
+        var data = {
+            username : username,
+            password : password,
+        }
+        return this.http.post(this.API_URL + '/change-password/', data);
+    }
+    
 }

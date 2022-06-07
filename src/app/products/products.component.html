@@ -1,45 +1,50 @@
+<app-navbar></app-navbar>
 
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-</head>
-<div class="container">
-    <div class="row">
-        <ng-container >
-            <div class="card col-md-3">
-                <img src="{{'assets/'+productShow.uid+'.jpg'}}" alt="{{productShow.product_name}}">
-                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{productShow.product_name}}</h5>
-                <!-- <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{productShow.product_details}}</p> -->
-                <p><strong>Price:</strong> ${{productShow.current_price}}</p>
-                <button class="btn btn-primary" (click)="showBidProduct()" >Bid</button>
-            </div>
+<div class="component">
+        <div class="container">
+            <div class="row">
+                <ng-container >
+                    <div class="card col-md-3">
+                        <img src="{{'assets/'+productShow.uid+'.jpg'}}" alt="{{productShow.product_name}}">
+                        <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{productShow.product_name}}</h5>
+                        <!-- <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{productShow.product_details}}</p> -->
+                        <p><strong>Price:</strong> ${{productShow.current_price}}</p>
+                        <button class="btn btn-primary" (click)="showBidProduct()" >Bid</button>
+                    </div>
 
-            <div class="detail-card">
-                <h1><b>Product Details</b></h1><br>
-                
-                    <h3 class="product-title">{{productShow.product_name}}</h3>
-                    <div class="rating">
-                        <div class="stars">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
+                    <div class="detail-card">
+                        <h1><b>Product Details</b></h1><br>
+                        
+                            <h3 class="product-title">{{productShow.product_name}}</h3>
+                            <div class="rating">
+                                <div class="stars">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </div>
+                                
+                            </div>
+                            <p class="product-description">{{productShow.product_details}}</p>
+                            <h4 class="price">Base price:  BDT{{productShow.base_price}}</h4>
+                            <h4 class="price">Current price:  BDT{{productShow.current_price}}</h4>
+                        
+                            
                         
                     </div>
-                    <p class="product-description">{{productShow.product_details}}</p>
-                    <h4 class="price">{{"Base price:    $"+productShow.base_price}}</h4>
-                    <h4 class="price">{{"Current price:    $"+productShow.current_price}}</h4>
-                   
-                    
-                
+
+
+                </ng-container>
+
             </div>
-
-
-        </ng-container>
-
-    </div>
+        </div>
 </div>
 
-<app-footer></app-footer>
+
+
+<div class="footer-component">
+    <app-footer></app-footer>
+</div>
+

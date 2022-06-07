@@ -1,0 +1,44 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="component">
+
+    
+
+    <div class="flex-div">
+        
+        <!-- <button (click)="add()" class="btn btn-success">Add</button> -->
+
+        <button (click)="ban()" class="btn btn-warning">Ban any user</button>
+    </div>
+
+    <div class="users">
+      <h3 class="fs-4 fw-bold">All users</h3>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Serial</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Username</th>
+            
+            <th scope="col">Contact</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users;let i = index;">
+            <th scope="row">{{i}}</th>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.address}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.phone_number}}</td>
+            
+          </tr>
+          
+        </tbody>
+      </table>
+</div>

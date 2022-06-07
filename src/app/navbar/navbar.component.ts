@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
   click = 1;
   isBidAble :boolean = true;
-  user : User = new User();
+  user !:any;
   products : Product[] = [];
   searchData!:String;
   flag!:number;
@@ -51,10 +51,11 @@ export class NavbarComponent implements OnInit {
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
         this.authenticated = auth; 
-        this.user = this.userService.getUser();
+        
       }
 
     );
+    this.authenticate();
     setInterval(()=>{
       const date = new Date();
       this.updateDate(date);
@@ -84,7 +85,19 @@ export class NavbarComponent implements OnInit {
     },1000);
   }
 
-  
+  authenticate(){
+    this.userService.authenticate().subscribe(response => {
+      this.user = response;
+      
+      //alert("Logged In as .. " + String(this.userdata.username) )
+      Emitters.authEmitter.emit(true);
+    },
+    err => {
+      //alert("not Logged In")
+      Emitters.authEmitter.emit(false);
+    }
+  );
+  }
 
   logout(): void {
     this.userService.logout().subscribe(() => this.authenticated = false);

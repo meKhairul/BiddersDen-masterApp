@@ -1,0 +1,31 @@
+
+<!-- <app-admin-navbar></app-admin-navbar> -->
+
+<div class="component">
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Ban User</h3>
+                        
+                        <form>
+      
+                            <div class="col-md-12">
+                                <label for="product-name">User ID</label>
+                                <input class="form-control" type="text" name="userid" [(ngModel)] = "userId" [ngModelOptions] = "{standalone: true}"required minlength="6" maxlength="80">
+                                
+                            </div>
+      
+                            
+                            <div class="form-button mt-3">
+                                <button (click)="ban(userId)" id="submit" type="submit" class="btn btn-warning" >Ban</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+</div>

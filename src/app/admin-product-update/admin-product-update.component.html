@@ -1,0 +1,109 @@
+
+<app-admin-navbar></app-admin-navbar>
+
+<div class="component">
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Update Product</h3>
+                        
+                        <form>
+      
+                            <div class="col-md-12">
+                                <label for="product-name">Product name</label>
+                                <input class="form-control" type="text" name="product-name" [(ngModel)] = "product.product_name" [ngModelOptions] = "{standalone: true}"required minlength="6" maxlength="80">
+                                <div *ngIf="product.product_name.length>8" class="green">Product name field is valid!</div>
+                                <!-- <div *ngIf="product.product_name.length>14" class="red">Product name field is too large!</div> -->
+                                <div *ngIf="product.product_name.length==0" class="red">Product name field cannot be blank!</div>
+                            </div>
+      
+                            <div class="col-md-12">
+                                <label for="base-price">Base Price</label>
+                                <input class="form-control" type="number" name="Base Price" [(ngModel)] = "product.base_price" [ngModelOptions] = "{standalone: true}"required>
+                                 <div *ngIf="product.base_price!=null" class="green">Base Price field is valid!</div>
+                                 <div *ngIf="product.base_price==null" class="red">Base Price field cannot be blank!</div>
+                            </div>
+    
+                            
+      
+                           <div class="col-md-12">
+                                <label for="">Category</label>
+                                <select class="form-select mt-3" [(ngModel)] = "product.product_category" [ngModelOptions]= "{standalone: true}" required>
+                                      
+                                      <option value="electronics">Electronics</option>
+                                      <option value="cloths">Cloths</option>
+                                      <option value="foods">Foods</option>
+                                      <option value="sports">Sports</option>
+                                      <option value="hardware accessories">Hardware accessories</option>
+                                      <option value="books">Books</option>
+                                      <option value="beauty and cosmetics">Beauty & Cosmetics</option>
+                               </select>
+                               <span *ngIf="product.product_category=='electronics'" class="sub-category">
+                                    <select  class="form-select mt-3" [(ngModel)] = "sub_category" [ngModelOptions]= "{standalone: true}" required>
+                                        
+                                        <option value="laptops">Laptops</option>
+                                        <option value="desktops">Desktops</option>
+                                        <option value="smartphones">Smartphones</option>
+                                        <option value="bikes">Bikes</option>
+                                        <option value="tv">TV</option>
+                                        <option value="fridge">Fridge</option>
+                                    </select>
+                               </span>
+                               <span *ngIf="product.product_category=='cloths'" class="sub-category">
+                                <select  class="form-select mt-3" [(ngModel)] = "sub_category" [ngModelOptions]= "{standalone: true}" required>
+                                    
+                                    <option value="men">Men</option>
+                                    <option value="women">Women</option>
+                                    <option value="kids">Kids</option>
+                                    
+                                </select>
+                           </span>
+                               
+                                <div class="valid-feedback">You selected a Category!</div>
+                                <div class="invalid-feedback">Please select a Category!</div>
+                           </div>
+      
+      
+                           <div class="col-md-12">
+                               <label for="">Product Defects</label>
+                              <textarea class="form-control" type="text" name="defects" [(ngModel)] = "product.product_details" [ngModelOptions] = "{standalone: true}" required></textarea>
+                               <div class="valid-feedback">Product defects field is valid!</div>
+                               <div class="invalid-feedback">Product defects field cannot be blank!</div>
+                           </div>
+      
+      
+                          <div class="col-md-12 mt-3">
+                            Product Photo:
+                            <input class="form-control" type="file" placeholder="Choose File"  (change) = "onChanged($event)"  required>
+                               <div class="valid-feedback">Product photos field is valid!</div>
+                               <div class="invalid-feedback">Product photos field cannot be blank!</div>
+                          </div>
+                          
+      
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" [(ngModel)] = "product.isApproved" [ngModelOptions] = "{standalone: true}"  required>
+                            <label class="form-check-label">Is Approved</label>
+                           <div class="invalid-feedback">Please confirm that the entered data are all correct!</div>
+                          </div>
+                            <div class="col-md-12">
+                                <input type="radio" id="html" name="fav_language" value="sold" [(ngModel)] = "product.isApproved" [ngModelOptions] = "{standalone: true}" required>
+                                <label for="html">Sold</label><br>
+                                <input type="radio" id="html" name="fav_language" value="unsold" [(ngModel)] = "product.isApproved" [ngModelOptions] = "{standalone: true}" required>
+                                <label for="html">Unsold</label><br>
+                                
+                            </div>
+                  
+      
+                            <div class="form-button mt-3">
+                                <button id="submit" type="submit" class="btn btn-primary" (click)="addProduct()">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+</div>

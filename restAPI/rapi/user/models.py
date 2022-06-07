@@ -1,4 +1,5 @@
 from datetime import datetime
+from email import message
 from itertools import product
 from tkinter import CASCADE
 from django.db import models
@@ -18,6 +19,8 @@ class Users(models.Model):
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     isVerified = models.BooleanField(default=False)
+    isBanned = models.BooleanField(default=False)
+    recovery_code = models.CharField(max_length=100)
     
     def __str__(self):
         return self.username
@@ -67,10 +70,10 @@ class Transactions(models.Model):
         return self.transactionId
 
 class Messages(models.Model):
-    text = models.CharField(max_length=100)
-    room = models.CharField(max_length=100)
+    message = models.CharField(max_length=100)
+    username = models.CharField(max_length=100)
     time = models.DateTimeField(default=datetime.now, blank=True)
-    sender = models.CharField(max_length=100)
+    room = models.CharField(max_length=100)
 
     def __str__(self):
         return self.text

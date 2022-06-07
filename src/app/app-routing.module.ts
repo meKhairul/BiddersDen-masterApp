@@ -19,9 +19,20 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { PaypalComponent } from './paypal/paypal.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { AdminLoginComponent } from './Admin/admin-login/admin-login.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
+import { AdminUserlistComponent } from './admin-userlist/admin-userlist.component';
+import { AdminProductlistComponent } from './admin-productlist/admin-productlist.component';
+import { AdminChatComponent } from './admin-chat/admin-chat.component';
+import { AdminAdduserComponent } from './admin-adduser/admin-adduser.component';
+import { AdminBanuserComponent } from './admin-banuser/admin-banuser.component';
+import { AdminProductDetailsComponent } from './admin-product-details/admin-product-details.component';
+import { AdminProductUpdateComponent } from './admin-product-update/admin-product-update.component';
+import { SignInWithRecoveryCodeComponent } from './sign-in-with-recovery-code/sign-in-with-recovery-code.component';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
+  {path:'home',component:HomeComponent},
   {path:'signin',component:SignInComponent},
   {path:'sort',component:SortComponent},
   {path:'sell',component:SellComponent},
@@ -33,11 +44,26 @@ const routes: Routes = [
   {path:'chat',component:ChatComponent},
   {path:'search',component:SearchComponent},
   {path:'payment',component:PaymentComponent},
+  
+  {path:'paypal',component:PaypalComponent},
+  {path:'',component:HomePageComponent},
+  {path:'category',component:CategoriesComponent},
+  {path:'admin-login',component:AdminLoginComponent},
+  {path:'admin-home',component:AdminHomeComponent},
+  {path:'admin-nav',component:AdminNavbarComponent},
+  {path:'admin-userlist',component:AdminUserlistComponent},
+  {path:'admin-productlist',component:AdminProductlistComponent},
+  {path:'admin-chat',component:AdminChatComponent},
+  {path:'admin-adduser',component:AdminAdduserComponent},
+  {path:'admin-banuser',component:AdminBanuserComponent},
+  {path:'admin-productDetails',component:AdminProductDetailsComponent},
+  {path:'admin-updateProduct',component:AdminProductUpdateComponent},
   {path:'forgot-password',component:ForgotPasswordComponent},
   {path:'change-password',component:ChangePasswordComponent},
-  {path:'paypal',component:PaypalComponent},
-  {path:'home-page',component:HomePageComponent},
-  {path:'category',component:CategoriesComponent}
+  {path:'signinwithcode', component:SignInWithRecoveryCodeComponent},
+  {path: 'product/:id', component: ProductsComponent},
+  
+  
 ];
 
 @NgModule({

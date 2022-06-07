@@ -1,6 +1,6 @@
 export class Message{
-    text:String = "";
-    room:String = "";
-    time!:Date
-    sender:String = "";
+    message:String = "";
+    username:String = "";
+    time!:Date;
+    room:String = ""
 }

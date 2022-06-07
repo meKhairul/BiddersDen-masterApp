@@ -186,7 +186,7 @@
           <img class="direct-icon" src="assets/direction.png" /> 
         </a>
         <ul class="submenu">
-          <li><a class="direct-icon" href="#">Electronics
+          <li><a class="direct-icon" (click)="getCategoricalProducts('Electronics')">Electronics
           <img class="direct-icon" src="assets/direction.png" />
           </a>
             <ul class="submenu2">
@@ -202,14 +202,14 @@
             </ul>
           </li>
           <hr>
-          <li><a href="#">Foods</a></li><hr>
-          <li><a href="#">Cloths
+          <li><a (click)="getCategoricalProducts('Foods')">Foods</a></li><hr>
+          <li><a (click)="getCategoricalProducts('Cloths')">Cloths
             <img class="direct-icon" src="assets/direction.png" />
           </a>
             <ul class="submenu2">
-              <li><a (click)="getCategoricalProducts('Electronics,Men')">Men</a></li> <hr>
-              <li><a (click)="getCategoricalProducts('Electronics,Women')">Women</a></li><hr>
-              <li><a (click)="getCategoricalProducts('Electronics,Kids')">Kids</a></li><hr>
+              <li><a (click)="getCategoricalProducts('Cloths,Men')">Men</a></li> <hr>
+              <li><a (click)="getCategoricalProducts('CLoths,Women')">Women</a></li><hr>
+              <li><a (click)="getCategoricalProducts('Cloths,Kids')">Kids</a></li><hr>
               
             </ul>
           </li><hr>

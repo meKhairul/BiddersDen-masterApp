@@ -86,6 +86,16 @@
 .bikes{
     margin-left: 30%;
 }
+.component{
+  margin-left:20% ;
+  max-width: 1000px;
+  margin-top: 5%;
+}
+.footer-component{
+  margin-left: 14%;
+  max-width: 1144px;
+
+}
 
 
 

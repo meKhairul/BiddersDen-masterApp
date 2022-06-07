@@ -1,0 +1,76 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="component">
+
+
+  <div class="products">
+    <h3 class="fs-4 fw-bold">Approved products</h3>
+  </div>
+
+  <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Serial</th>
+            
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Seller Id</th>
+            
+            <th scope="col">Base Price</th>
+            <th scope="col">Current Price</th>
+            <th scope="col">IsVerified</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of approve_products;let i = index;">
+            <th scope="row">{{i}}</th>
+            
+            <td><a (click)="viewProduct(product)">{{product.product_name}}</a></td>
+            <td>{{product.product_category}}</td>
+            <td>{{product.uid}}</td>
+            <td>{{product.base_price}}</td>
+            <td>{{product.current_price}}</td>
+            <td>{{product.isApproved}}</td>
+            
+          </tr>
+          
+        </tbody>
+  </table>
+
+  <div class="products">
+    <h3 class="fs-4 fw-bold">Unapproved products</h3>
+  </div>
+
+  <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Serial</th>
+            
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Seller Id</th>
+            
+            <th scope="col">Base Price</th>
+            <th scope="col">Current Price</th>
+            <th scope="col">IsVerified</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of disapprove_products;let i = index;">
+            <th scope="row">{{i}}</th>
+            
+            <td><a (click)="viewProduct(product)">{{product.product_name}}</a></td>
+            <td>{{product.product_category}}</td>
+            <td>{{product.uid}}</td>
+            <td>{{product.base_price}}</td>
+            <td>{{product.current_price}}</td>
+            <td>{{product.isApproved}}</td>
+            
+          </tr>
+          
+        </tbody>
+  </table>
+
+</div>

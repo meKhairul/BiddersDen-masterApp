@@ -1,67 +1,4 @@
-<!-- 
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-</head>
-<div class="container">
-    <div class="row">
-        
-        
-      <img class="product-image" src="{{'assets/'+productShow.uid+'.jpg'}}" alt="{{productShow.product_name}}">
-      <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{productShow.product_name}}</h5>
-      <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{productShow.product_details}}</p>
-      <p><strong>Current Price:</strong> ${{productShow.base_price}}</p>
-      <p><strong>Remaining Time:</strong> </p>
-
-
-      <div class="make-bid">
-        <label for="bid">Bids</label>
-        <input type="number"  [(ngModel)] = "bid_price" [ngModelOptions] = "{standalone: true}" required>
-        <button type="submit">Cancel</button>
-        <button (click)="make_bid()" type="submit">Place Bid</button>
-      </div>
-
-      <div class="detail-card">
-          <h1><b>Bidding Details</b></h1><br>
-          
-          <table class="table table-hover table-dark">
-              <thead>
-                <tr>
-                  <th scope="col">Serial No.</th>
-                  <th scope="col">Bidder</th>
-                  <th scope="col">Amount</th>
-                  
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>$200</td>
-                  
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>$195</td>
-                  
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>$190</td>
-                </tr>
-              </tbody>
-            </table>
-              
-          
-      </div>
-
-    </div>
-</div>
-
-<app-footer></app-footer>
- -->
 
 
 
@@ -71,93 +8,102 @@
  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <!------ Include the above in your HEAD tag ---------->
  
- <div class="container emp-profile">
-             
-                 <div class="row" >
-                     <div class="card col-md-4">
-                         <div class="profile-img">
-                             <img src="{{'assets/'+productShow.uid+'.jpg'}}" alt="{{productShow.product_name}}"/>
-                             
-                         </div>
-                         <div class="profile-work">
-                          <h6>
-                              <b>{{productShow.product_details}}</b>
-                          </h6>
-                         </div>
-                     </div>
-                     <div class="detail-card col-md-8">
-                         <div class="profile-head">
-                                     <h5>
-                                         {{productShow.product_name}}
-                                     </h5>
-                                     
-                                     <h6 class="proile-rating">Current Price : <span>{{productShow.current_price+" Taka"}}</span></h6>
-                             
-                         </div>
-                         <div class="remaining-time">
-                            <div class="time-head">
-                                <h6>Remaining Time : </h6>
-                            </div>
-                            <div class="time">
-                                <i> 2hrs 25min 5s</i>
-                            </div>
-                            
-                          </div>
-                          <div class="tab-content profile-tab" id="myTabContent">
+ <app-navbar></app-navbar>
 
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                  <label class="input-group-text" for="inputGroupSelect01">Your maximum Bid</label>
-                                </div>
-                                <input type="number" placeholder="Enter bid amount"  [(ngModel)] = "bid_price" [ngModelOptions] = "{standalone: true}">
-                                <div *ngIf="bid_price<=productShow.current_price" class="red"> You must bid more than current price</div>
-                                <div *ngIf="bid_price>productShow.current_price" class="green"> Its a valid amount</div>
-                                <!-- <select class="custom-select" id="inputGroupSelect01" [(ngModel)] = "bid_price" [ngModelOptions] = "{standalone: true}" required>
-                                  <option selected>Select Bids</option>
-                                  
-                                  <option *ngFor="let bid of bids" value="{{bid}}">{{"BDT "+bid}}</option>
-                                  
-                                </select> -->
+ <div class="component">
+      <div class="container emp-profile">
+              
+                  <div class="row" >
+                      <div class="card col-md-4">
+                          <div class="profile-img">
+                              <img src="{{'assets/'+productShow.uid+'.jpg'}}" alt="{{productShow.product_name}}"/>
+                              
+                          </div>
+                          <div class="profile-work">
+                            <h6>
+                                <b>{{productShow.product_details}}</b>
+                            </h6>
+                          </div>
+                      </div>
+                      <div class="detail-card col-md-8">
+                          <div class="profile-head">
+                                      <h5>
+                                          {{productShow.product_name}}
+                                      </h5>
+                                      
+                                      <h6 class="proile-rating">Current Price : <span>{{productShow.current_price+" Taka"}}</span></h6>
+                              
+                          </div>
+                          <div class="remaining-time">
+                              <div class="time-head">
+                                  <h6>Remaining Time : </h6>
+                              </div>
+                              <div class="time">
+                                  <i> 2hrs 25min 5s</i>
+                              </div>
+                              
                             </div>
-                            
-                            <div class="place-bid">
-                                <button class="btn btn-primary" (click)="makeBid()"  type="submit">
-                                    Place Bid
-                                </button>
-                            </div> 
-                            <div class="user-bids">
-                              <button (click)="getBids()" class="btn btn-primary">
-                                Show Top Bids
-                            </button>
-                            <br>
-                            
-                            <table *ngIf="clicked" class="table table-hover table-dark">
-                               <thead>
-                                 <tr>
-                                   <th scope="col">Serial No.</th>
-                                   <th scope="col">Bidder</th>
-                                   <th scope="col">Amount</th>
-                                   
-                                 </tr>
-                               </thead>
-                               <tbody>
-                                 <tr *ngFor="let data of currentBids;let i = index;">
-                                   <td scope="row">{{i}}</td>
-                                   <td>{{data.bidderId}}</td>
-                                   <td>BDT{{data.bidAmount}}</td>
-                                   
-                                 </tr>
-                                 
-                               </tbody>
-                             </table>
-                            </div>
-                             
-                         </div>
-                     </div>
-                     
-                 </div>
-                
+                            <div class="tab-content profile-tab" id="myTabContent">
+
+                              <div class="input-group mb-3">
+                                  <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Your maximum Bid</label>
+                                  </div>
+                                  <input type="number" placeholder="Enter bid amount"  [(ngModel)] = "bid_price" [ngModelOptions] = "{standalone: true}">
+                                  <div *ngIf="bid_price<=productShow.current_price" class="red"> You must bid more than current price</div>
+                                  <div *ngIf="bid_price>productShow.current_price" class="green"> Its a valid amount</div>
+                                  <!-- <select class="custom-select" id="inputGroupSelect01" [(ngModel)] = "bid_price" [ngModelOptions] = "{standalone: true}" required>
+                                    <option selected>Select Bids</option>
+                                    
+                                    <option *ngFor="let bid of bids" value="{{bid}}">{{"BDT "+bid}}</option>
+                                    
+                                  </select> -->
+                              </div>
+                              
+                              <div class="place-bid">
+                                  <button class="btn btn-primary" (click)="makeBid()"  type="submit">
+                                      Place Bid
+                                  </button>
+                              </div> 
+                              <div class="user-bids">
+                                <button (click)="getBids()" class="btn btn-primary">
+                                  Show Top Bids
+                              </button>
+                              <br>
+                              
+                              <table *ngIf="clicked" class="table table-hover table-dark">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Serial No.</th>
+                                    <th scope="col">Bidder</th>
+                                    <th scope="col">Amount</th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let data of currentBids;let i = index;">
+                                    <td scope="row">{{i}}</td>
+                                    <td>{{data.bidderId}}</td>
+                                    <td>BDT{{data.bidAmount}}</td>
+                                    
+                                  </tr>
+                                  
+                                </tbody>
+                              </table>
+                              </div>
+                              
+                          </div>
+                      </div>
                       
-         </div>
-<app-footer></app-footer>
+                  </div>
+                  
+                        
+          </div>
+ </div>
+
+
+ <div class="footer-component">
+   <app-footer></app-footer>
+ </div>
+
 

@@ -18,6 +18,7 @@ export class ProductService {
   bidProductToBeShown  = new Product();
   sortValue!:number;
   flag!:number;
+  adminUpdatedProduct:Product=new Product();
 
 constructor(private http: HttpClient) { }
 
@@ -117,6 +118,18 @@ getCategory()
 {
   return this.category;
 }
-
+setAdminUpdatedProduct(product:Product){
+  this.adminUpdatedProduct = product;
+}
+getAdminUpdateProduct():Product
+{
+  return this.adminUpdatedProduct;
+}
+getProductDetails(id : string): Observable<any>{
+  var data = {
+    id:id,
+  }
+  return this.http.post(this.API_URL + '/productDetails/', data);
+}
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { flatMap } from 'rxjs';
 import { Bid } from '../bid';
 import { Emitters } from '../emiiters/Emitter';
@@ -19,19 +19,30 @@ export class ProductsComponent implements OnInit {
   newBid = new Bid();
   currentBids : Bid[] = [];
   authenticated:boolean = false;
+  id!:any;
 
-  constructor(private productService:ProductService, private userService: UserService,private router:Router) { }
+  constructor(private productService:ProductService, private userService: UserService,private router:Router,private aroute:ActivatedRoute) { }
 
   ngOnInit(): void {
     
+    this.id = this.aroute.snapshot.paramMap.get('id');
+    console.log(this.id); 
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        this.authenticated = auth; 
+        this.user = this.userService.getUser();
+      }
+    );
+    this.getProductDetails(this.id);
     this.getBids();
-    if(this.user.username !=null)
-    {
-      this.authenticated = true;
-    }
   }
   
 
+  getProductDetails(id : string){
+    this.productService.getProductDetails(id).subscribe(data=>{
+      this.productShow = data;
+    });
+  }
   
   getBids(){
     this.productService.getBids(this.productShow).subscribe(data=>{

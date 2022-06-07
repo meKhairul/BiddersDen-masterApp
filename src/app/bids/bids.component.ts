@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Bid } from '../bid';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
@@ -22,7 +23,7 @@ export class BidsComponent implements OnInit {
   productShow = this.productService.getBidProductToBeShown();
   
   minBid = Math.max(this.productShow.current_price,5);
-  constructor(private productService:ProductService,private userService:UserService) { 
+  constructor(private productService:ProductService,private userService:UserService,private router:Router) { 
     
     
     for(let i=this.minBid;this.bids.length<=50;i+=(this.minBid/10))
@@ -35,7 +36,12 @@ export class BidsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+          return;
+      }
+      window.scrollTo(0, 0)
+  });
   }
 
   makeBid()

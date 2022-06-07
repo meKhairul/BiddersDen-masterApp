@@ -36,13 +36,16 @@ CORS_ALLOW_CREDENTIALS = True
 STORE_ID = "spect629723b0a62b1"
 STORE_PASS =  "spect629723b0a62b1@ssl"
 
+admin_username = 'admin'
+admin_username = 'admin'
+
 # Application definition
 
 INSTALLED_APPS = [
     'rest_framework',
     'user.apps.UserConfig',
     'corsheaders',
-
+    #'chatApp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +57,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-
+    #'django_samesite_none.middleware.SameSiteNoneMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

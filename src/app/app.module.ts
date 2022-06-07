@@ -26,7 +26,18 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { PaypalComponent } from './paypal/paypal.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { HomePageComponent } from './home-page/home-page.component';
-
+import { AdminLoginComponent } from './Admin/admin-login/admin-login.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
+import { AdminUserlistComponent } from './admin-userlist/admin-userlist.component';
+import { AdminProductlistComponent } from './admin-productlist/admin-productlist.component';
+import { AdminChatComponent } from './admin-chat/admin-chat.component';
+import { AdminAdduserComponent } from './admin-adduser/admin-adduser.component';
+import { AdminBanuserComponent } from './admin-banuser/admin-banuser.component';
+import { AdminProductDetailsComponent } from './admin-product-details/admin-product-details.component';
+import { AdminProductUpdateComponent } from './admin-product-update/admin-product-update.component';
+import { SignInWithRecoveryCodeComponent } from './sign-in-with-recovery-code/sign-in-with-recovery-code.component';
+import { NgxPaypalComponent, NgxPayPalModule } from 'ngx-paypal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,13 +60,26 @@ import { HomePageComponent } from './home-page/home-page.component';
     PaypalComponent,
     CategoriesComponent,
     HomePageComponent,
+    AdminLoginComponent,
+    AdminHomeComponent,
+    AdminNavbarComponent,
+    AdminUserlistComponent,
+    AdminProductlistComponent,
+    AdminChatComponent,
+    AdminAdduserComponent,
+    AdminBanuserComponent,
+    AdminProductDetailsComponent,
+    AdminProductUpdateComponent,
+    SignInWithRecoveryCodeComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPayPalModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

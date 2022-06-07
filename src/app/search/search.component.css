@@ -44,3 +44,13 @@ div.col{
     height: 400px;
 }
 
+.component{
+    margin-left:20% ;
+    max-width: 1000px;
+    margin-top: 5%;
+  }
+  .footer-component{
+    margin-left: 14%;
+    max-width: 1144px;
+  
+  }

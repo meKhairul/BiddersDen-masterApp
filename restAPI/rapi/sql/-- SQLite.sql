@@ -1,2 +1,2 @@
 -- SQLite
-DELETE FROM user_events ;
+DELETE FROM user_messages ;

@@ -23,15 +23,18 @@ class UsersSerializer(serializers.ModelSerializer):
                   'email',
                   'address',
                   'username',
-                  'password',)
+                  'password',
+                  'isVerified',
+                  'isBanned',
+                  'recovery_code')
 
 class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
         fields = (
-                    'uid',
-                    'product_name',
+                  'uid',
+                  'product_name',
                   'product_category',
                   'base_price',
                   'product_details',
@@ -73,10 +76,10 @@ class MessagesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Messages
-        fields = ('text',
-                  'room',
+        fields = ('message',
+                  'username',
                   'time',
-                  'sender',)
+                  'room')
 
 class EventSerializer(serializers.ModelSerializer):
 

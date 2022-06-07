@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
         this.authenticated = auth; 
-        this.userdata = this.userService.getUser();
+        
       }
 
     );
@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
   authenticate(){
     this.userService.authenticate().subscribe(response => {
       this.userdata = response;
+      console.log(this.userdata)
       this.userService.setUser(this.userdata);
       //alert("Logged In as .. " + String(this.userdata.username) )
       Emitters.authEmitter.emit(true);
@@ -71,12 +72,13 @@ export class HomeComponent implements OnInit {
 
   showProduct(product:Product){
     this.productService.setProductToBeShown(product);
-    this.router.navigate(['product']);
+    
     if(this.authenticated) {
       this.productService.createEvent('view', this.userdata.username, product).subscribe(data=>{
       console.log(data);
       });
     }
+    this.router.navigate(['product', product.uid]);
   }
 
   showBidProduct(product:Product){

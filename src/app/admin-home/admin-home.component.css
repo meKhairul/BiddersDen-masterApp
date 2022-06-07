@@ -1,0 +1,440 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', 'sans-sherif';
+    box-sizing: border-box;
+  } 
+  
+  :root {
+    --font-family-sans-serif: "Open Sans", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+  
+  
+  a{
+    text-decoration: none;
+    color: #5a5a5a;
+  }
+  img{
+    cursor: pointer;
+  }
+  
+  
+  .flex-div{
+    align-items: center;
+    display: flex;
+  }
+  nav{
+    padding-left: 1%;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    background-color: rgba(156, 224, 233, 0.705);
+  }
+  .nav-right button{
+    margin-right: 25px;
+    
+    color: aqua;
+    height: 30px;
+    width: 80px;
+  }
+  .nav-right{
+    margin-left: 3%;
+  }
+  .nav-right .user-icon{
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  div.language{
+    margin-left: 7px;
+    display: flex !important;
+  }
+  .language .language-icon{
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .nav-left .logo{
+    width: 130px;
+    height: 30px;
+  }
+  
+  /*.nav-middle .mic-icon{
+    width: 16px;
+  }*/
+  div.nav-middle{
+    margin-left: 25%;
+  }
+  .nav-middle .search-box{
+    border: 1px solid rgb(172, 184, 216);
+    margin-right: 45px;
+    padding: 8px 12px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+  }
+  
+  .nav-middle .search-box input{
+    width: 400px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    
+  }
+  
+  .nav-middle .search-box img{
+    width: 15px;
+  }
+  
+  .nav-left .menu-icon{
+    width: 22px;
+    margin-right: 25px;
+    
+  }
+  
+  form{
+    display: flex;
+  }
+  
+  /*sidebar component css*/
+  
+  .sidebar{
+    background-color: rgb(69, 124, 129);
+    width: 13%;
+    height: 150vh;
+    position: fixed;
+    top: 0;
+    padding-left: 1%;
+    padding-top: 80px;
+    display: block;
+    
+  }
+   .shortcut-links{
+    margin-top: 10px;
+  } 
+  
+  .outer-link img{
+    width: 20px;
+    margin-right: 20px;
+    
+  }
+  .direct-icon{
+    margin-left: -1px;
+  }
+  
+   .outer-link:hover{
+    color: #000;
+  }
+  /* .outer-link p:hover{
+    background-color: #5a5a5a;
+  } */
+  
+  .outer-link{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: fit-content;
+    flex-wrap: wrap;
+    color: #ffffff;
+  } 
+  
+  /* .shortcut-links a:first-child{
+    color: #ed3833;
+  } */
+  
+  .shortcut-links hr{
+    border: 0;
+    height: 1px;
+    background: #5a5a5a;
+    width: 85%;
+  }
+  
+  .small-sidebar{
+    width: 5%;
+  }
+  
+  .small-sidebar a p{
+    display: none;
+  }
+  .sidebar a:hover{
+    
+    color: #251816;
+    
+  }
+  
+  
+  
+  .small-sidebar hr{
+    width: 50%;
+    margin-top: 25px;
+  }
+  
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+  
+  .dropbtn {
+    
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(237, 214, 241);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: rgb(240, 230, 230);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #e2626c}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .dropdown-menu li:hover > ul.dropdown-menu {
+    display: block;
+  }
+  .dropdown-submenu {
+    position:relative;
+  }
+  .dropdown-submenu>.dropdown-menu {
+    top:0;
+    left:100%;
+    margin-top:-20px;
+  }
+  
+  /* rotate caret on hover */
+  .dropdown-menu > li > a:hover:after {
+    text-decoration: underline;
+    transform: rotate(90deg);
+  } 
+  
+  .category-menu >li,.category-menu>a{
+    display: inline-block;
+  }
+  .category-menu a{
+    text-decoration: none;
+    color: #fff;
+    
+  }
+  .category-menu a:hover{
+    
+    color: rgb(250, 246, 246);
+  } 
+  .category-menu>li:hover>.submenu li:hover{
+    background-color: #7b8488;
+    color: rgb(255, 255, 255);
+  }
+  
+  
+  .submenu{
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    width: 70%;
+    left: 70%;
+    height: auto;
+    display: none;
+  }
+  .submenu li,.submenu2 li{
+    
+    color: #ffffff;
+    background-color: #181313;
+    padding-left: 10%;
+  }
+  .submenu2{
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 92%;
+    height: 100%;
+    left: 90%;
+    top: 0;
+    display: none;
+  }
+  .submenu>ul>li>a:hover{
+    background-color: rgb(214, 46, 46);
+    /* text-decoration: underline; */
+    color: #912222;
+    background-size: 50%;
+  }
+  .submenu2>ul>li>a:hover{
+    background-color: rgb(209, 43, 43);
+    /* text-decoration: underline; */
+    color: #e9dada;
+    background-size: 95%;
+    
+  }
+  .category-menu>li:hover>.submenu{
+    margin-top: -15%;
+    display: block;
+    size: 15%;
+    border: 1px solid rgb(255, 255, 255);
+  } 
+  .submenu>li:hover>.submenu2{
+    display: block;
+    size: 15%;
+    border: 1px solid rgb(255, 255, 255);
+  } 
+  ul{
+    list-style: none;
+  }
+  .timer{
+    display: block;
+    border: 1px solid rgb(253, 239, 239);
+    box-shadow: 2px 2px 2px 2px rgb(139, 130, 179);
+    position: fixed;
+    height: 5%;
+    margin-top: 1%;
+    margin-left: 14%;
+    background-color: #ddecf3;
+    width: 10%;
+  }
+  .time{
+    margin-left: 1.5%;
+    padding-top: 2%;
+    font-size: 13px;
+    color: rgb(100, 61, 95);
+  }
+  /* .home{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(/assets/background.jpg);
+    background-position: center;
+    background-size: cover;
+    
+    background-repeat: no-repeat;
+  } */
+  
+  .dropdown-content{
+    border: 2px solid rgb(75, 128, 123);
+    box-shadow: 2px 2px 20px rgb(204, 197, 197);
+    height: 200px;
+    background-color: #4b5863;
+    width: 200px;
+    overflow-y: scroll;
+  }
+  
+  .dropdown-item.dropdown-notification:active, .dropdown-item.dropdown-notification.active {
+    color: #1d1e1f;
+    text-decoration: none;
+    background-color: #f7f7f9;
+  }
+  
+  .dropdown-notification:hover .notification-read {
+    color: #34495E;
+  }
+  
+  .dropdown-notification-all {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-style: oblique;
+    background-color: #34495E;
+    color: white;
+  }
+  
+  .dropdown-notification-all:hover {
+    background-color: #34495E;
+    color: white;
+  }
+  
+  .notifications-container {
+    max-height: 300px;
+    overflow: auto;
+  }
+  
+  .notification-dropdown-menu {
+    padding-bottom: 0;
+    min-width: 528px;
+  }
+  
+  .notification-img {
+    width: 48px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .notifications-body {
+    display: inline-block;
+  }
+  
+  .notification-texte {
+    text-align: left;
+    margin: 0;
+  }
+  
+  .notification-read {
+    margin: 0;
+    height: 48px;
+    vertical-align: top;
+    line-height: 48px;
+    padding-left: 15px;
+    color: white;
+    float: right;
+  }
+  
+  .notification-date {
+    text-align: left;
+    color: #2980b9;
+    margin: 0;
+  }
+  
+  .notification-solo {
+    margin-top: 1rem;
+  }
+  
+  .notification-unread {
+    text-decoration: none;
+    background-color: #f7f7f9;
+  }
+  .component{
+    margin-left:20% ;
+    max-width: 1000px;
+  }

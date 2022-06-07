@@ -1,0 +1,96 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="component">
+
+
+          <main class="content">
+            <div class="container p-0">
+        
+                <h1 class="h3 mb-3">Messages</h1>
+        
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-12 col-lg-5 col-xl-3 border-right">
+        
+                            <div class="px-4 d-none d-md-block">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <input type="text" class="form-control my-3" placeholder="Search...">
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div *ngFor="let room of unique_room" class="userList">
+                                <a (click)="showChat(room)" class="list-group-item list-group-item-action border-0">
+                                
+                                    <div class="d-flex align-items-start">
+                                        <img src="assets/icons/user.png" class="rounded-circle mr-2" alt="Vanessa Tucker" width="40" height="40">
+                                        <div class="flex-grow-1 ml-2 mt-2 font-weight-bold text-muted">
+                                            {{room}}
+                                            
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+        
+                            <hr class="d-block d-lg-none mt-1 mb-0">
+                        </div>
+                        <div class="col-12 col-lg-7 col-xl-9">
+                            <div class="py-2 px-4 border-bottom d-none d-lg-block">
+                                <div class="d-flex align-items-center py-1">
+                                    <div class="position-relative">
+                                        <img src="assets/icons/user.png" class="rounded-circle mr-1 " alt="Sharon Lessman" width="40" height="40">
+                                    </div>
+                                    <div class="flex-grow-1 ml-2 pl-3">
+                                        <strong>{{userRoom}}</strong>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+        
+                            <div class="position-relative">
+                                <div class="chat-messages p-4">
+                                    <div *ngFor="let msg of allrooms" class="chat-box">
+                                        <div *ngIf="msg.room=='admin'" class="chat-message-right pb-4">
+                                            <div>
+                                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                                
+                                            </div>
+                                            <div class="flex-shrink-1 bg-primary rounded py-2 px-3 mr-3">
+                                                <div class="font-weight-bold mb-1 text-muted small " >{{msg.username}}</div>
+                                                <h6 style="color:white;">{{msg.message}}</h6>
+                                            </div>
+                                            <div class="text-muted small text-nowrap mt-2 ml-20">{{msg.time | date:'shortTime'}}</div>
+                                        </div>
+            
+                                        <div *ngIf="msg.room==userRoom" class="chat-message-left pb-4">
+                                            <div>
+                                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                            </div>
+                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                                <div class="font-weight-bold mb-1 text-muted small " >{{msg.username}}</div>
+                                                <h6>{{msg.message}}</h6>
+                                            </div>
+                                            <div class="text-muted small text-nowrap mt-2 ml-20">{{msg.time | date:'shortTime'}}</div>
+
+                                        </div>
+                                    </div>
+                                    
+        
+                                </div>
+                            </div>
+        
+                            <div class="flex-grow-0 py-3 px-4 border-top">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Type your message">
+                                    <button (click)="submit()"  class="btn btn-primary">Send</button>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+</div>

@@ -1,5 +1,6 @@
 from email import message
 from itertools import product
+from time import time
 from unicodedata import category
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
@@ -21,11 +22,12 @@ from decimal import Decimal
 import uuid
 from django.conf import settings
 from django.core.mail import send_mail
-
+from chatApp.pusher import pusher_client
 from rest_framework.decorators import api_view
 import jwt, datetime
 
 # Create your views here.
+###########   User   #############
 @csrf_exempt
 def register(request,id=0):
     if request.method=='POST':                                    #register
@@ -79,23 +81,6 @@ def verify(request, uid):
         user.save()
         return JsonResponse('Your account has been verified', safe= False)
     return JsonResponse('No user found with this email', safe = False)
-
-@csrf_exempt
-@api_view(['POST'])
-def addProduct(request,id=0):
-    if request.method=='POST':                                    #register
-        product_data=JSONParser().parse(request)
-        seller_username = product_data['seller']
-        uid = str(uuid.uuid4())
-        print(seller_username)
-        seller = Users.objects.filter(username=seller_username).first()
-        print(seller)
-        Product.objects.create(uid = uid, product_name = product_data['product_name'], product_category = product_data['product_category'],
-                                base_price = product_data['base_price'], product_details = product_data['product_details'],
-                                current_price = product_data['current_price'], time_to_bid = product_data['time_to_bid'], seller = seller)
-        return JsonResponse(str(uid), safe = False)
-
-
 
 @api_view(['POST'])
 @csrf_exempt
@@ -161,6 +146,8 @@ def userView(request):
         serializer = UsersSerializer(user)
         return Response(serializer.data)
 
+
+
 @api_view(['POST'])
 @csrf_exempt
 def logout(request):
@@ -170,6 +157,101 @@ def logout(request):
         'message': 'success'
     }
     return response
+
+
+@api_view(['POST'])
+@csrf_exempt
+def recovery(request):
+    if request.method == 'POST':
+        rnd = str(uuid.uuid4())
+        data=JSONParser().parse(request)
+        user = Users.objects.filter(email = data['email']).first()
+        user.recovery_code = rnd
+        user.save()
+        subject = 'Recovery code for your account'
+        body = 'Use the code   ' + rnd + '   to change your password'
+        email_from = settings.EMAIL_HOST_USER
+        recipient = [data['email']]
+        #send_mail(subject, body , email_from, recipient)
+        return JsonResponse("mail sent", safe = False) 
+
+@api_view(['POST'])
+@csrf_exempt
+def loginWithRecoveryCode(request):
+    if request.method == 'POST':
+        data=JSONParser().parse(request)
+        recovery_code = data['code']
+        user = Users.objects.filter(recovery_code=recovery_code).first()
+        if user :
+            #rnd = str(uuid.uuid4())
+            #user.recovery_code = rnd
+            #user.save()
+            serializer = UsersSerializer(user)
+            return Response(serializer.data)
+        return JsonResponse("Invalid Code", safe = False)
+
+
+@api_view(['POST'])
+@csrf_exempt
+def changePassword(request):
+    if request.method == 'POST':
+        data=JSONParser().parse(request)
+        username = data['username']
+        password = data['password']
+        user = Users.objects.filter(username=username).first()
+        if user :
+            user.password = make_password(password)
+            user.save()
+            return JsonResponse(password, safe = False)
+        return JsonResponse("Invalid username", safe = False)
+
+
+@api_view(['POST'])
+@csrf_exempt
+def updateUser(request):
+     if request.method == 'POST':
+        data=JSONParser().parse(request)
+        username = data['username']
+        user = Users.objects.filter(username = username).first()
+        if user:
+            user.username = data['newUsername']
+            user.password = data['newPassword']
+            user.address = data['newaddress']
+            user.name =  data['newName']
+            user.save()
+            return JsonResponse('User profile has been updated', safe = False)
+        else :
+            return JsonResponse('User not found', safe= False)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############## PRODUCTS ################
+
+@csrf_exempt
+@api_view(['POST'])
+def addProduct(request,id=0):
+    if request.method=='POST':                                    
+        product_data=JSONParser().parse(request)
+        seller_username = product_data['seller']
+        uid = str(uuid.uuid4())
+        print(seller_username)
+        seller = Users.objects.filter(username=seller_username).first()
+        print(seller)
+        Product.objects.create(uid = uid, product_name = product_data['product_name'], product_category = product_data['product_category'],
+                                base_price = product_data['base_price'], product_details = product_data['product_details'],
+                                current_price = product_data['current_price'], time_to_bid = product_data['time_to_bid'], seller = seller)
+        return JsonResponse(str(uid), safe = False)
 
 @csrf_exempt
 def SaveFile(request):
@@ -201,9 +283,37 @@ def getCategoricalProducts(request):
         category = data['category'] 
         category = category.lower()
         print(category)
-        products = Product.objects.filter(product_category = category)
+        products = Product.objects.filter(product_category__icontains = category)
         product_serializer = ProductSerializer(products, many = True)
         return JsonResponse(product_serializer.data, safe = False)
+
+@api_view(['POST'])
+@csrf_exempt
+def searchProduct(request):
+    if request.method == 'POST':
+        data=JSONParser().parse(request)
+        searchData = data['text'] 
+        products = Product.objects.filter(product_category__icontains = searchData) | Product.objects.filter(product_name__icontains = searchData)| Product.objects.filter(product_details__icontains = searchData )
+        product_serializer = ProductSerializer(products, many = True)
+        return JsonResponse(product_serializer.data, safe = False)
+
+
+@api_view(['POST'])
+@csrf_exempt
+def productDetails(request):
+    if request.method == 'POST':
+        data=JSONParser().parse(request)
+        uid = data['id']
+        product = Product.objects.filter(uid = uid).first()
+        product_serialized = ProductSerializer(product)
+        return JsonResponse(product_serialized.data, safe = False)
+
+
+
+
+
+
+########### BIDDING ###########
 
 @api_view(['POST'])
 @csrf_exempt
@@ -241,70 +351,9 @@ def getPreviousBidsForUser(request):
 
 
 
-@api_view(['POST'])
-@csrf_exempt
-def searchProduct(request):
-    if request.method == 'POST':
-        data=JSONParser().parse(request)
-        searchData = data['text'] 
-        products = Product.objects.filter(product_category__icontains = searchData) | Product.objects.filter(product_name__icontains = searchData)| Product.objects.filter(product_details__icontains = searchData )
-        product_serializer = ProductSerializer(products, many = True)
-        return JsonResponse(product_serializer.data, safe = False)
-
-@api_view(['POST'])
-@csrf_exempt
-def getMessages(request):
-    if request.method == 'POST':
-        data=JSONParser().parse(request)
-        room = data['username']
-        messages = Messages.objects.filter(room = room)
-        message_serialized = MessagesSerializer(messages, many = True)
-        return JsonResponse(message_serialized.data, safe = False)
 
 
-@api_view(['POST'])
-@csrf_exempt
-def addMessages(request):
-    if request.method == 'POST':
-        data=JSONParser().parse(request)
-        Messages.objects.create(text = data['text'], room = data['username'], sender = data['username'])
-        messages = Messages.objects.filter(room = data['username'])
-        message_serialized = MessagesSerializer(messages, many = True)
-        return JsonResponse(message_serialized.data, safe = False)
-
-@api_view(['POST'])
-@csrf_exempt
-def passwordRecovery(request):
-    if request.method == 'POST':
-        rnd = str(uuid.uuid4())
-        data=JSONParser().parse(request)
-        print(data['email'])
-        subject = 'Change your password'
-        body = 'Please click the link to change your password http://localhost:4200/change-password/'
-        email_from = settings.EMAIL_HOST_USER
-        recipient = [data['email']]
-        send_mail(subject, body , email_from, recipient)
-        return JsonResponse("mail sent", safe = False) 
-
-@api_view(['POST'])
-@csrf_exempt
-def changePassword(request):
-    if request.method == 'POST':
-        data=JSONParser().parse(request)
-        email = data['email']
-        password = data['password']
-        print(email)
-        print(password)
-        user = Users.objects.filter(email=email).first()
-        print(user)
-        if user:
-            if user.isVerified:
-                user.password = password
-                user.save()
-                return JsonResponse('Your password has been changed', safe = False)
-            else :
-                return JsonResponse('Your account is not verified yet, please verifiy your account first', safe= False)
-        return JsonResponse('No user found with this email', safe = False)
+############## Event ################
 
 @api_view(['POST'])
 @csrf_exempt
@@ -312,6 +361,103 @@ def addEvent(request):
     if request.method == 'POST':
         data=JSONParser().parse(request)
         print(data)
-        
         Events.objects.create(product_id = data['product_id'], user_id = data['user_id'], event_type = data['event_type'], category_code = data['category_code'], price = data['price'])
         return JsonResponse("Event added successfully", safe = False)
+
+
+
+
+
+
+
+
+
+
+
+
+############## Chat #################
+
+
+@csrf_exempt
+@api_view(['POST'])
+def message(request):
+    print(request.data)
+    time = datetime.datetime.now()
+    
+    message = Messages(message = request.data['message'], username = request.data['username'], room = request.data['room'])
+    message.save()
+    message = {'username': message.username, 'message': message.message,'time' : str(message.time), 'room' : message.room}
+    pusher_client.trigger('chatApp', 'message', message)
+    return Response([])
+    return JsonResponse(message, safe = False)
+
+
+
+
+@api_view(['POST'])
+@csrf_exempt
+def getMessages(request):
+    if request.method == 'POST':
+        data=JSONParser().parse(request)
+        messages = Messages.objects.all()
+        message_serialized = MessagesSerializer(messages, many = True)
+        return JsonResponse(message_serialized.data, safe = False)
+
+
+
+
+
+
+
+
+
+############ ADMIN #############
+
+@api_view(['POST'])
+@csrf_exempt
+def banUser(request):
+     if request.method == 'POST':
+        data=JSONParser().parse(request)
+        username = data['username']
+        user = Users.objects.filter(username = username).first()
+        print(user)
+        if user:
+            user.isBanned = True
+            user.save()
+            return JsonResponse('User has been banned', safe = False)
+        else :
+            return JsonResponse('User not found', safe= False)
+
+
+@api_view(['POST'])
+@csrf_exempt
+def updateProduct(request):
+     if request.method == 'POST':
+        data=JSONParser().parse(request)
+        product_id = data['product_id']
+        product = Product.objects.filter(product_id = product_id).first()
+        if product:
+            product.product_name = data['newName']
+            product.product_category = data['new']
+            product.base_price = data['newaddress']
+            product.product_details =  data['newName']
+            product.recieved_date = data['newName']
+            product.shipping_date = data['new']
+            product.delivered_date = data['newaddress']
+            product.isApproved =  data['newName']
+            product.isSold =  data['newName']
+
+            product.save()
+            return JsonResponse('Product has been banned', safe = False)
+        else :
+            return JsonResponse('Product not found', safe= False)
+
+
+@csrf_exempt
+@api_view(['POST'])
+def getAllUsers(request):
+    if request.method=='POST':
+        users = Users.objects.all()
+        users = UsersSerializer(users, many = True)
+        return JsonResponse(users.data, safe = False)
+
