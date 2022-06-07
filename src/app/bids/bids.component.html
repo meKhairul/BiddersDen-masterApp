@@ -21,14 +21,15 @@
                           </div>
                           <div class="profile-work">
                             <h6>
-                                <b>{{productShow.product_details}}</b>
+                                <b>{{productShow.product_name}}</b>
                             </h6>
                           </div>
                       </div>
                       <div class="detail-card col-md-8">
+                          <p class="product-details fs-4 fw-bold">Product Details</p>
                           <div class="profile-head">
                                       <h5>
-                                          {{productShow.product_name}}
+                                          {{productShow.product_details}}
                                       </h5>
                                       
                                       <h6 class="proile-rating">Current Price : <span>{{productShow.current_price+" Taka"}}</span></h6>
@@ -40,9 +41,18 @@
                               </div>
                               <div class="time">
                                   <i> 2hrs 25min 5s</i>
-                              </div>
-                              
+                              </div> 
+
+                          </div>
+                          <div class="remaining-time">
+                            <div class="time-head">
+                                  <h6>Product Type: </h6>
                             </div>
+                            <div class="time">
+                                <i>used</i>
+                            </div>
+                          </div>
+                              
                             <div class="tab-content profile-tab" id="myTabContent">
 
                               <div class="input-group mb-3">
@@ -71,7 +81,7 @@
                               </button>
                               <br>
                               
-                              <table *ngIf="clicked" class="table table-hover table-dark">
+                              <!-- <table *ngIf="clicked" class="table table-hover table-dark">
                                 <thead>
                                   <tr>
                                     <th scope="col">Serial No.</th>
@@ -84,12 +94,33 @@
                                   <tr *ngFor="let data of currentBids;let i = index;">
                                     <td scope="row">{{i}}</td>
                                     <td>{{data.bidderId}}</td>
-                                    <td>BDT{{data.bidAmount}}</td>
+                                    <td>{{data.bidAmount}} Tk</td>
+                                    
+                                  </tr>
+                                  
+                                </tbody>
+                              </table> -->
+
+                              <table *ngIf="clicked" class="table table-bordered ">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">Bidder</th>
+                                    <th scope="col">Bid Price</th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let data of currentBids;let i = index;">
+                                    <th scope="row">{{i}}</th>
+                                    <td>{{data.bidderId}}</td>
+                                    <td>{{data.bidAmount}}</td>
                                     
                                   </tr>
                                   
                                 </tbody>
                               </table>
+
                               </div>
                               
                           </div>
@@ -102,7 +133,7 @@
  </div>
 
 
- <div class="footer-component">
+ <div class="footer-component mt-2">
    <app-footer></app-footer>
  </div>
 

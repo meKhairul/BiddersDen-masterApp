@@ -12,4 +12,5 @@ export class Product{
     isApproved : boolean = false;
     seller : string = "";
     buyer : string = "";
+    isSold : boolean = false;
 }

@@ -160,3 +160,11 @@ optgroup{
 .form-select::after{
     display: block;
 }
+.flex-div{
+    display: flex;
+}
+
+.radio{
+    margin-left: 50%;
+}
+

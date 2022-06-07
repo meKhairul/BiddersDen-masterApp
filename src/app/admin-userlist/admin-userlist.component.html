@@ -12,7 +12,7 @@
     </div>
 
     <div class="users">
-      <h3 class="fs-4 fw-bold">All users</h3>
+      <h3 class="fs-4 fw-bold">Banned users</h3>
     </div>
 
     <table class="table table-bordered">
@@ -29,7 +29,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of users;let i = index;">
+          <tr *ngFor="let user of bannedUsers;let i = index;">
             <th scope="row">{{i}}</th>
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
@@ -41,4 +41,37 @@
           
         </tbody>
       </table>
+
+
+      <div class="users">
+        <h3 class="fs-4 fw-bold">Verified users</h3>
+      </div>
+  
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Serial</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Address</th>
+              <th scope="col">Username</th>
+              
+              <th scope="col">Contact</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of verifiedUsers;let i = index;">
+              <th scope="row">{{i}}</th>
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.address}}</td>
+              <td>{{user.username}}</td>
+              <td>{{user.phone_number}}</td>
+              
+            </tr>
+            
+          </tbody>
+        </table>
+
 </div>

@@ -166,13 +166,23 @@ button{
     border-color: #232424;
 }
 
+.input-group{
+    margin-top: 2%;
+}
+
+table td{
+    overflow-y: scroll;
+    min-height: 100px;
+    max-height: 200px;
+}
+
 div.remaining-time{
     display: flex;
-    margin-top: 50px;
+    margin-top: 3%;
 }
 div.time{
     margin-left: 11px;
-    margin-top: -1px;
+    margin-top: -3px;
     color: brown;
 }
 .card {
@@ -193,14 +203,7 @@ div.detail-card{
     margin-top: 15px;
     margin-bottom: 28px;
 }
-table{
-    overflow-y: scroll;
-    height: 200px;
-    display: block;
-    background-color: white;
-    width: 312px;
-    margin-left: 16%;
-}
+
 
 thead th{
     background-color: #fff;

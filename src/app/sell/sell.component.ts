@@ -18,14 +18,18 @@ export class SellComponent implements OnInit {
   image:any
   uid:any
   sub_category!:any;
+  img1!:any;
+  img2!:any;
   constructor(private userService : UserService, private productService: ProductService, private route:Router) { }
 
   ngOnInit(): void {
   
   }
 
-  onChanged(event:any){
-    this.image = event.target.files[0];
+  onChanged(event:any, id : number){
+    if(id==0) this.image = event.target.files[id];
+    if(id==1) this.img1 = event.target.files[id];
+    if(id==2) this.img2 = event.target.files[id];
   }
   
   uploadata = new FormData();
@@ -46,6 +50,15 @@ export class SellComponent implements OnInit {
         this.uid = response.toString()
         this.uploadata.append('image', this.image);
         this.uploadata.append('file_name', this.uid);
+        this.uploadPhoto();
+        this.uploadata = new FormData();
+        this.uploadata.append('image', this.img1);
+        this.uploadata.append('file_name', this.uid+'1');
+        this.uploadPhoto();
+        this.uploadata = new FormData();
+        this.uploadata.append('image', this.img2);
+        this.uploadata.append('file_name', this.uid+'2');
+        console.log(this.uploadata);
         this.uploadPhoto();
       });
     }

@@ -1,0 +1,50 @@
+id,event_type,user_id,product_id,category_code,price
+92,view,bsse1101,091cbf22-72e0-460d-b23d-6d72aa6b9f73,electronics,150000
+93,bid,bsse1101,091cbf22-72e0-460d-b23d-6d72aa6b9f73,electronics,150000
+94,view,bsse1101,9122209d-3bf4-46a1-a1ec-588812961963,electronics,60000
+95,view,bsse1101,6743b72e-ce8f-4315-96f9-2c659edcfeb8,"cloths,men",314
+96,view,bsse1101,dc1fe296-9818-4c63-913e-95ccc66b9f42,"electronics,desktops",98000
+97,bid,bsse1101,dc1fe296-9818-4c63-913e-95ccc66b9f42,"electronics,desktops",98000
+98,view,bsse1101,eb2ea05d-4c07-4e5a-b4df-d38714a6ea4f,"electronics,laptops",105000
+99,view,bsse1101,e1f3f43f-8a8f-45ff-9ac4-cb3ad7cfda9d,"electronics,laptops",87000
+100,bid,bsse1101,e1f3f43f-8a8f-45ff-9ac4-cb3ad7cfda9d,"electronics,laptops",87000
+101,view,bsse1101,7f523e9c-0674-4e19-8f9f-dfef1d233413,"electronics,laptops",30000
+102,view,bsse1101,73ac84bd-0ece-473e-8c4e-2952c29d0845,"electronics,laptops",32000
+103,view,bsse1101,a7c7c4de-7e6f-462c-935c-5f770c353465,"electronics,laptops",28000
+104,view,bsse1101,95570252-7031-4480-bd17-a9182a310d1c,"electronics,bikes",120000
+105,bid,bsse1101,95570252-7031-4480-bd17-a9182a310d1c,"electronics,bikes",120000
+106,view,khairul123,b1da5450-c0ea-4b11-bfdf-2b348ac2deed,"foods,undefined",500
+107,view,khairul123,f3180558-a331-4b79-972c-cddbdbc35d27,"foods,undefined",200
+108,bid,khairul123,f3180558-a331-4b79-972c-cddbdbc35d27,"foods,undefined",200
+109,view,khairul123,deba9341-3738-463e-918f-107a5e840dfc,"foods,undefined",1500
+110,view,khairul123,58a80b98-c9bf-458a-a8df-bcfe89a67566,"foods,undefined",12000
+111,view,khairul123,42184923-9c71-444a-8b09-1162509d6f06,"foods,undefined",3000
+112,bid,khairul123,42184923-9c71-444a-8b09-1162509d6f06,"foods,undefined",3000
+113,view,khairul123,6743b72e-ce8f-4315-96f9-2c659edcfeb8,"cloths,men",314
+114,view,khairul123,6743b72e-ce8f-4315-96f9-2c659edcfeb8,"cloths,men",314
+115,bid,khairul123,6743b72e-ce8f-4315-96f9-2c659edcfeb8,"cloths,men",314
+116,view,khairul123,998d9d11-563c-4f43-92b8-f97f95baaa90,"books,undefined",200
+117,view,khairul123,b1da5450-c0ea-4b11-bfdf-2b348ac2deed,"foods,undefined",500
+118,view,khairul123,f3180558-a331-4b79-972c-cddbdbc35d27,"foods,undefined",200
+119,view,bsse1102,66d9f13a-c7e0-4813-b960-1dabeca058a4,"books,undefined",700
+120,view,bsse1102,e706e808-1bf5-483f-ab95-f326c9654798,"books,undefined",235
+121,view,bsse1102,998d9d11-563c-4f43-92b8-f97f95baaa90,"books,undefined",200
+122,bid,bsse1102,998d9d11-563c-4f43-92b8-f97f95baaa90,"books,undefined",200
+123,view,bsse1102,175efa24-35e9-4e23-abe0-947a773f24b4,"books,undefined",500
+124,view,bsse1102,86b98be6-fe8e-441c-b479-25da56ee8799,"books,undefined",50
+125,view,bsse1102,6743b72e-ce8f-4315-96f9-2c659edcfeb8,"cloths,men",314
+126,view,bsse1102,d0ad7230-8c43-4d96-b892-ca8596cf01df,"cloths,women",390
+127,view,bsse1102,1535e428-5f32-41ea-9aaa-7da2a62822a8,"cloths,men",2000
+128,bid,bsse1102,1535e428-5f32-41ea-9aaa-7da2a62822a8,"cloths,men",2000
+129,view,bsse1102,9e66a911-6781-48d7-9f64-76a337c23b20,"sports,undefined",100
+130,view,bsse1103,9b3283a1-76be-482f-b83b-4222ed4668c8,"hardware accessories,undefined",4300
+131,bid,bsse1103,9b3283a1-76be-482f-b83b-4222ed4668c8,"hardware accessories,undefined",4300
+132,view,bsse1103,8750334e-15bd-4294-8e23-12c94cb9d4e6,"hardware accessories,undefined",2000
+133,bid,bsse1103,8750334e-15bd-4294-8e23-12c94cb9d4e6,"hardware accessories,undefined",2000
+134,view,bsse1103,d0d0e25a-b860-4b54-8354-c8ec91d2638a,"hardware accessories,undefined",4200
+135,view,bsse1103,eff6b9ab-0f2a-4a6f-aad3-3afd5a527873,"hardware accessories,undefined",2000
+136,bid,bsse1103,eff6b9ab-0f2a-4a6f-aad3-3afd5a527873,"hardware accessories,undefined",2000
+137,view,bsse1103,b0200f9d-6aa5-4439-9d1c-ab23e706ee4d,"hardware accessories,undefined",560
+138,view,bsse1103,7581fcd6-9704-48c3-a5b2-aa94ac7ad856,"hardware accessories,undefined",500
+139,view,bsse1103,6743b72e-ce8f-4315-96f9-2c659edcfeb8,"cloths,men",314
+140,view,bsse1103,b1da5450-c0ea-4b11-bfdf-2b348ac2deed,"foods,undefined",500

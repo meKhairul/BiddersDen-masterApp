@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit {
       console.log(this.currentBids);
     });
   }
-  showBidProduct()
+  showBidProduct(product:Product)
   {
     if(this.authenticated)
     {
@@ -61,6 +61,7 @@ export class ProductsComponent implements OnInit {
     {
       alert("You are not allowed to bid.Please sign in first!!");
     }
+    this.router.navigate(['bid', product.uid]);
   }
 
   

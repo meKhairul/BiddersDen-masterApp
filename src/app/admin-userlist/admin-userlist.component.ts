@@ -14,28 +14,33 @@ export class AdminUserlistComponent implements OnInit {
   isModal : boolean =false;
   constructor(private userService:UserService , private router:Router) { }
 
+  bannedUsers : User[] = [];;
+  verifiedUsers : User[] = [];
+
   ngOnInit(): void {
     this.getAllusers();
+    
+    
     
   }
   getAllusers()
   {
     this.userService.getAllUsers().subscribe(data=>{
       this.users = data;
+      for(let user of this.users)
+      {
+        if(user.isBanned)
+        {
+          this.bannedUsers.push(user);
+        }
+        else{
+          this.verifiedUsers.push(user);
+        }
+      }
       console.log(this.users);
     });
   }
-  addModal()
-  {
-    if(this.isModal)
-    {
-      this.isModal = false
-    }
-    else
-    {
-      this.isModal  = true;
-    }
-  }
+  
   add()
   {
     this.router.navigate(['admin-adduser']);

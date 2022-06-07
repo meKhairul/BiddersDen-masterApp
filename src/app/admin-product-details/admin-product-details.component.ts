@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { flatMap } from 'rxjs';
 import { Bid } from '../bid';
 import { Emitters } from '../emiiters/Emitter';
@@ -14,24 +14,35 @@ import { UserService } from '../user.service';
 })
 export class AdminProductDetailsComponent implements OnInit {
 
-  productShow = this.productService.getAdminUpdateProduct();
+  productShow = this.productService.getProductToBeShown();
   user = this.userService.getUser();
   newBid = new Bid();
   currentBids : Bid[] = [];
   authenticated:boolean = false;
+  id!:any;
 
-  constructor(private productService:ProductService, private userService: UserService,private router:Router) { }
+  constructor(private productService:ProductService, private userService: UserService,private router:Router,private aroute:ActivatedRoute) { }
 
   ngOnInit(): void {
     
+    this.id = this.aroute.snapshot.paramMap.get('id');
+    console.log(this.id); 
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        this.authenticated = auth; 
+        this.user = this.userService.getUser();
+      }
+    );
+    this.getProductDetails(this.id);
     this.getBids();
-    if(this.user.username !=null)
-    {
-      this.authenticated = true;
-    }
   }
   
 
+  getProductDetails(id : string){
+    this.productService.getProductDetails(id).subscribe(data=>{
+      this.productShow = data;
+    });
+  }
   
   getBids(){
     this.productService.getBids(this.productShow).subscribe(data=>{
@@ -39,7 +50,7 @@ export class AdminProductDetailsComponent implements OnInit {
       console.log(this.currentBids);
     });
   }
-  showBidProduct()
+  showBidProduct(product:Product)
   {
     if(this.authenticated)
     {
@@ -50,7 +61,9 @@ export class AdminProductDetailsComponent implements OnInit {
     {
       alert("You are not allowed to bid.Please sign in first!!");
     }
+    this.router.navigate(['bid', product.uid]);
   }
+
   
   update(product:Product)
   {

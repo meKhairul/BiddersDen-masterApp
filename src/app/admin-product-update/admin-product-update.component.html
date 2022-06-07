@@ -73,31 +73,40 @@
                                <div class="invalid-feedback">Product defects field cannot be blank!</div>
                            </div>
       
-      
-                          <div class="col-md-12 mt-3">
-                            Product Photo:
-                            <input class="form-control" type="file" placeholder="Choose File"  (change) = "onChanged($event)"  required>
-                               <div class="valid-feedback">Product photos field is valid!</div>
-                               <div class="invalid-feedback">Product photos field cannot be blank!</div>
-                          </div>
-                          
+                          <div class="col-md-12">
+                            <label for="base-price">Received Date</label>
+                            <input class="form-control" type="date" name="Base Price" [(ngModel)] = "product.recieved_date" [ngModelOptions] = "{standalone: true}"required>
+                             <!-- <div *ngIf="product.base_price!=null" class="green">Base Price field is valid!</div>
+                             <div *ngIf="product.base_price==null" class="red">Base Price field cannot be blank!</div> -->
+                        </div>
+                        <div class="col-md-12">
+                            <label for="base-price">Shipping Date</label>
+                            <input class="form-control" type="date" name="Base Price" [(ngModel)] = "product.shipping_date" [ngModelOptions] = "{standalone: true}"required>
+                             <!-- <div *ngIf="product.base_price!=null" class="green">Base Price field is valid!</div>
+                             <div *ngIf="product.base_price==null" class="red">Base Price field cannot be blank!</div> -->
+                        </div>
+                        <div class="col-md-12">
+                            <label for="base-price">Delivered Date</label>
+                            <input class="form-control" type="date" name="Base Price" [(ngModel)] = "product.delivered_date" [ngModelOptions] = "{standalone: true}"required>
+                             <!-- <div *ngIf="product.base_price!=null" class="green">Base Price field is valid!</div>
+                             <div *ngIf="product.base_price==null" class="red">Base Price field cannot be blank!</div> -->
+                        </div>
       
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="invalidCheck" [(ngModel)] = "product.isApproved" [ngModelOptions] = "{standalone: true}"  required>
                             <label class="form-check-label">Is Approved</label>
                            <div class="invalid-feedback">Please confirm that the entered data are all correct!</div>
                           </div>
-                            <div class="col-md-12">
-                                <input type="radio" id="html" name="fav_language" value="sold" [(ngModel)] = "product.isApproved" [ngModelOptions] = "{standalone: true}" required>
-                                <label for="html">Sold</label><br>
-                                <input type="radio" id="html" name="fav_language" value="unsold" [(ngModel)] = "product.isApproved" [ngModelOptions] = "{standalone: true}" required>
-                                <label for="html">Unsold</label><br>
-                                
-                            </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" [(ngModel)] = "product.isSold" [ngModelOptions] = "{standalone: true}"  required>
+                            <label class="form-check-label">Is Sold</label>
+                           <div class="invalid-feedback">Please confirm that the entered data are all correct!</div>
+                          </div>
+                
                   
       
                             <div class="form-button mt-3">
-                                <button id="submit" type="submit" class="btn btn-primary" (click)="addProduct()">Send</button>
+                                <button id="submit" type="submit" class="btn btn-primary" (click)="updateProduct(product)">Update</button>
                             </div>
                         </form>
                     </div>

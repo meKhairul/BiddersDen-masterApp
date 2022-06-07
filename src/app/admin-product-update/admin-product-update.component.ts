@@ -12,11 +12,12 @@ import { UserService } from '../user.service';
 })
 export class AdminProductUpdateComponent implements OnInit {
 
-  product = new Product();
+  
   seller = new User();
   image:any
   uid:any
   sub_category!:any;
+  product = this.productService.getAdminUpdateProduct();
   constructor(private userService : UserService, private productService: ProductService, private route:Router) { }
 
   ngOnInit(): void {
@@ -55,6 +56,25 @@ export class AdminProductUpdateComponent implements OnInit {
       alert(response.toString())
       this.route.navigate([''])
     });
+  }
+  updateProduct(product:Product)
+  {
+    console.log(product);
+    var res = {
+      product_id: product.uid,
+      newName : product.product_name,
+      new_category : product.product_category+","+this.sub_category,
+      newBasePrice : product.base_price,
+      newDetails : product.product_details,
+      new_recieved_date : product.recieved_date,
+      newShippigDate : product.shipping_date,
+      new_delivered_date : product.delivered_date,
+      newIsApproved :product.isApproved,
+      newIsSold : product.isSold,
+    }
+    this.productService.updateProduct(res).subscribe(response=>{
+      this.route.navigate(['../admin-productlist']);
+    })
   }
 
 

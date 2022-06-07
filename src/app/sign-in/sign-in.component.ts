@@ -32,19 +32,29 @@ export class SignInComponent implements OnInit {
   }
  
   login(){
-    console.log("logging in")
-    var data = {
-      //name:this.name,
-      //phone_number:this.phone_number,
-      //email:this.email,
-      //address:this.address,
-      username:this.username,
-      password:this.password
+
+    if(this.username != null && this.password!=null)
+    {
+        console.log("logging in")
+      var data = {
+        //name:this.name,
+        //phone_number:this.phone_number,
+        //email:this.email,
+        //address:this.address,
+        username:this.username,
+        password:this.password
+      }
+      this.userService.login(data).subscribe(response=>{
+        //alert(response.toString())
+        this.route.navigate(['/'])
+      });
     }
-    this.userService.login(data).subscribe(response=>{
-      //alert(response.toString())
-      this.route.navigate(['/'])
-    });
+    else
+    {
+      alert("Username or Password can't be blank!");
+    }
+
+    
   
   }
 }

@@ -16,11 +16,16 @@ export class ChangePasswordComponent implements OnInit {
 
   }
   submit(){
-    var user = this.userService.getUser();
-    this.userService.changePassword(this.password, user.username).subscribe(data=>{
-        console.log(data)
-    });
-    this.router.navigate(['']);
+
+    if(this.password == this.conf_password)
+    {
+      var user = this.userService.getUser();
+      this.userService.changePassword(this.password, user.username).subscribe(data=>{
+          console.log(data)
+      });
+      this.router.navigate(['']);
+    }
+    
   }
 
 }

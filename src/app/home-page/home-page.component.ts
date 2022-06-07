@@ -12,26 +12,32 @@ import { UserService } from '../user.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private userService:UserService,private productService:ProductService,private router:Router) { }
+  constructor(private userService:UserService,private productService:ProductService,private router:Router) { 
+    setInterval(()=>{
+      const date = new Date();
+      this.myTimer(date);
+      
+    },1000);
+  }
 
   isdrop:boolean = false;
   products : Product[] = [];
+  nextProducts : Product[] = [];
   isBidAble :boolean = true;
   rday!:any;
   rhour!:any;
   rampm!:any;
   rmins!:any;
   rsec!:any;
+  recommendedProducts: Product[]=[];
+  nextIndex :number = 0;
+
 
   authenticated : boolean = false;
   userdata!: any;
 
   ngOnInit(): void {
-    setInterval(()=>{
-      const date = new Date();
-      this.myTimer(date);
-      
-    },1000);
+    
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
         this.authenticated = auth; 
@@ -56,6 +62,42 @@ export class HomePageComponent implements OnInit {
   login()
   {
     this.router.navigate(['signup']);
+  }
+
+  next()
+  {
+    this.nextIndex = Math.min(this.nextIndex+12,this.products.length);
+    if(this.nextIndex!=this.products.length)
+    { 
+      this.nextProducts.splice(0);
+      this.getNextProduct();
+    }
+  }
+  previous()
+  {
+    this.nextIndex = Math.max(this.nextIndex-12,0);
+    
+      this.nextProducts.splice(0);
+    
+      this.getNextProduct();
+  
+  }
+
+  getNextProduct()
+  {
+    for (let index = this.nextIndex; index < this.nextIndex + 12; index++) {
+        
+      console.log(this.products[index], index);
+    
+      if(index >= this.products.length)
+      {
+        break;
+      }
+
+      this.nextProducts.push(this.products[index]);
+      
+    }
+    console.log("nextProducts "+this.nextProducts);
   }
 
   myTimer(date:Date) {
@@ -99,6 +141,8 @@ export class HomePageComponent implements OnInit {
     var reqData = {
       category : category
     }
+    console.log(category);
+    this.productService.setCategory(category);
     this.productService.getCategoricalProducts(reqData).subscribe(data=>{
       this.products = data;
       console.log(this.products)
@@ -120,6 +164,11 @@ export class HomePageComponent implements OnInit {
     this.userService.authenticate().subscribe(response => {
       this.userdata = response;
       this.userService.setUser(this.userdata);
+      this.userService.getRecommendations(this.userdata.username).subscribe(data => {
+        this.recommendedProducts = data;
+        console.log(this.recommendedProducts)
+      });
+     
       //alert("Logged In as .. " + String(this.userdata.username) )
       Emitters.authEmitter.emit(true);
     },
@@ -132,17 +181,22 @@ export class HomePageComponent implements OnInit {
   getProducts(){
     this.productService.getAllProducts().subscribe(data=>{
       this.products = data;
+
+      this.getNextProduct();
+      
     });
+    
   }
 
   showProduct(product:Product){
     this.productService.setProductToBeShown(product);
-    this.router.navigate(['product']);
+    //this.router.navigate(['product']);
     if(this.authenticated) {
       this.productService.createEvent('view', this.userdata.username, product).subscribe(data=>{
       console.log(data);
       });
     }
+    this.router.navigate(['product', product.uid]);
   }
 
   showBidProduct(product:Product){
@@ -151,7 +205,7 @@ export class HomePageComponent implements OnInit {
     if(this.authenticated && this.isBidAble)
     {
       this.productService.setBidProductToBeShown(product);
-      this.router.navigate(['bid']);
+      this.router.navigate(['bid',product.uid]);
     }
     else if(this.authenticated==false)
     {
@@ -169,27 +223,26 @@ export class HomePageComponent implements OnInit {
   }
   sorting(val : number)
   {
-    this.productService.getAllProducts().subscribe(data=>{
-      this.products = data;
+    
       
       if(val==0){
-        this.products = this.products.sort((a, b) => 0-(a.current_price - b.current_price)); 
+        this.nextProducts = this.nextProducts.sort((a, b) => 0-(a.current_price - b.current_price)); 
       }
       else if(val==1)
       {
         console.log(val);
-        this.products = this.products.sort((a, b) => (a.current_price > b.current_price?1:-1));
+        this.nextProducts = this.nextProducts.sort((a, b) => (a.current_price > b.current_price?1:-1));
       }
       else if(val==2)
       {
-        this.products = this.products.sort((a, b) => (a.product_name > b.product_name?1:-1));
+        this.nextProducts = this.nextProducts.sort((a, b) => (a.product_name > b.product_name?1:-1));
       }
       else if(val==3)
       {
-        this.products = this.products.sort((a, b) => (a.recieved_date > b.recieved_date?1:-1));
+        this.nextProducts = this.nextProducts.sort((a, b) => (a.recieved_date > b.recieved_date?1:-1));
       }
       console.log(this.products);
-    });
+    
     
   }
   

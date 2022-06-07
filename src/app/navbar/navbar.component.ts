@@ -99,6 +99,13 @@ export class NavbarComponent implements OnInit {
   );
   }
 
+ 
+  login()
+  {
+    this.router.navigate(['../signin']);
+    
+  }
+  
   logout(): void {
     this.userService.logout().subscribe(() => this.authenticated = false);
     this.user = new User();

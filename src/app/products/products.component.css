@@ -25,7 +25,7 @@
 }
 
 .card {
-  padding: 18px;
+  padding: 45px;
   margin-top: 15px;
   width: 44%;
   margin-bottom: 28px;
@@ -182,4 +182,18 @@ div.detail-card{
   margin-left: 14%;
   max-width: 1144px;
 
+}
+div.remaining-time{
+  display: flex;
+  margin-top: 3%;
+}
+div.time{
+  margin-left: 11px;
+  margin-top: -3px;
+  color: brown;
+}
+
+.product-name{
+  text-overflow: clip;
+  width: 100%;
 }

@@ -44,6 +44,10 @@ searchProducts(data:any){
   return this.http.post<any[]>(this.API_URL + '/searchProducts/', data);
 }
 
+updateProduct(data:any) {
+  return this.http.post(this.API_URL + '/updateProduct/', data);
+}
+
 getProducts():Product[]{
   return this.products;
 }

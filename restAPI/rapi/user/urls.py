@@ -40,4 +40,8 @@ urlpatterns=[
     re_path(r'^ban/$', views.banUser),
     re_path(r'^users/$', views.getAllUsers),
 
+    #recommendation
+    re_path(r'^initRecommendations/$', views.generateRecommendation),
+    re_path(r'^recommend/$', views.gg),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

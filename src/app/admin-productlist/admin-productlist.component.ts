@@ -43,7 +43,8 @@ export class AdminProductlistComponent implements OnInit {
   }
   viewProduct(product:Product)
   {
-    this.router.navigate(['admin-productDetails']);
+    this.productService.setProductToBeShown(product);
+    this.router.navigate(['admin-productDetails', product.uid]);
   }
 
 }

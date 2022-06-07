@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Emitters } from '../emiiters/Emitter';
 import { User } from '../user';
 import { UserService } from '../user.service';
 
@@ -9,19 +11,44 @@ import { UserService } from '../user.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  user = new User();
+  userdata!:any;
   totalSells : number = 12;
   totalBuys !: any;
   totalIncome : number = 20000;
   totalMoneySpent:number = 550000;
   recentBids!:any;
   show :number = 0;
+  click : boolean = false;
+  constructor(private userService: UserService,private router:Router) { }
 
-  constructor(private userService: UserService) { }
+
+  authenticated : boolean = false;
 
   ngOnInit(): void {
     
-    this.user = this.userService.getUser();
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        this.authenticated = auth; 
+        this.userdata = this.userService.getUser();
+      }
+
+    );
+    this.authenticate();
+  }
+  authenticate(){
+    this.userService.authenticate().subscribe(response => {
+      this.userdata = response;
+      this.userService.setUser(this.userdata);
+      
+     
+      //alert("Logged In as .. " + String(this.userdata.username) )
+      Emitters.authEmitter.emit(true);
+    },
+    err => {
+      //alert("not Logged In")
+      Emitters.authEmitter.emit(false);
+    }
+  );
   }
   swapValue(){
     if(this.show==0)
@@ -32,6 +59,31 @@ export class UserProfileComponent implements OnInit {
     {
       this.show=0;
     }
+  }
+
+  getPreviousBids()
+  {
+
+    if(this.click)
+    {
+      this.click=true;
+    }
+    else
+    {
+      this.click = false;
+    }
+    var reqData = {
+      username : this.userdata.username
+    }
+    this.userService.getPreviousBids(reqData).subscribe(res=>{
+      this.recentBids = res;
+      console.log(this.recentBids);
+    })
+  }
+
+  editProfile()
+  {
+    this.router.navigate(['../editProfile']);
   }
 
 

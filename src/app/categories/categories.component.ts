@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Emitters } from '../emiiters/Emitter';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-categories',
@@ -10,13 +12,15 @@ import { ProductService } from '../product.service';
 })
 export class CategoriesComponent implements OnInit {
   
+  authenticated : boolean = false;
+  userdata!: any;
   products:Product[] = [];
   category!:String;
   splitCategory:String="";
   subCategory:String="";
   hasSubCategory:boolean = false;
 
-  constructor(private productService : ProductService, private router : Router) { }
+  constructor(private userService:UserService, private productService : ProductService, private router : Router) { }
 
   ngOnInit(): void {
     this.products = this.productService.categoricalProducts;
@@ -38,13 +42,19 @@ export class CategoriesComponent implements OnInit {
       }
       
     }
-    console.log(this.splitCategory);
-    console.log(this.subCategory);
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        this.authenticated = auth; 
+        this.userdata = this.userService.getUser();
+      }
+
+    );
+    this.authenticate();
 
   }
   showProduct(product:Product){
     this.productService.setProductToBeShown(product);
-    this.router.navigate(['product']);
+    this.router.navigate(['product', product.uid]);
   }
 
   showBidProduct(product:Product){
@@ -72,5 +82,20 @@ export class CategoriesComponent implements OnInit {
       }
     });
     
+  }
+  authenticate(){
+    this.userService.authenticate().subscribe(response => {
+      this.userdata = response;
+      this.userService.setUser(this.userdata);
+      
+     
+      //alert("Logged In as .. " + String(this.userdata.username) )
+      Emitters.authEmitter.emit(true);
+    },
+    err => {
+      //alert("not Logged In")
+      Emitters.authEmitter.emit(false);
+    }
+  );
   }
 }

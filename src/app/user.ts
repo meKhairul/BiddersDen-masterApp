@@ -5,4 +5,6 @@ export class User{
     address!:string;
     username!: string;
     password!:string;
+    isBanned : boolean = false;
+    isVerified : boolean = false;
 }

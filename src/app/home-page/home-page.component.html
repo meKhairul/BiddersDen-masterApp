@@ -10,7 +10,7 @@
     <div class="navbar">
         
         <div class="flex-div dropdown-menu full-size">
-            <a (click)="getCategoricalProducts('Electronics')" class="dropdown-item dropforprice fw-bold" >Electronics
+            <a class="dropdown-item dropforprice fw-bold" >Electronics
                 <div class="subdrop dropdown-menu">
                     <div class="flex-div">
                         <div class="links">
@@ -52,23 +52,26 @@
             <a (click)="getCategoricalProducts('Beauty & Cosmetics')"class="dropdown-item fw-bold" >Beauty and Cosmetics</a>
         </div>
     </div>
-    <div class="start-page">
+    <div  class="start-page">
         <div class="intro-part flex-div">
             <div class="text-item">
                 <p class="p-green fs-4">Welcome to Bidder'sDen</p>
                 <P class="fs-4 fw-bold">Auction started</P>
                 <p class="fs-4 fw-bold"></p>
-                <p class="text-muted mb-4">Make bid and get your desired product</p>
+                <p class="text-muted mb-4 fw-bold">Make bid and get your desired product</p>
             </div>
             <!--clock-->
-            <div id="clock" class="light">
+            <div *ngIf="rhour!=undefined" id="clock" class="light">
                 <div class="remaining-time">
                     <p class="remaining-time fs-4 fw-bold text-muted">Remaining time</p>
                 </div>
-                <div class="display flex-div">
-                    <div class="hours">{{rhour+':'}}</div>
-                    <div class="mins">{{rmins+':'}}</div>
-                    <div class="sec">{{rsec}}</div>
+                <div class="display ">
+                    <div class="time flex-div">
+                        <div class="hours">{{rhour+':'}}</div>
+                        <div class="mins">{{rmins+':'}}</div>
+                        <div class="sec">{{rsec}}</div>
+                    </div>
+                    
                     
                 </div>
             </div>
@@ -83,37 +86,37 @@
         </div>
         <div class="flex-div move-left">
             <div class="image-links">
-                <a href="" class="category-link">
+                <a (click)="getCategoricalProducts('Electronics,Desktop')"  class="category-link">
                     <img src="assets/icons/desktop.png" alt="link">
                     <p class="link-name fw-bold">Desktop</p>
                 </a>
             </div>
             <div class="image-links">
-                <a href="" class="category-link">
+                <a (click)="getCategoricalProducts('Electronics,Laptops')"  class="category-link">
                     <img src="assets/icons/laptop.png" alt="link">
                     <p class="link-name fw-bold">Laptops</p>
                 </a>
             </div>
             <div class="image-links">
-                <a href="" class="category-link">
+                <a (click)="getCategoricalProducts('Electronics,Bikes')" class="category-link">
                     <img src="assets/icons/motorcycle.png" alt="link">
                     <p class="link-name fw-bold bikes">Bikes</p>
                 </a>
             </div>
             <div class="image-links">
-                <a href="" class="category-link">
+                <a (click)="getCategoricalProducts('Electronics,Smartphones')" class="category-link">
                     <img src="assets/icons/smartphone.png" alt="link">
                     <p class="link-name fw-bold smartphones">Smartphones</p>
                 </a>
             </div>
             <div class="image-links">
-                <a href="" class="category-link">
+                <a (click)="getCategoricalProducts('Cloths')" class="category-link">
                     <img src="assets/icons/t-shirt.png" alt="link">
                     <p class="link-name fw-bold">Cloths</p>
                 </a>
             </div>
             <div class="image-links">
-                <a href="" class="category-link">
+                <a (click)="getCategoricalProducts('Sports')" class="category-link">
                     <img src="assets/icons/sports.png" alt="link">
                     <p class="link-name fw-bold">Sports</p>
                 </a>
@@ -151,35 +154,77 @@
     <div *ngIf="isBidAble" class="container">
       <h3 class="fs-4 fw-bold some-space"><b>Ongoing Products</b></h3>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
-        <div *ngFor="let product of products;" >
+        <div *ngFor="let product of nextProducts;" >
         
-        <div class="col" >
-          
-            <div class="card shadow-sm " >
-              <button (click)="showProduct(product)" >
-                <img src="{{'assets/'+product.uid+'.jpg'}}" alt="{{product.product_name}}" class="bid-products">
-              </button>
-              
-              <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="assets/laptop.png" role="img" aria-label="Placeholder: laptops " preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Laptops</text></svg> -->
-    
-              <div class="card-body ">
-                <p class="card-text"><small>{{product.product_name}}</small></p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button (click)="showBidProduct(product)"  type="button" class="btn btn-sm btn-outline-secondary">Bid</button>
-                    <button (click)="showProduct(product)" type="button" class="btn btn-sm btn-outline-secondary">Product Details</button>
-                  </div>
-                <small class="text-muted"><i><b>{{"BDT "+product.current_price}}</b></i></small>
+            <div class="col" >
+            
+                <div class="card shadow-sm " >
+                <a (click)="showProduct(product)" >
+                    <img src="{{'assets/'+product.uid+'.jpg'}}" alt="{{product.product_name}}" class="bid-products">
+                </a>
+                
+                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="assets/laptop.png" role="img" aria-label="Placeholder: laptops " preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Laptops</text></svg> -->
+        
+                <div class="card-body ">
+                    <p class="card-text"><small>{{product.product_name}}</small></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button (click)="showBidProduct(product)"  type="button" class="btn btn-sm btn-outline-secondary">Bid</button>
+                            <button (click)="showProduct(product)" type="button" class="btn btn-sm btn-outline-secondary">Details</button>
+                        </div>
+                        <small class="text-muted"><i><b>{{"BDT "+product.current_price}}</b></i></small>
+                    </div>
                 </div>
-              </div>
+                </div>
             </div>
-        </div>
         
-      </div>  
-      
+        </div>  
+        <div class="next-items">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item"><a class="page-link" (click)="previous()">Previous</a></li>
+                  
+                  <li class="page-item"><a class="page-link" (click)="next()">Next</a></li>
+                </ul>
+              </nav>
+        </div>
         
       </div>
     </div>
+
+    <div *ngIf="isBidAble && authenticated" class="container mt-2">
+        <h3 class="fs-4 fw-bold some-space"><b>Recommended Products</b></h3>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+          <div *ngFor="let product of recommendedProducts;" >
+          
+          <div class="col" >
+            
+              <div class="card shadow-sm " >
+                <a (click)="showProduct(product)" >
+                  <img src="{{'assets/'+product.uid+'.jpg'}}" alt="{{product.product_name}}" class="bid-products">
+                </a>
+                
+                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="assets/laptop.png" role="img" aria-label="Placeholder: laptops " preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Laptops</text></svg> -->
+      
+                <div class="card-body ">
+                  <p class="card-text"><small>{{product.product_name}}</small></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button (click)="showBidProduct(product)"  type="button" class="btn btn-sm btn-outline-secondary">Bid</button>
+                      <button (click)="showProduct(product)" type="button" class="btn btn-sm btn-outline-secondary">Details</button>
+                    </div>
+                  <small class="text-muted"><i><b>{{"BDT "+product.current_price}}</b></i></small>
+                  </div>
+                </div>
+              </div>
+          </div>
+          
+        </div>  
+        
+          
+        </div>
+      </div>
+
   </div>
 </div>
 

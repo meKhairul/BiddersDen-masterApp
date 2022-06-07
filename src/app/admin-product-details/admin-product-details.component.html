@@ -8,30 +8,26 @@
         <ng-container >
             <div class="card col-md-3">
                 <img src="{{'assets/'+productShow.uid+'.jpg'}}" alt="{{productShow.product_name}}">
-                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{productShow.product_name}}</h5>
-                <!-- <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{productShow.product_details}}</p> -->
-                <p><strong>Price:</strong> ${{productShow.current_price}}</p>
-               
-                <button class="btn btn-info" (click)="update(productShow)" >Update</button>
+                
+                <div class="product-name">
+                    <h5 style="text-align: center;">{{productShow.product_name}}</h5>
+                    <!-- <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{productShow.product_details}}</p> -->
+                    <p style="text-align: center;"><strong>Price:</strong> {{productShow.current_price}} Tk</p>
+                </div>
+                
+                <button class="btn btn-primary" (click)="update(productShow)" >Update</button>
             </div>
 
             <div class="detail-card">
-                <h1><b>Product Details</b></h1><br>
-                
-                    <h3 class="product-title">{{productShow.product_name}}</h3>
-                    <div class="rating">
-                        <div class="stars">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
+                <h1 class="full-size fw-bold"><b>Product Details</b></h1><br>
                         
-                    </div>
-                    <p class="product-description">{{productShow.product_details}}</p>
-                    <h4 class="price">Base price : BDT{{productShow.base_price}}</h4>
-                    <h4 class="price">Current price : BDT{{productShow.current_price}}</h4>
+                            
+
+                <h3 class=" fs-4 fw-bold">{{productShow.product_name}}</h3>
+                
+                <p class="product-description text-muted fw-bold">{{productShow.product_details}}</p>
+                    <h4 class="price text-muted">Base price : {{productShow.base_price}} Tk</h4>
+                    <h4 class="price text-muted">Current price : {{productShow.current_price}} Tk</h4>
                    
                     
                 

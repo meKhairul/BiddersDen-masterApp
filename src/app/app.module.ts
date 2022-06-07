@@ -38,6 +38,8 @@ import { AdminProductDetailsComponent } from './admin-product-details/admin-prod
 import { AdminProductUpdateComponent } from './admin-product-update/admin-product-update.component';
 import { SignInWithRecoveryCodeComponent } from './sign-in-with-recovery-code/sign-in-with-recovery-code.component';
 import { NgxPaypalComponent, NgxPayPalModule } from 'ngx-paypal';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { FAQComponent } from './faq/faq.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,6 +73,8 @@ import { NgxPaypalComponent, NgxPayPalModule } from 'ngx-paypal';
     AdminProductDetailsComponent,
     AdminProductUpdateComponent,
     SignInWithRecoveryCodeComponent,
+    EditProfileComponent,
+    FAQComponent,
     
   ],
   imports: [

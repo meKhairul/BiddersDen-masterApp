@@ -42,7 +42,7 @@ export class SearchComponent implements OnInit {
   }
   showProduct(product:Product){
     this.productService.setProductToBeShown(product);
-    this.router.navigate(['product']);
+    this.router.navigate(['product', product.uid]);
   }
 
   showBidProduct(product:Product){

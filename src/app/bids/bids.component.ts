@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Bid } from '../bid';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
@@ -19,11 +19,11 @@ export class BidsComponent implements OnInit {
   newBid = new Bid();
   currentBids : Bid[] = [];
   current_date : Date = new Date();
-  
+  id!:any;
   productShow = this.productService.getBidProductToBeShown();
   
   minBid = Math.max(this.productShow.current_price,5);
-  constructor(private productService:ProductService,private userService:UserService,private router:Router) { 
+  constructor(private productService:ProductService,private userService:UserService,private router:Router,private aroute:ActivatedRoute) { 
     
     
     for(let i=this.minBid;this.bids.length<=50;i+=(this.minBid/10))
@@ -36,12 +36,31 @@ export class BidsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = this.aroute.snapshot.paramMap.get('id');
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
           return;
       }
+      
       window.scrollTo(0, 0)
   });
+  this.getProductDetails(this.id);
+  }
+
+  getProductDetails(id : string){
+    this.productService.getProductDetails(id).subscribe(data=>{
+      this.productShow = data;
+      if(this.router.url == "/bid/"+"id"){
+        console.log("we are here:" +this.router.url);
+        let currentUrl = this.router.url;
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+        });
+      }
+      else {
+        this.router.navigate(['bid',id]);
+      }
+    });
   }
 
   makeBid()

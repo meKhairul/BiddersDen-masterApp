@@ -97,5 +97,25 @@ export class UserService {
         }
         return this.http.post(this.API_URL + '/change-password/', data);
     }
-    
+    banUser(val:any){
+        return this.http.post(this.API_URL + '/ban/', val);
+    }
+    createRecommendations(){
+        return this.http.post(this.API_URL + '/initRecommendations/', "asd");
+    }
+
+    getRecommendations(username : String): Observable<any[]>{
+        var data = {
+            username : username,
+        }
+        return this.http.post<any>(this.API_URL + '/recommend/', data);
+    }
+    updateUser(data:any) {
+        return this.http.post(this.API_URL + '/updateUser/', data);
+    }
+
+    getPreviousBids(data:any): Observable<any[]>
+    {
+        return this.http.post<any>(this.API_URL + '/bidhistory/', data);
+    }
 }

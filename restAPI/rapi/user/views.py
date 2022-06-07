@@ -7,6 +7,7 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
+from .recommendation import generateRecommendations
 from user.models import Product, Messages
 from user.serializers import FileSerializer
 from user.serializers import ProductSerializer, BidsSerializer
@@ -26,6 +27,7 @@ from chatApp.pusher import pusher_client
 from rest_framework.decorators import api_view
 import jwt, datetime
 
+import pandas as pd
 # Create your views here.
 ###########   User   #############
 @csrf_exempt
@@ -218,6 +220,7 @@ def updateUser(request):
             user.password = data['newPassword']
             user.address = data['newaddress']
             user.name =  data['newName']
+            user.phone_number = data['newPhoneNumber']
             user.save()
             return JsonResponse('User profile has been updated', safe = False)
         else :
@@ -250,7 +253,7 @@ def addProduct(request,id=0):
         print(seller)
         Product.objects.create(uid = uid, product_name = product_data['product_name'], product_category = product_data['product_category'],
                                 base_price = product_data['base_price'], product_details = product_data['product_details'],
-                                current_price = product_data['current_price'], time_to_bid = product_data['time_to_bid'], seller = seller)
+                                current_price = product_data['current_price'], time_to_bid = 3, seller = seller)
         return JsonResponse(str(uid), safe = False)
 
 @csrf_exempt
@@ -441,9 +444,9 @@ def updateProduct(request):
             product.product_category = data['new']
             product.base_price = data['newaddress']
             product.product_details =  data['newName']
-            product.recieved_date = data['newName']
+            product.recieved_date = data['new_recieved_date']
             product.shipping_date = data['new']
-            product.delivered_date = data['newaddress']
+            product.delivered_date = data['new_delivered_date']
             product.isApproved =  data['newName']
             product.isSold =  data['newName']
 
@@ -460,4 +463,45 @@ def getAllUsers(request):
         users = Users.objects.all()
         users = UsersSerializer(users, many = True)
         return JsonResponse(users.data, safe = False)
+
+
+
+############   RECOMMENDATION #############
+@csrf_exempt
+@api_view(['POST'])
+def generateRecommendation(request):
+    if request.method=='POST':
+        generateRecommendations()
+        return JsonResponse("sucess", safe = False)
+
+
+@csrf_exempt
+@api_view(['POST'])
+def gg(request):
+    if request.method=='POST':
+        data = JSONParser().parse(request)
+        print(data)
+        username = data['username']
+        file_name = 'recommendations_' + username + '.csv'
+        df = pd.read_csv('E:/' + file_name)
+        product_ids = []
+        for id in df['product_id']:
+            product_ids.append(id)
+        print("product ids",  product_ids)
+
+        #products = Product.objects.filter(pk__in product_ids)
+        #products = ProductSerializer(products)
+        products = []
+        for product_id in product_ids:
+            product = Product.objects.filter(uid = product_id).first()
+            #product = ProductSerializer(product)
+            products.append(product)
+        
+        print(products)
+        products = ProductSerializer(products, many = True)
+
+        return JsonResponse(products.data, safe = False)
+
+
+
 

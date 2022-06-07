@@ -23,6 +23,27 @@
     max-width: 1144px;
   
   }
+  img{
+    height: 68%;
+    width: 66%;
+  }
+ 
+  .stats{
+    margin-top: -5%;
+  }
+  .vh-100{
+    max-height: 75vh !important;
+  }
+  .edit-profile{
+    position: relative;
+    top: -7%;
+    left: 7%;
+    
+  }
+  .container{
+    position: relative;
+  }
+  
 
 
 

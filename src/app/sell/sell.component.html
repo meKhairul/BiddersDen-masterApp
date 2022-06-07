@@ -22,12 +22,7 @@
                              <div *ngIf="product.base_price==null" class="red">Base Price field cannot be blank!</div>
                         </div>
 
-                        <div class="col-md-12">
-                            <label for="Bidding Time">Bidding Time (In days)</label>
-                            <input class="form-control" type="number" name="Bidding Time"  [(ngModel)] = "product.time_to_bid" [ngModelOptions] = "{standalone: true}"required>
-                             <div class="valid-feedback"> This Field is valid!</div>
-                             <div class="invalid-feedback"> This field cannot be blank!</div>
-                        </div>
+                        
   
                        <div class="col-md-12">
                             <label for="">Category</label>
@@ -68,7 +63,7 @@
   
   
                        <div class="col-md-12">
-                           <label for="">Product Defects</label>
+                           <label for="">Product Details</label>
                           <textarea class="form-control" type="text" name="defects" [(ngModel)] = "product.product_details" [ngModelOptions] = "{standalone: true}" required></textarea>
                            <div class="valid-feedback">Product defects field is valid!</div>
                            <div class="invalid-feedback">Product defects field cannot be blank!</div>
@@ -77,10 +72,34 @@
   
                       <div class="col-md-12 mt-3">
                         Product Photo:
-                        <input class="form-control" type="file" placeholder="Choose File"  (change) = "onChanged($event)"  required>
+                        <input class="form-control" type="file" placeholder="Add photos"  (change) = "onChanged($event, 0)"   required>
                            <div class="valid-feedback">Product photos field is valid!</div>
                            <div class="invalid-feedback">Product photos field cannot be blank!</div>
                       </div>
+                      <div class="col-md-12 mt-3">
+                        Product Photo:
+                        <input class="form-control" type="file" placeholder="Add photos"  (change) = "onChanged($event, 1)"   required>
+                           <div class="valid-feedback">Product photos field is valid!</div>
+                           <div class="invalid-feedback">Product photos field cannot be blank!</div>
+                      </div>
+                      <div class="col-md-12 mt-3">
+                        Product Photo:
+                        <input class="form-control" type="file" placeholder="Add photos"  (change) = "onChanged($event, 2)"   required>
+                           <div class="valid-feedback">Product photos field is valid!</div>
+                           <div class="invalid-feedback">Product photos field cannot be blank!</div>
+                      </div>
+                      <div class="col-md-12 flex-div">
+                        <label style="margin-right: 2%;" for="Product Type">Product Type</label>
+                        
+                        <div class="radio-type ml-20 pl-3 flex-div">
+                            <input class="radio" type="radio" id="html" name="fav_language" value="used" [(ngModel)] = "product.isApproved" [ngModelOptions] = "{standalone: true}" required>
+                            <label class="used" for="html">Used</label><br>
+                            <input class="radio" type="radio" id="html" name="fav_language" value="new" [(ngModel)] = "product.isApproved" [ngModelOptions] = "{standalone: true}" required>
+                            <label class="used" for="html">New</label><br>
+                        </div>
+                        
+                        
+                    </div>
                       
   
                     <div class="form-check">
@@ -88,6 +107,7 @@
                       <label class="form-check-label">I confirm that all data are correct</label>
                      <div class="invalid-feedback">Please confirm that the entered data are all correct!</div>
                     </div>
+
               
   
                         <div class="form-button mt-3">

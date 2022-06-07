@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { UserService } from '../user.service';
 
 @Component({
@@ -16,8 +17,14 @@ export class AdminBanuserComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ban(userId:String)
+  ban(username:String)
   {
+    var req = {
+      username : username,
+    }
+    this.userService.banUser(req).subscribe(response=>{
+      
+    });
     this.router.navigate(['../admin-userlist']);
   }
 
