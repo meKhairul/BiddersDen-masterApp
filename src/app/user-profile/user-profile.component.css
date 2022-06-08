@@ -46,6 +46,120 @@
   
 
 
+.h4 {
+  font-family: 'Work Sans', sans-serif !important;
+  font-weight: 800 !important;
+}
+.product-name {
+  width: 100%;
+  margin-left: 12%;
+  padding: 6%;
+}
+.price{
+  margin-left: 2%;
+  padding: 6%;
+}.photo{
+  padding: 2%;
+}
+
+img {
+  width: 70px;
+  height: 70px;
+  object-fit: fill;
+  margin-left: 5%;
+  margin-top: 2%;
+}
+img:hover{
+  transition: 0.1s ease-in-out;
+  transform: scale(1.07);
+}
+
+.text-muted {
+  font-size: 10px;
+}
+
+.textmuted {
+  color: #6c757d;
+  font-size: 13px;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.btn.btn-primary {
+  width: 100%;
+  height: 55px;
+  border-radius: 0;
+  padding: 13px 0;
+  background-color: black;
+  border: none;
+  font-weight: 600;
+}
+
+.btn.btn-primary:hover .fas {
+  transform: translateX(10px);
+  transition: transform 0.5s ease
+}
+
+
+.fw-900 {
+  font-weight: 900;
+}
+
+::placeholder {
+  font-size: 12px;
+}
+
+.ps-30 {
+  padding-left: 30px;
+}
+
+.h4 {
+  font-family: 'Work Sans', sans-serif !important;
+  font-weight: 800 !important;
+}
+
+.textmuted,
+h5,
+.text-muted {
+  font-family: 'Poppins', sans-serif;
+}
+
+.flex-div{
+  display: flex;
+}
+
+.textmuted,
+h5,
+.text-muted {
+  font-family: 'Poppins', sans-serif;
+}
+
+.flex-div{
+  display: flex;
+}
+
+.im{
+  margin-left: 24%;
+}
+.nm{
+  margin-left: 27%;
+}
+.prc{
+  margin-left: 29%;
+}
+.sl{
+  margin-left: 7%;
+}
+
+.list{
+  margin-left: 10%;
+  padding-left: 5%;
+}
+.hr-move{
+  margin-left: 15%;
+}
 
 
 

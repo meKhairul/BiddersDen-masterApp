@@ -9,8 +9,16 @@ import { UserService } from 'src/app/user.service';
 })
 export class AdminLoginComponent implements OnInit {
 
-  username!: any;
-  password!:any;
+  
+
+  user!:any
+  name!: string;
+  phone_number!:string;
+  email!:string;
+  address!:string;
+  username!: string;
+  password!:string;
+ 
 
   constructor(private userService:UserService,private router:Router) { }
 

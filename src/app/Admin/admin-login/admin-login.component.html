@@ -1,4 +1,4 @@
-<!-- Section: Design Block -->
+<!-- 
 <section class="background-radial-gradient overflow-hidden">
     <style>
       .background-radial-gradient {
@@ -64,16 +64,13 @@
           <div class="card bg-glass">
             <div class="card-body px-4 py-5 px-md-5">
               <form>
-                <!-- 2 column grid layout with text inputs for the first and last names -->
                 
   
-                <!-- Email input -->
                 <div class="form-outline mb-4">
                   <input type="text" id="form3Example3" class="form-control" />
                   <label class="form-label" for="form3Example3">Username</label>
                 </div>
   
-                <!-- Password input -->
                 <div class="form-outline mb-4">
                   <input type="password" id="form3Example4" class="form-control" />
                   <label class="form-label" for="form3Example4">Password</label>
@@ -89,4 +86,75 @@
       </div>
     </div>
   </section>
-  <!-- Section: Design Block -->
+   -->
+
+   <!-- <a href="https://front.codes/" class="logo" target="_blank">
+		<img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+	</a> -->
+
+	<div class="section">
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+						<h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+			          	<label for="reg-log"></label>
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+								<div class="card-front">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h4 style="color: white;" class="mb-4 pb-3 ">Log In</h4>
+											<div class="form-group">
+												<input type="text" name="logemail" class="form-style" placeholder="Your username" id="logemail" autocomplete="off" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" required minlength="6" maxlength="14" >
+												<i class="input-icon uil uil-at"></i>
+											</div>	
+											<div class="form-group mt-2">
+												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off" [(ngModel)]="password" [ngModelOptions]="{standalone:true}" required minlength="6" maxlength="14" >
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<a (click)="login()" class="btn mt-4">submit</a>
+                            				<p class="mb-0 mt-4 text-center"><a routerLink="../forgot-password" class="link">Forgot your password?</a></p>
+				      					</div>
+			      					</div>
+			      				</div>
+								<div class="card-back">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h4 style="color: white;" class="mb-4 pb-3">Sign Up</h4>
+											<div class="form-group">
+												<input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off" [(ngModel)]="name" [ngModelOptions]="{standalone:true}" required required minlength="6" maxlength="20">
+												<i class="input-icon uil uil-user"></i>
+											</div>	
+											<div class="form-group mt-2">
+												<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off"[(ngModel)]="email" [ngModelOptions]="{standalone:true}" >
+												<i class="input-icon uil uil-at"></i>
+											</div>	
+                      <div class="form-group mt-2">
+												<input type="text" name="logemail" class="form-style" placeholder="Your Address" id="logemail" autocomplete="off" [(ngModel)]="address" [ngModelOptions]="{standalone:true}" required pattern="01(3|4|5|6|7|8|9)[0-9]{8}">
+												<i class="input-icon uil uil-at"></i>
+											</div>	
+                      <div class="form-group mt-2">
+												<input type="text" name="logemail" class="form-style" placeholder="Your Phone number" id="logemail" autocomplete="off"[(ngModel)]="phone_number" [ngModelOptions]="{standalone:true}" required pattern="01(3|4|5|6|7|8|9)[0-9]{8}">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+                      <div class="form-group mt-2">
+												<input type="text" name="logemail" class="form-style" placeholder="Your username" id="logemail" autocomplete="off" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" required minlength="6" maxlength="14">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off" [(ngModel)]="password" [ngModelOptions]="{standalone:true}" required minlength="6" maxlength="45" >
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<a class="btn mt-4">submit</a>
+				      					</div>
+			      					</div>
+			      				</div>
+			      			</div>
+			      		</div>
+			      	</div>
+		      	</div>
+	      	</div>
+	    </div>
+	</div>

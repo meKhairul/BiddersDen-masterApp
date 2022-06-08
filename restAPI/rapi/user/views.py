@@ -1,5 +1,4 @@
 from email import message
-from itertools import product
 from time import time
 from unicodedata import category
 from django.views.decorators.csrf import csrf_exempt
@@ -26,6 +25,7 @@ from django.core.mail import send_mail
 from chatApp.pusher import pusher_client
 from rest_framework.decorators import api_view
 import jwt, datetime
+import os.path
 
 import pandas as pd
 # Create your views here.
@@ -57,7 +57,7 @@ def register(request,id=0):
         
         Users.objects.create(uid= uid, name=name, phone_number = phone_number, email = email, address = address, username=username, password=hashed_password, isVerified = False)
 
-        #sendMail(email, uid)
+        sendMail(email, uid)
         return JsonResponse("Please check your mail to verify your account", safe=False)
 
 
@@ -104,8 +104,8 @@ def login(request):
 
             if user is None:
                 raise AuthenticationFailed('User not found')
-            #elif user.isVerified==False:
-                #raise AuthenticationFailed('Please verifiy your account first')
+            elif user.isVerified==False:
+                raise AuthenticationFailed('Please verifiy your account first')
             elif not check_password(password, user.password):
                 raise AuthenticationFailed('Incorrect Password')
         
@@ -475,6 +475,35 @@ def generateRecommendation(request):
         return JsonResponse("sucess", safe = False)
 
 
+# @csrf_exempt
+# @api_view(['POST'])
+# def gg(request):
+#     if request.method=='POST':
+#         data = JSONParser().parse(request)
+#         print(data)
+#         username = data['username']
+#         file_name = 'recommendations_' + username + '.csv'
+#         df = pd.read_csv('E:/' + file_name)
+#         product_ids = []
+#         for id in df['product_id']:
+#             product_ids.append(id)
+#         print("product ids",  product_ids)
+
+#         #products = Product.objects.filter(pk__in product_ids)
+#         #products = ProductSerializer(products)
+#         products = []
+#         for product_id in product_ids:
+#             product = Product.objects.filter(uid = product_id).first()
+#             #product = ProductSerializer(product)
+#             products.append(product)
+        
+#         print(products)
+#         products = ProductSerializer(products, many = True)
+
+#         return JsonResponse(products.data, safe = False)
+
+
+
 @csrf_exempt
 @api_view(['POST'])
 def gg(request):
@@ -483,25 +512,37 @@ def gg(request):
         print(data)
         username = data['username']
         file_name = 'recommendations_' + username + '.csv'
-        df = pd.read_csv('E:/' + file_name)
-        product_ids = []
-        for id in df['product_id']:
-            product_ids.append(id)
-        print("product ids",  product_ids)
+        file_name = 'E:/' + file_name
 
-        #products = Product.objects.filter(pk__in product_ids)
-        #products = ProductSerializer(products)
-        products = []
-        for product_id in product_ids:
-            product = Product.objects.filter(uid = product_id).first()
-            #product = ProductSerializer(product)
-            products.append(product)
-        
-        print(products)
-        products = ProductSerializer(products, many = True)
+        if os.path.exists(file_name):
+            print("yes")
+            df = pd.read_csv(file_name)
+            product_ids = []
+            for id in df['product_id']:
+                product_ids.append(id)
+            print("product ids",  product_ids)
 
-        return JsonResponse(products.data, safe = False)
-
-
+            #products = Product.objects.filter(pk__in product_ids)
+            #products = ProductSerializer(products)
+            products = []
+            for product_id in product_ids:
+                product = Product.objects.filter(uid = product_id).first()
+                #product = ProductSerializer(product)
+                products.append(product)
+            
+            print(products)
+            products = ProductSerializer(products, many = True)
+            response = {
+                'found' : True,
+                'products' : products.data ,
+            }
+            return JsonResponse(response, safe = False)
+        else:
+            print("no")
+            response = {
+                'found' : False,
+                'products' : [],
+            }
+            return JsonResponse(response, safe = False)
 
 

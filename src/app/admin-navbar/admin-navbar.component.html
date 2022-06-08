@@ -1,6 +1,6 @@
 <nav class="flex-div home">
     <div class="nav-left flex-div">
-      <a (click)="menuButtonClickEvent()"><img
+      <a ><img
         src="assets/align-justify.png"
         class="menu-icon"
         
@@ -19,21 +19,32 @@
   
       <div  class="nav-right flex-div">
       
-          
+        
+        <div class="dropdown">
+          <div class="dropbtn" >
+            <a *ngIf="userdata.username=='biddersden'" routerLink="../admin-chat">
+              <img src="assets/chat.png" class="user-icon" alt="user-Icon" />
+              
+            </a>
+            
+            
+          </div>
+        </div>
+
       <div class="dropdown">
         <div class="dropbtn" >
-          <a (click)="toggle()">
-            <img src="assets/login.png" class="user-icon" alt="user-Icon" />
+          <a *ngIf="userdata.username=='biddersden'" (click)="logout()">
+            <img src="assets/icons/turn-off.png" class="user-icon" alt="user-Icon" />
             
           </a>
           
           
         </div>
       </div>
-      <div class="dropdown">
+      <div *ngIf="userdata.username!='biddersden'" class="dropdown">
         <div class="dropbtn" >
-          <a (click)="logout()">
-            <img src="assets/icons/turn-off.png" class="user-icon" alt="user-Icon" />
+          <a routerLink="../admin-login" >
+            <img src="assets/login.png" class="user-icon" alt="user-Icon" />
             
           </a>
           
@@ -47,7 +58,7 @@
 
   </nav>
   
-  <!--sidebar-->
+  <!-- sidebar -->
   <div class="sidebar" [class.small-sidebar]="click == 0">
     <div class="shortcut-links">
       <div class="links">
@@ -58,7 +69,7 @@
         <P><strong>Home</strong></P>
       </a>
       
-      <a class="outer-link" routerLink="../admin-chat" (click) = "logout()"
+      <a class="outer-link" routerLink="../admin-chat"
         ><img src="assets/login.png" />
         <p><strong>Chat</strong></p>
       </a>
@@ -66,23 +77,12 @@
         ><img src="assets/login.png" />
         <p><strong>Users</strong></p>
       </a>
-      <a class="outer-link" routerLink="../admin-productlist" 
-        ><img src="assets/login.png" />
-        <p><strong>Products</strong></p>
-      </a>
+      
       
                           
       <hr />
     </div>
   </div>
+  </div>
   
-  <!-- <div class="timer flex-div">
-    <div class="flex-div">
-      <p class="days time">{{day}}</p>
-      <p class="hours time">{{hour+':'}}</p>
-      <p class="mins time">{{mins+':'}}</p>
-      <p class="seconds time">{{sec}}</p>
-      <p class="ampm time">{{ampm}}</p>
-    </div>
-  </div> -->
-  
+

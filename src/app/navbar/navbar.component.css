@@ -12,6 +12,10 @@
   "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+div.blank{
+  width: 200px !important;
+  height: 60px !important;
+}
 
 a{
   text-decoration: none;

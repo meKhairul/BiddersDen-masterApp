@@ -40,6 +40,9 @@ import { SignInWithRecoveryCodeComponent } from './sign-in-with-recovery-code/si
 import { NgxPaypalComponent, NgxPayPalModule } from 'ngx-paypal';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { FAQComponent } from './faq/faq.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +79,7 @@ import { FAQComponent } from './faq/faq.component';
     EditProfileComponent,
     FAQComponent,
     
+    
   ],
   imports: [
     BrowserModule,
@@ -83,7 +87,9 @@ import { FAQComponent } from './faq/faq.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgxPayPalModule
+    NgxPayPalModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

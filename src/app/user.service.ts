@@ -11,6 +11,8 @@ import { Product } from "./product";
 
 export class UserService {
 
+
+    isBangla : boolean = false;
     isBidAble:boolean=true;
     recovery_email:String = "";
     user!:any;
@@ -117,5 +119,13 @@ export class UserService {
     getPreviousBids(data:any): Observable<any[]>
     {
         return this.http.post<any>(this.API_URL + '/bidhistory/', data);
+    }
+    setIsBangla(isBangla : boolean)
+    {
+        this.isBangla = isBangla;
+    }
+    getIsBangla():boolean
+    {
+        return this.isBangla;
     }
 }

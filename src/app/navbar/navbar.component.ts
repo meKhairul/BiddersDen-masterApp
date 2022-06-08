@@ -36,6 +36,7 @@ export class NavbarComponent implements OnInit {
   winningProducts:Product[] = [];
   daysArray = ["Sunday","Monday","Tuesday","Wednesday","Thurshday","Friday","Saturday"];
 
+  isBangla : boolean = false;
   
   menuButtonClickEvent() {
     if (this.click == 0) this.click = 1;
@@ -67,13 +68,13 @@ export class NavbarComponent implements OnInit {
       this.myTimer(date);
     },1000);
     setInterval(()=>{
-      //console.log(this.isBidAble);
-      //console.log(this.one);
+      console.log('bidable '+ this.isBidAble);
+      console.log('one '+this.one);
       if(!this.isBidAble && this.one)
       {
         this.one=false;
         this.winOrNot();
-        //console.log(this.winningProducts);
+        console.log(this.winningProducts);
         this.userService.setWinnerProducts(this.winningProducts);
         this.newNotify.type = 'win';
         this.newNotify.msg = 'Congratulations!! Yoy have won the bid/s. Click the Link to Pay for getting the product.';
@@ -121,6 +122,12 @@ export class NavbarComponent implements OnInit {
     {
       console.log("You must sign in first");
     }
+  }
+
+  makeBangla()
+  {
+    this.isBangla = true;
+    this.userService.setIsBangla(this.isBangla);
   }
   
   search(searchData:String,flag:number){
@@ -220,7 +227,8 @@ export class NavbarComponent implements OnInit {
     d.setMilliseconds(999);
     //console.log(date);
     let difference = d.getTime() - date.getTime();
-    if(difference<=0)
+    
+    if(date.getHours()<=9 || date.getHours()>=23)
     {
       this.isBidAble = false;
       this.userService.setIsBidAble(this.isBidAble);

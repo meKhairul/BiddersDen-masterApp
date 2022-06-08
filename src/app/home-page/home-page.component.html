@@ -14,14 +14,27 @@
                 <div class="subdrop dropdown-menu">
                     <div class="flex-div">
                         <div class="links">
-                            <a (click)="getCategoricalProducts('Electronics,Laptops')" class="dropdown-item fw-bold" >Laptops</a>
-                            <a (click)="getCategoricalProducts('Electronics,Desktop')" class="dropdown-item fw-bold" >Desktops</a>
-                            <a (click)="getCategoricalProducts('Electronics,Smartphones')"class="dropdown-item fw-bold" >Smartphones</a>
-                            <a (click)="getCategoricalProducts('Electronics,Bikes')"class="dropdown-item fw-bold" >Bikes</a>
-                            <a (click)="getCategoricalProducts('Electronics,Cars')"class="dropdown-item fw-bold" >Cars</a>
-                            <a (click)="getCategoricalProducts('Electronics,Television')"class="dropdown-item fw-bold" >Televison</a>
-                            <a (click)="getCategoricalProducts('Electronics,Fridge')"class="dropdown-item fw-bold" >Fridges</a>
-                        </div>
+                            <div *ngIf="!isBangla" class="english">
+                                <a (click)="getCategoricalProducts('Electronics,Laptops')" class="dropdown-item fw-bold" >Laptops</a>
+                                <a (click)="getCategoricalProducts('Electronics,Desktop')" class="dropdown-item fw-bold" >Desktops</a>
+                                <a (click)="getCategoricalProducts('Electronics,Smartphones')"class="dropdown-item fw-bold" >Smartphones</a>
+                                <a (click)="getCategoricalProducts('Electronics,Bikes')"class="dropdown-item fw-bold" >Bikes</a>
+                                <a (click)="getCategoricalProducts('Electronics,Cars')"class="dropdown-item fw-bold" >Cars</a>
+                                <a (click)="getCategoricalProducts('Electronics,Television')"class="dropdown-item fw-bold" >Televison</a>
+                                <a (click)="getCategoricalProducts('Electronics,Fridge')"class="dropdown-item fw-bold" >Fridges</a>
+                                
+                            </div>
+                            <div *ngIf="isBangla" class="bangla">
+                                <a (click)="getCategoricalProducts('Electronics,Laptops')" class="dropdown-item fw-bold" >Laptops</a>
+                                <a (click)="getCategoricalProducts('Electronics,Desktop')" class="dropdown-item fw-bold" >Desktops</a>
+                                <a (click)="getCategoricalProducts('Electronics,Smartphones')"class="dropdown-item fw-bold" >Smartphones</a>
+                                <a (click)="getCategoricalProducts('Electronics,Bikes')"class="dropdown-item fw-bold" >Bikes</a>
+                                <a (click)="getCategoricalProducts('Electronics,Cars')"class="dropdown-item fw-bold" >Cars</a>
+                                <a (click)="getCategoricalProducts('Electronics,Television')"class="dropdown-item fw-bold" >Televison</a>
+                                <a (click)="getCategoricalProducts('Electronics,Fridge')"class="dropdown-item fw-bold" >Fridges</a>
+                            
+                            </div>
+                            </div>
                         <div class="image">
                             <img src="assets/electronics.png" alt="">
                         </div>
@@ -49,19 +62,20 @@
             <a (click)="getCategoricalProducts('Sports')"class="dropdown-item dropforprice fw-bold" >Sports</a>
             <a (click)="getCategoricalProducts('Hardware Accessories')"class="dropdown-item fw-bold" >Hardware Accessories</a>
             <a (click)="getCategoricalProducts('Books')"class="dropdown-item fw-bold" >Books</a>
-            <a (click)="getCategoricalProducts('Beauty & Cosmetics')"class="dropdown-item fw-bold" >Beauty and Cosmetics</a>
+            <a (click)="getCategoricalProducts('Beauty and Cosmetics')"class="dropdown-item fw-bold" >Beauty and Cosmetics</a>
         </div>
     </div>
     <div  class="start-page">
         <div class="intro-part flex-div">
             <div class="text-item">
                 <p class="p-green fs-4">Welcome to Bidder'sDen</p>
-                <P class="fs-4 fw-bold">Auction started</P>
+                <P *ngIf="isBidAble" class="fs-4 fw-bold">Auction started</P>
+                <P *ngIf="!isBidAble" class="fs-4 fw-bold">Auction closed for today</P>
                 <p class="fs-4 fw-bold"></p>
                 <p class="text-muted mb-4 fw-bold">Make bid and get your desired product</p>
             </div>
             <!--clock-->
-            <div *ngIf="rhour!=undefined" id="clock" class="light">
+            <div *ngIf="isBidAble && rhour!=undefined" id="clock" class="light">
                 <div class="remaining-time">
                     <p class="remaining-time fs-4 fw-bold text-muted">Remaining time</p>
                 </div>
@@ -151,8 +165,9 @@
     
     
     
-    <div *ngIf="isBidAble" class="container">
-      <h3 class="fs-4 fw-bold some-space"><b>Ongoing Products</b></h3>
+    <div  class="container">
+      <h3 *ngIf="isBidAble" class="fs-4 fw-bold some-space"><b>Ongoing Products</b></h3>
+      <h3 *ngIf="!isBidAble" class="fs-4 fw-bold some-space"><b>Upcoming Products</b></h3>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
         <div *ngFor="let product of nextProducts;" >
         
@@ -192,7 +207,7 @@
       </div>
     </div>
 
-    <div *ngIf="isBidAble && authenticated" class="container mt-2">
+    <div *ngIf="isBidAble && authenticated && found" class="container mt-2">
         <h3 class="fs-4 fw-bold some-space"><b>Recommended Products</b></h3>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
           <div *ngFor="let product of recommendedProducts;" >

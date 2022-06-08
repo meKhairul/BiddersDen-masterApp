@@ -11,7 +11,7 @@ import { UserService } from '../user.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  userdata!:any;
+  
   totalSells : number = 12;
   totalBuys !: any;
   totalIncome : number = 20000;
@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
   click : boolean = false;
   constructor(private userService: UserService,private router:Router) { }
 
-
+  userdata!:any;
   authenticated : boolean = false;
 
   ngOnInit(): void {
@@ -64,26 +64,31 @@ export class UserProfileComponent implements OnInit {
   getPreviousBids()
   {
 
-    if(this.click)
-    {
-      this.click=true;
-    }
-    else
-    {
-      this.click = false;
-    }
+    
     var reqData = {
       username : this.userdata.username
     }
     this.userService.getPreviousBids(reqData).subscribe(res=>{
       this.recentBids = res;
       console.log(this.recentBids);
+      if(this.click)
+    {
+      this.click=false;
+    }
+    else
+    {
+      this.click = true;
+    }
     })
   }
 
   editProfile()
   {
     this.router.navigate(['../editProfile']);
+  }
+  showProduct(productId:String)
+  {
+    this.router.navigate(['product', productId]);
   }
 
 

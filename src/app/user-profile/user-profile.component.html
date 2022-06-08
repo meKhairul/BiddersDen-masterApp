@@ -65,23 +65,13 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            <h4>Dashboard</h4>
+            
           </div>
         </div>
-        <div class="row">
+        <div class="row mydiv">
           
           
-          <div class="col-md-3 mb-3">
-            <div class="card bg-success text-white h-100">
-              <div class="card-body py-5">Payment Requests</div>
-              <div class="card-footer d-flex">
-                <button (click)="swapValue()" class="view-details btn">View Details</button> 
-                <span class="ms-auto">
-                  <i class="bi bi-chevron-right"></i>
-                </span>
-              </div>
-            </div>
-          </div>
+          
           <div class="col-md-3 mb-3">
             <div class="card bg-danger text-white h-100">
               <div class="card-body py-5">Recent Bids</div>
@@ -95,77 +85,57 @@
             </div>
 
           </div>
-          <table *ngIf="recentBids.length!=0" class="table table-bordered ">
+          <table *ngIf="click" class="table table-bordered ">
             <thead>
               <tr>
                 <th scope="col">SL no</th>
-                <th scope="col">ProductId</th>
-                <th scope="col">Bidder</th>
+                <th scope="col">Image</th>
+                <th scope="col">Bid Amount</th>
                 
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let data of recentBids;let i = index;">
+              <tr *ngFor="let bids of recentBids;let i = index;">
                 <th scope="row">{{i}}</th>
-                <td>{{data.ProductId}}</td>
-                <td>{{data.bidderId}}</td>
+                <td>
+                  <a class="photo" (click)="showProduct(bids.productId)" >
+                          <img src="{{'assets/'+bids.productId+'.jpg'}}" alt="{{bids.productId}}" class="bid-products">
+                      </a>
+                  </td>
+                <td><p class="price fs-4 fw-bold">{{bids.bidAmount}}.00 Tk</p></td>
                 
               </tr>
               
             </tbody>
           </table>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <div class="card h-100">
-              <div class="card-header">
-                <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                Selling Performance
-              </div>
-              <div class="card-body">
-                <canvas class="chart" width="400" height="200"></canvas>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <div class="card h-100">
-              <div class="card-header">
-                <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                Bidding Performance
-              </div>
-              <div class="card-body">
+          <!-- <ol class="winning-products">
+                        
+            <div class="flex-div">
+                <p class="fs-4 small h4 sl">Serial</p>
+                <p class="fs-4 small h4 im">Image</p>
                 
+                <p class="text-muted h4 prc">Price</p>
 
-                  <!-- <div class="page-content page-container" id="page-content">
-                      <div class="padding">
-                          <div class="row">
-                              <div class="container-fluid d-flex justify-content-center">
-                                  <div class="col-sm-8 col-md-6">
-                                      <div class="card">
-                                          <div class="card-header">Pie chart</div>
-                                          <div class="card-body" style="height: 420px">
-                                              <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                                  <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                                      <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-                                                  </div>
-                                                  <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                                      <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-                                                  </div>
-                                              </div> <canvas id="chart-line" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                -->
-
-
-              </div>
             </div>
-          </div>
+            <hr class="hr-move">
+            
+              <li  *ngFor="let bids of recentBids" class="list">
+                  <div class="flex-div table-bordered">
+                      <a class="photo" (click)="showProduct(bids.productId)" >
+                          <img src="{{'assets/'+bids.productId+'.jpg'}}" alt="{{bids.productId}}" class="bid-products">
+                      </a>
+                      
+                      <p class="price text-muted fw-bold">{{bids.bidAmount}}.00 Tk</p>
+
+                  </div>
+                  <hr>
+              </li>
+            
+            
+    </ol> -->
         </div>
+        
+        
         
       </div>
     </main>

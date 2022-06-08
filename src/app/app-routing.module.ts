@@ -51,10 +51,10 @@ const routes: Routes = [
   {path:'',component:HomePageComponent},
   {path:'category',component:CategoriesComponent},
   {path:'admin-login',component:AdminLoginComponent},
-  {path:'admin-home',component:AdminHomeComponent},
+  
   {path:'admin-nav',component:AdminNavbarComponent},
   {path:'admin-userlist',component:AdminUserlistComponent},
-  {path:'admin-productlist',component:AdminProductlistComponent},
+  {path:'admin-home',component:AdminProductlistComponent},
   {path:'admin-chat',component:AdminChatComponent},
   {path:'admin-adduser',component:AdminAdduserComponent},
   {path:'admin-banuser',component:AdminBanuserComponent},

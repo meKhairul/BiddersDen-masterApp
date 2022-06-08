@@ -14,7 +14,7 @@
             <div class="py-2 px-4 border-bottom d-none d-lg-block">
               <div class="d-flex align-items-center py-1">
                 <div class="position-relative">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                 </div>
                 <div class="flex-grow-1 pl-3 ml-2">
                   <strong>Admin Panel</strong>
@@ -39,14 +39,14 @@
                     <div class="text-muted small text-nowrap mt-2 ml-20">{{msg.time | date:'shortTime'}}</div>
                   </div>
 
-                  <div *ngIf="msg.username=='admin'" class="chat-message-left pb-4">
+                  <div *ngIf="msg.username=='biddersden'" class="chat-message-left pb-4">
                     <div class="mb-3">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                       
                     </div>
                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                      <div class="font-weight-bold mb-1 text-muted small">Sharon Lessman</div>
-                      <h6>Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.</h6>
+                      <div class="font-weight-bold mb-1 text-muted small">Admin</div>
+                      <h6>{{msg.message}}</h6>
                     </div>
                     <div class="text-muted small text-nowrap mt-2 ml-2">2:34 am</div>
                   </div>

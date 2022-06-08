@@ -1,25 +1,4 @@
 <!-- 
-<br>
-<br>
-<h1 style="text-align: center;">Sign In</h1>
-<form style="text-align: center;">
-    <div class="form-group">
-      
-      <label for="username">Username</label>
-      
-      <input type="text" class="form-control" id="username" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" >
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" [(ngModel)]="password" [ngModelOptions]="{standalone:true}" >
-    </div>
-    <button type="submit" (click)="login()" class="btn btn-success">Sign In</button>
-    <button routerLink="/signup" class="btn btn-success">Sign Up</button>
-
-  </form> -->
-
-
-  <!-- Section: Design Block -->
 <section class=" text-center text-lg-start">
   <style>
     .rounded-t-5 {
@@ -47,24 +26,23 @@
         <div class="card-body py-5 px-md-5">
           <h3>Sign in to get started</h3>
           <form>
-            <!-- Email input -->
+
             <div class="form-outline mb-4">
               <label class="form-label" for="form2Example1">Username</label>
               <input type="text" id="form2Example1" class="form-control" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" required minlength="6" maxlength="14" />
               
             </div>
 
-            <!-- Password input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="form2Example2">Password</label>
               <input type="password" id="form2Example2" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone:true}" required minlength="6" maxlength="20"/>
               
             </div>
 
-            <!-- 2 column grid layout for inline styling -->
+           
             <div class="row mb-4">
               <div class="col d-flex justify-content-center">
-                <!-- Checkbox -->
+                
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="" id="form2Example31"  required />
                   <label class="form-check-label" for="form2Example31"> Remember me </label>
@@ -72,12 +50,12 @@
               </div>
 
               <div class="col">
-                <!-- Simple link -->
+                
                 <a routerLink="../forgot-password">Forgot password?</a>
               </div>
             </div>
 
-            <!-- Submit button -->
+            
             <button (click)="login()" type="submit" class="signin-btn btn-primary btn-block mb-4">Sign in</button>
             <br>
             <div class="bottom">
@@ -151,4 +129,165 @@
         </div>
       </div>
     </div>
-  </section> -->
+  </section> --> 
+
+  <!-- 
+<section class="background-radial-gradient overflow-hidden">
+    <style>
+      .background-radial-gradient {
+        background-color: hsl(218, 41%, 15%);
+        background-image: radial-gradient(650px circle at 0% 0%,
+            hsl(218, 41%, 35%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%),
+          radial-gradient(1250px circle at 100% 100%,
+            hsl(218, 41%, 45%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%);
+      }
+  
+      #radius-shape-1 {
+        height: 220px;
+        width: 220px;
+        top: -60px;
+        left: -130px;
+        background: radial-gradient(#44006b, #ad1fff);
+        overflow: hidden;
+      }
+  
+      #radius-shape-2 {
+        border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+        bottom: -60px;
+        right: -110px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(#44006b, #ad1fff);
+        overflow: hidden;
+      }
+  
+      .bg-glass {
+        background-color: hsla(0, 0%, 100%, 0.9) !important;
+        backdrop-filter: saturate(200%) blur(25px);
+      }
+    </style>
+  
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+      <div class="row gx-lg-5 align-items-center mb-5">
+        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+          <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+            The best offer <br />
+            <span style="color: hsl(218, 81%, 75%)">for your business</span>
+          </h1>
+          <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Temporibus, expedita iusto veniam atque, magni tempora mollitia
+            dolorum consequatur nulla, neque debitis eos reprehenderit quasi
+            ab ipsum nisi dolorem modi. Quos?
+          </p>
+        </div>
+  
+        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+          <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+          <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+  
+          <div class="card bg-glass">
+            <div class="card-body px-4 py-5 px-md-5">
+              <form>
+                
+  
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example3" class="form-control" />
+                  <label class="form-label" for="form3Example3">Username</label>
+                </div>
+  
+                <div class="form-outline mb-4">
+                  <input type="password" id="form3Example4" class="form-control" />
+                  <label class="form-label" for="form3Example4">Password</label>
+                </div>
+  
+                <button (click)="login()" class="btn btn-primary font-weight-bold" style="margin-left:25%;width:200px">Log In</button>
+  
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+   -->
+
+   <!-- <a href="https://front.codes/" class="logo" target="_blank">
+		<img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+	</a> -->
+
+	<div class="section">
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+						<h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+			          	<label for="reg-log"></label>
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+								<div class="card-front">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h4 style="color: white;" class="mb-4 pb-3 ">Log In</h4>
+											<div class="form-group">
+												<input type="text" name="logemail" class="form-style" placeholder="Your username" id="logemail" autocomplete="off" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" required minlength="6" maxlength="14" >
+												<i class="input-icon uil uil-at"></i>
+											</div>	
+											<div class="form-group mt-2">
+												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off" [(ngModel)]="password" [ngModelOptions]="{standalone:true}" required minlength="6" maxlength="14" >
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<a (click)="login()" class="btn mt-4">submit</a>
+                            				<p class="mb-0 mt-4 text-center"><a routerLink="../forgot-password" class="link">Forgot your password?</a></p>
+				      					</div>
+			      					</div>
+			      				</div>
+								<div class="card-back">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h4 style="color: white;" class="mb-4 pb-3">Sign Up</h4>
+											<div class="form-group">
+												<input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off" [(ngModel)]="name" [ngModelOptions]="{standalone:true}" required required minlength="6" maxlength="20">
+												<i class="input-icon uil uil-user"></i>
+											</div>	
+											<div class="form-group mt-2">
+												<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off"[(ngModel)]="email" [ngModelOptions]="{standalone:true}" >
+												<i class="input-icon uil uil-at"></i>
+											</div>	
+                      <div class="form-group mt-2">
+												<input type="text" name="logemail" class="form-style" placeholder="Your Address" id="logemail" autocomplete="off" [(ngModel)]="address" [ngModelOptions]="{standalone:true}" required pattern="01(3|4|5|6|7|8|9)[0-9]{8}">
+												<i class="input-icon uil uil-at"></i>
+											</div>	
+                      <div class="form-group mt-2">
+												<input type="text" name="logemail" class="form-style" placeholder="Your Phone number" id="logemail" autocomplete="off"[(ngModel)]="phone_number" [ngModelOptions]="{standalone:true}" required pattern="01(3|4|5|6|7|8|9)[0-9]{8}">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+                      <div class="form-group mt-2">
+												<input type="text" name="logemail" class="form-style" placeholder="Your username" id="logemail" autocomplete="off" [(ngModel)]="username" [ngModelOptions]="{standalone:true}" required minlength="6" maxlength="14">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off" [(ngModel)]="password" [ngModelOptions]="{standalone:true}" required minlength="6" maxlength="45" >
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<a (click)="addUser()" class="btn mt-4">submit</a>
+				      					</div>
+			      					</div>
+			      				</div>
+			      			</div>
+			      		</div>
+			      	</div>
+		      	</div>
+	      	</div>
+	    </div>
+	</div>

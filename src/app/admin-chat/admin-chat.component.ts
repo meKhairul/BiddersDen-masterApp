@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { Message } from '../message';
 import Pusher from 'pusher-js';
 import {HttpClient} from "@angular/common/http";
@@ -16,7 +16,7 @@ export class AdminChatComponent implements OnInit {
   isUniqueRoom : boolean = false;
   allrooms : Message[] = [];
   userRoom : String = "";
-  
+  search !: String;
   //messages!: any[];
   user! : any;
   newMessageText = "";
@@ -49,16 +49,48 @@ export class AdminChatComponent implements OnInit {
   message = '';
   messages: Message[] = [];
 
-  constructor(private http: HttpClient, private userService : UserService) {
+  userdata!:any;
+ 
+
+  constructor(private http: HttpClient, private userService : UserService,private router:Router) {
   }
 
   ngOnInit(): void {
+
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        this.authenticated = auth; 
+        this.userdata = this.userService.getUser();
+      }
+
+    );
+    this.authenticate();
+    
     
     this.userService.authenticate().subscribe(response => {
       this.user = response;
       this.pusher();
       this.getMessages();
      });
+  }
+
+  authenticate(){
+    this.userService.authenticate().subscribe(response => {
+      this.userdata = response;
+      this.userService.setUser(this.userdata);
+      
+      if(this.userdata.username!='biddersden')
+      {
+        this.router.navigate(['']);
+      }
+      //alert("Logged In as .. " + String(this.userdata.username) )
+      Emitters.authEmitter.emit(true);
+    },
+    err => {
+      //alert("not Logged In")
+      Emitters.authEmitter.emit(false);
+    }
+  );
   }
 
   pusher(){
@@ -70,9 +102,7 @@ export class AdminChatComponent implements OnInit {
 
     const channel = pusher.subscribe('chatApp');
     channel.bind('message', (data: any) => {
-
-      
-      //if(data.room==this.user.username) this.messages.push(data);
+      if(data.room==this.userRoom) this.allrooms.push(data);
       //alert('An event was triggered with message: ' + data.message);
     });
   }
@@ -81,7 +111,7 @@ export class AdminChatComponent implements OnInit {
   {
     for(let data of this.allrooms)
     {
-      if(!this.unique_room.includes(data.room))
+      if(!this.unique_room.includes(data.room) && data.room != 'biddersden')
       {
         this.unique_room.push(data.room);
         
@@ -92,10 +122,11 @@ export class AdminChatComponent implements OnInit {
 
   submit(): void {
     //this.messages.push(this.message)
-    this.http.post(this.API_URL + '/message/', {
+      console.log(this.userRoom)  
+      this.http.post(this.API_URL + '/message/', {
       username: this.user.username,
       message: this.message, 
-      room : this.user.username
+      room : this.userRoom
     }).subscribe(() => {
       this.message = '';
     });

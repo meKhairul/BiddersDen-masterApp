@@ -19,10 +19,11 @@ export class CategoriesComponent implements OnInit {
   splitCategory:String="";
   subCategory:String="";
   hasSubCategory:boolean = false;
-
+  isBangla :boolean = false;
   constructor(private userService:UserService, private productService : ProductService, private router : Router) { }
 
   ngOnInit(): void {
+    this.isBangla = this.userService.getIsBangla();
     this.products = this.productService.categoricalProducts;
     this.category = this.productService.getCategory();
 

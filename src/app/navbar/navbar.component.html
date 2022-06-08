@@ -11,17 +11,20 @@
 
   <div class="nav-middle flex-div">
     <div class="search-box flex-div">
-      <form>
+      <form (submit)="search(searchData,1)">
         <input type="text" placeholder="Search" [(ngModel)] = "searchData" [ngModelOptions] = "{standalone: true}" required/>
-        <button type="submit" (click)="search(searchData,1)">
-        <img src="assets/search.png" alt="" />
-        </button>
+        
+        
+        
       </form>
       
       <!--img src="assets/images/voice-search.png" class="mic-icon" alt=""> -->
     </div>
   </div>
 
+  <div *ngIf="!authenticated" class="blank">
+
+  </div>
   <!-- <ul class="nav navbar-nav navbar-right">
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notification (<b>2</b>)</a>
@@ -84,7 +87,7 @@
   
 
     <div  class="nav-right flex-div">
-    <div class="dropdown">
+    <div class="dropdown" *ngIf="authenticated">
       <div class="dropbtn" >
         <a (click)="toggle()">
           <img src="assets/notification.png" class="user-icon" alt="notification-Icon" />
@@ -102,7 +105,7 @@
     </div>
     
 
-    <div class="dropdown">
+    <div class="dropdown" *ngIf="authenticated">
       <div class="dropbtn" >
         <a routerLink="chat">
           <img src="assets/chat.png" class="user-icon" alt="chat-Icon" />
@@ -114,7 +117,7 @@
       </div> -->
     </div>
         
-    <div class="dropdown">
+    <div class="dropdown" *ngIf="authenticated">
       <div class="dropbtn" >
         <a (click)="toggle()">
           <img src="assets/user.png" class="user-icon" alt="user-Icon" />
@@ -151,10 +154,10 @@
   </div>
   </div>
   
-  <div class="language">
+  <!-- <div class="language">
     <img src="assets/united-kingdom.png" class="language-icon" alt="english-Icon" />
-    <img src="assets/bangladesh.png" class="language-icon" alt="bd-Icon" />
-  </div>
+    <a (click)="makeBangla()" class="bangla"><img src="assets/bangladesh.png" class="language-icon" alt="bd-Icon" /></a>
+  </div> -->
 </nav>
 
 <!--sidebar-->
@@ -167,7 +170,7 @@
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAcRJREFUSEuNle1ZwzAMhF9tkBWYgDJB20mgkwCT0E3SblAmYIVsIB5/xJZsp0/yq4hY5zvdKUJ4BND4qzyx1NVtQRDUH/P/jg2kq3UoHtheoQPoXl0BtlByPbOZUOb8+4yybEG7O457Z/oVYFKYgUM+/AA5C7qsyg5Ujtr3Eo0Rr8B7PFB1D7XLiIVrsWMGuXnvBoGrCpcw6bEpUj0/VvBS+kL57Aabu0U2wjfKVwXwYhkAjwN8AD/ew2Ols1SBaeP6IGlh7g7n5u2BQWQqm4sK1y5PnXbCAZVZ0CkFbfPWLpbRUUKw78PSaGdwQJhRpkFmYtor3CDVwoJyhgySl8TaKzT9g7b5HgZWfFlAXyAF0cyAh8BrCs72ztlyS+PGINPbEwAvUJcVb9MqXX3xlzRLx8AOTa3gT0XqbL+ZA7cGmuW9Z60VbRt39RsgzCAxaP3mYH3y61/2om5dO2ojBtXSaQbmEm7fNBZxhNZcidatWe4WSpaUM1zHoBhhLK/J7wAgnTEsC3vxK33kovRuD+A2bwtQkhNlbG09WJhyAz0acneEUyPRTeBoaNyBU/NRst+D3Vb0X5cuJJs52ALwdtxzDQvxD/O42CJA8DvnAAAAAElFTkSuQmCC"/>
       <P><strong>Home</strong></P>
     </a>
-    <a class="outer-link" *ngIf="authenticated" routerLink="sell">
+    <a class="outer-link" *ngIf="authenticated" routerLink="../../sell">
       <img src="assets/shopping-bag.png" />
       <p><strong>Sell</strong></p>
     </a>
@@ -249,16 +252,16 @@
         </ul>
       </li>
     </ul> -->
-    <a class="outer-link" routerLink="../faq" data-toggle="tooltip" data-placement="bottom" title="know more about us">
+    <!-- <a class="outer-link" routerLink="../../faq" data-toggle="tooltip" data-placement="bottom" title="know more about us">
       <img src="assets/about.png" />
       <p><strong>FAQ</strong></p>
-    </a>
+    </a> -->
 
     <a class="outer-link" *ngIf = "!authenticated" (click) = "login()">
       <img src="assets/login.png" />
       <p><strong>Sign in</strong></p>
     </a>
-    <a class="outer-link" *ngIf = "authenticated" routerLink="../signin" (click) = "logout()"
+    <a class="outer-link" *ngIf = "authenticated" routerLink="/" (click) = "logout()"
       ><img src="assets/login.png" />
       <p><strong>Sign Out</strong></p>
     </a>

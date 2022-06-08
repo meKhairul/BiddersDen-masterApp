@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Emitters } from '../emiiters/Emitter';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { User } from '../user';
@@ -18,10 +19,39 @@ export class AdminAdduserComponent implements OnInit {
   image:any
   uid:any
   sub_category!:any;
+  userdata!:any;
+  authenticated : boolean = false;
   constructor(private userService : UserService, private productService: ProductService, private route:Router) { }
 
   ngOnInit(): void {
-  
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        this.authenticated = auth; 
+        this.userdata = this.userService.getUser();
+      }
+
+    );
+    this.authenticate();
+    
+  }
+
+  authenticate(){
+    this.userService.authenticate().subscribe(response => {
+      this.userdata = response;
+      this.userService.setUser(this.userdata);
+      
+      if(this.userdata.username!='biddersden')
+      {
+        this.route.navigate(['']);
+      }
+      //alert("Logged In as .. " + String(this.userdata.username) )
+      Emitters.authEmitter.emit(true);
+    },
+    err => {
+      //alert("not Logged In")
+      Emitters.authEmitter.emit(false);
+    }
+  );
   }
 
   onChanged(event:any){

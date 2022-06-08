@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Bid } from '../bid';
+import { Emitters } from '../emiiters/Emitter';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
 
@@ -15,7 +16,7 @@ export class BidsComponent implements OnInit {
   clicked : number = 0;
   bid_price !: number;
   bids : number[] = [];
-  user = this.userService.getUser()
+  user!:any;
   newBid = new Bid();
   currentBids : Bid[] = [];
   current_date : Date = new Date();
@@ -34,8 +35,20 @@ export class BidsComponent implements OnInit {
     }
     
   }
+  isBangla : boolean = false;
+  authenticated : boolean = false;
 
   ngOnInit(): void {
+    this.isBangla = this.userService.getIsBangla();
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        this.authenticated = auth; 
+        this.user = this.userService.getUser();
+      }
+
+    );
+    this.authenticate();
+    this.user = this.userService.getUser()
     this.id = this.aroute.snapshot.paramMap.get('id');
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
@@ -45,6 +58,23 @@ export class BidsComponent implements OnInit {
       window.scrollTo(0, 0)
   });
   this.getProductDetails(this.id);
+  
+  }
+
+  authenticate(){
+    this.userService.authenticate().subscribe(response => {
+      this.user = response;
+      this.userService.setUser(this.user);
+      
+     
+      //alert("Logged In as .. " + String(this.userdata.username) )
+      Emitters.authEmitter.emit(true);
+    },
+    err => {
+      //alert("not Logged In")
+      Emitters.authEmitter.emit(false);
+    }
+  );
   }
 
   getProductDetails(id : string){

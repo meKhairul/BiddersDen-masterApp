@@ -17,9 +17,37 @@ export class AdminHomeComponent implements OnInit {
   constructor(private userService:UserService, private productService: ProductService, private router:Router) { }
 
   show:boolean=false;
+  userdata!:any;
+  authenticated : boolean = false;
   
   ngOnInit(): void {
-    
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        this.authenticated = auth; 
+        this.userdata = this.userService.getUser();
+      }
+
+    );
+    this.authenticate();
+  }
+
+  authenticate(){
+    this.userService.authenticate().subscribe(response => {
+      this.userdata = response;
+      this.userService.setUser(this.userdata);
+      if(this.userdata.username!='biddersden')
+      {
+        this.router.navigate(['']);
+      }
+     
+      //alert("Logged In as .. " + String(this.userdata.username) )
+      Emitters.authEmitter.emit(true);
+    },
+    err => {
+      //alert("not Logged In")
+      Emitters.authEmitter.emit(false);
+    }
+  );
   }
 
   swapValue(){

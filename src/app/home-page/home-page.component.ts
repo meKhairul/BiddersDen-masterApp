@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Emitters } from '../emiiters/Emitter';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { Recommendations } from '../recommendations';
 import { UserService } from '../user.service';
 
 @Component({
@@ -29,14 +30,18 @@ export class HomePageComponent implements OnInit {
   rampm!:any;
   rmins!:any;
   rsec!:any;
+  found:boolean = false
+  recommendations!:any;
   recommendedProducts: Product[]=[];
   nextIndex :number = 0;
-
+  isBangla : boolean = false;
 
   authenticated : boolean = false;
   userdata!: any;
-
+ 
   ngOnInit(): void {
+
+    this.isBangla = this.userService.getIsBangla();
     
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
@@ -103,14 +108,14 @@ export class HomePageComponent implements OnInit {
   myTimer(date:Date) {
     
     const d = new Date();
-    d.setHours(23);
+    d.setHours(22);
     d.setMinutes(59);
     d.setSeconds(59);
     
     d.setMilliseconds(999);
     //console.log(date);
     let difference = d.getTime() - date.getTime();
-    if(difference<=0 && date.getHours()<=9)
+    if((date.getHours()<=9 || date.getHours()>=23))
     {
       this.isBidAble = false;
       this.userService.setIsBidAble(this.isBidAble);
@@ -121,6 +126,7 @@ export class HomePageComponent implements OnInit {
       this.isBidAble = true;
       this.userService.setIsBidAble(this.isBidAble);
     }
+
     this.rsec = Math.floor(difference / 1000);
     this.rmins = Math.floor(this.rsec / 60);
     this.rhour = Math.floor(this.rmins / 60);
@@ -160,16 +166,22 @@ export class HomePageComponent implements OnInit {
     });
     
   }
+
   authenticate(){
     this.userService.authenticate().subscribe(response => {
       this.userdata = response;
       this.userService.setUser(this.userdata);
+      if(this.userdata.username=='biddersden')
+      {
+        this.router.navigate(['../admin-home']);
+      }
       this.userService.getRecommendations(this.userdata.username).subscribe(data => {
-        this.recommendedProducts = data;
-        console.log(this.recommendedProducts)
+        this.recommendations = data;
+        if(this.recommendations.found){
+          this.found = true
+          this.recommendedProducts = this.recommendations.products;
+        }
       });
-     
-      //alert("Logged In as .. " + String(this.userdata.username) )
       Emitters.authEmitter.emit(true);
     },
     err => {
@@ -178,10 +190,30 @@ export class HomePageComponent implements OnInit {
     }
   );
   }
+
+  // authenticate(){
+  //   this.userService.authenticate().subscribe(response => {
+  //     this.userdata = response;
+  //     this.userService.setUser(this.userdata);
+      
+  //     this.userService.getRecommendations(this.userdata.username).subscribe(data => {
+  //       this.recommendedProducts = data;
+  //       console.log(this.recommendedProducts)
+  //     });
+     
+  //     //alert("Logged In as .. " + String(this.userdata.username) )
+  //     Emitters.authEmitter.emit(true);
+  //   },
+  //   err => {
+  //     //alert("not Logged In")
+  //     Emitters.authEmitter.emit(false);
+  //   }
+  // );
+  // }
   getProducts(){
     this.productService.getAllProducts().subscribe(data=>{
       this.products = data;
-
+      this.products = this.products.sort((a, b) => (a.recieved_date > b.recieved_date?-1:1));
       this.getNextProduct();
       
     });
