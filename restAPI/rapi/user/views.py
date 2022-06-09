@@ -355,6 +355,14 @@ def getPreviousBidsForUser(request):
 
 
 
+@api_view(['POST'])
+@csrf_exempt
+def addTransaction(request):
+    if request.method == 'POST':
+        data=JSONParser().parse(request)
+        Transactions.objects.create(productId = data['productId'], buyerId = data['bidderId'], sellerId = data['bidderId'], amount = data['bidAmount'], transactionId = data['transactionId'])
+        
+
 
 ############## Event ################
 
@@ -475,6 +483,35 @@ def generateRecommendation(request):
         return JsonResponse("sucess", safe = False)
 
 
+@csrf_exempt
+@api_view(['POST'])
+def gg(request):
+     if request.method=='POST':
+         data = JSONParser().parse(request)
+         print(data)
+         username = data['username']
+         file_name = 'recommendations_' + username + '.csv'
+         df = pd.read_csv('E:/' + file_name)
+         product_ids = []
+         for id in df['product_id']:
+             product_ids.append(id)
+         print("product ids",  product_ids)
+
+         #products = Product.objects.filter(pk__in product_ids)
+         #products = ProductSerializer(products)
+         products = []
+         for product_id in product_ids:
+             product = Product.objects.filter(uid = product_id).first()
+             #product = ProductSerializer(product)
+             products.append(product)
+       
+         print(products)
+         products = ProductSerializer(products, many = True)
+
+         return JsonResponse(products.data, safe = False)
+
+
+
 # @csrf_exempt
 # @api_view(['POST'])
 # def gg(request):
@@ -483,66 +520,37 @@ def generateRecommendation(request):
 #         print(data)
 #         username = data['username']
 #         file_name = 'recommendations_' + username + '.csv'
-#         df = pd.read_csv('E:/' + file_name)
-#         product_ids = []
-#         for id in df['product_id']:
-#             product_ids.append(id)
-#         print("product ids",  product_ids)
+#         file_name = 'E:/' + file_name
 
-#         #products = Product.objects.filter(pk__in product_ids)
-#         #products = ProductSerializer(products)
-#         products = []
-#         for product_id in product_ids:
-#             product = Product.objects.filter(uid = product_id).first()
-#             #product = ProductSerializer(product)
-#             products.append(product)
-        
-#         print(products)
-#         products = ProductSerializer(products, many = True)
+#         if os.path.exists(file_name):
+#             print("yes")
+#             df = pd.read_csv(file_name)
+#             product_ids = []
+#             for id in df['product_id']:
+#                 product_ids.append(id)
+#             print("product ids",  product_ids)
 
-#         return JsonResponse(products.data, safe = False)
-
-
-
-@csrf_exempt
-@api_view(['POST'])
-def gg(request):
-    if request.method=='POST':
-        data = JSONParser().parse(request)
-        print(data)
-        username = data['username']
-        file_name = 'recommendations_' + username + '.csv'
-        file_name = 'E:/' + file_name
-
-        if os.path.exists(file_name):
-            print("yes")
-            df = pd.read_csv(file_name)
-            product_ids = []
-            for id in df['product_id']:
-                product_ids.append(id)
-            print("product ids",  product_ids)
-
-            #products = Product.objects.filter(pk__in product_ids)
-            #products = ProductSerializer(products)
-            products = []
-            for product_id in product_ids:
-                product = Product.objects.filter(uid = product_id).first()
-                #product = ProductSerializer(product)
-                products.append(product)
+#             #products = Product.objects.filter(pk__in product_ids)
+#             #products = ProductSerializer(products)
+#             products = []
+#             for product_id in product_ids:
+#                 product = Product.objects.filter(uid = product_id).first()
+#                 #product = ProductSerializer(product)
+#                 products.append(product)
             
-            print(products)
-            products = ProductSerializer(products, many = True)
-            response = {
-                'found' : True,
-                'products' : products.data ,
-            }
-            return JsonResponse(response, safe = False)
-        else:
-            print("no")
-            response = {
-                'found' : False,
-                'products' : [],
-            }
-            return JsonResponse(response, safe = False)
+#             print(products)
+#             products = ProductSerializer(products, many = True)
+#             response = {
+#                 'found' : True,
+#                 'products' : products.data ,
+#             }
+#             return JsonResponse(response, safe = False)
+#         else:
+#             print("no")
+#             response = {
+#                 'found' : False,
+#                 'products' : [],
+#             }
+#             return JsonResponse(response, safe = False)
 
 

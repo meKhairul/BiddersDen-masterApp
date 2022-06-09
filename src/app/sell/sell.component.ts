@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Emitters } from '../emiiters/Emitter';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { User } from '../user';
@@ -14,22 +15,46 @@ import { UserService } from '../user.service';
 export class SellComponent implements OnInit {
   
   product = new Product();
-  seller = new User();
+  seller!:any;
   image:any
   uid:any
   sub_category!:any;
   img1!:any;
   img2!:any;
+  userdata!:any;
   constructor(private userService : UserService, private productService: ProductService, private route:Router) { }
+  authenticated :boolean = false;
 
   ngOnInit(): void {
-  
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        this.authenticated = auth; 
+        this.userdata = this.userService.getUser();
+      }
+
+    );
+    this.authenticate();
   }
 
-  onChanged(event:any, id : number){
-    if(id==0) this.image = event.target.files[id];
-    if(id==1) this.img1 = event.target.files[id];
-    if(id==2) this.img2 = event.target.files[id];
+
+  authenticate(){
+    this.userService.authenticate().subscribe(response => {
+      this.seller = response;
+      this.userService.setUser(this.seller);
+      
+     
+      //alert("Logged In as .. " + String(this.userdata.username) )
+      Emitters.authEmitter.emit(true);
+    },
+    err => {
+      //alert("not Logged In")
+      Emitters.authEmitter.emit(false);
+    }
+  );
+  }
+
+  onChanged(event:any){
+    this.image = event.target.files[0];
   }
   
   uploadata = new FormData();
@@ -50,15 +75,6 @@ export class SellComponent implements OnInit {
         this.uid = response.toString()
         this.uploadata.append('image', this.image);
         this.uploadata.append('file_name', this.uid);
-        this.uploadPhoto();
-        this.uploadata = new FormData();
-        this.uploadata.append('image', this.img1);
-        this.uploadata.append('file_name', this.uid+'1');
-        this.uploadPhoto();
-        this.uploadata = new FormData();
-        this.uploadata.append('image', this.img2);
-        this.uploadata.append('file_name', this.uid+'2');
-        console.log(this.uploadata);
         this.uploadPhoto();
       });
     }

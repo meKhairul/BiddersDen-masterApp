@@ -120,6 +120,7 @@ img.product-image{
 .profile-work{
     padding: 1%;
     margin-top: 2%;
+    margin-left: 28%;
 }
 .profile-work p{
     font-size: 12px;
@@ -142,6 +143,10 @@ img.product-image{
 .profile-tab p{
     font-weight: 600;
     color: #0062cc;
+}
+
+.profile-img{
+    margin-top: 2%;
 }
 
 div.col-md-8{

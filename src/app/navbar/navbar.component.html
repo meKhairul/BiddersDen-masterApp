@@ -107,7 +107,7 @@
 
     <div class="dropdown" *ngIf="authenticated">
       <div class="dropbtn" >
-        <a routerLink="chat">
+        <a routerLink="../../chat">
           <img src="assets/chat.png" class="user-icon" alt="chat-Icon" />
         </a>
       </div>
@@ -119,7 +119,7 @@
         
     <div class="dropdown" *ngIf="authenticated">
       <div class="dropbtn" >
-        <a (click)="toggle()">
+        <a routerLink="../../userprofile" (click)="toggle()">
           <img src="assets/user.png" class="user-icon" alt="user-Icon" />
           
         </a>
@@ -170,7 +170,7 @@
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAcRJREFUSEuNle1ZwzAMhF9tkBWYgDJB20mgkwCT0E3SblAmYIVsIB5/xJZsp0/yq4hY5zvdKUJ4BND4qzyx1NVtQRDUH/P/jg2kq3UoHtheoQPoXl0BtlByPbOZUOb8+4yybEG7O457Z/oVYFKYgUM+/AA5C7qsyg5Ujtr3Eo0Rr8B7PFB1D7XLiIVrsWMGuXnvBoGrCpcw6bEpUj0/VvBS+kL57Aabu0U2wjfKVwXwYhkAjwN8AD/ew2Ols1SBaeP6IGlh7g7n5u2BQWQqm4sK1y5PnXbCAZVZ0CkFbfPWLpbRUUKw78PSaGdwQJhRpkFmYtor3CDVwoJyhgySl8TaKzT9g7b5HgZWfFlAXyAF0cyAh8BrCs72ztlyS+PGINPbEwAvUJcVb9MqXX3xlzRLx8AOTa3gT0XqbL+ZA7cGmuW9Z60VbRt39RsgzCAxaP3mYH3y61/2om5dO2ojBtXSaQbmEm7fNBZxhNZcidatWe4WSpaUM1zHoBhhLK/J7wAgnTEsC3vxK33kovRuD+A2bwtQkhNlbG09WJhyAz0acneEUyPRTeBoaNyBU/NRst+D3Vb0X5cuJJs52ALwdtxzDQvxD/O42CJA8DvnAAAAAElFTkSuQmCC"/>
       <P><strong>Home</strong></P>
     </a>
-    <a class="outer-link" *ngIf="authenticated" routerLink="../../sell">
+    <a class="outer-link" *ngIf="authenticated" routerLink="../sell">
       <img src="assets/shopping-bag.png" />
       <p><strong>Sell</strong></p>
     </a>

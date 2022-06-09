@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Emitters } from '../emiiters/Emitter';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
@@ -13,7 +14,7 @@ import { UserService } from '../user.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private userService:UserService,private productService:ProductService,private router:Router) { 
+  constructor(private userService:UserService,private productService:ProductService,private router:Router,private toastr :ToastrService) { 
     setInterval(()=>{
       const date = new Date();
       this.myTimer(date);
@@ -115,7 +116,10 @@ export class HomePageComponent implements OnInit {
     d.setMilliseconds(999);
     //console.log(date);
     let difference = d.getTime() - date.getTime();
-    if((date.getHours()<=9 || date.getHours()>=23))
+
+    //console.log(date.getHours());
+
+    if((date.getHours()<9 || date.getHours()>23))
     {
       this.isBidAble = false;
       this.userService.setIsBidAble(this.isBidAble);
@@ -176,11 +180,12 @@ export class HomePageComponent implements OnInit {
         this.router.navigate(['../admin-home']);
       }
       this.userService.getRecommendations(this.userdata.username).subscribe(data => {
-        this.recommendations = data;
+        this.recommendedProducts = data;
+        /*this.recommendations = data;
         if(this.recommendations.found){
           this.found = true
           this.recommendedProducts = this.recommendations.products;
-        }
+        }*/
       });
       Emitters.authEmitter.emit(true);
     },
@@ -241,10 +246,13 @@ export class HomePageComponent implements OnInit {
     }
     else if(this.authenticated==false)
     {
-      alert("You are not allowed to bid.Please sign in first!!");
+      this.toastr.error("Notification",'You are not allowed to bid.Please sign in first!!');
+      this.router.navigate(['signin']);
+      // alert("You are not allowed to bid.Please sign in first!!");
     }
     else{
-      alert("Bidding is not started yet!!");
+      this.toastr.error("Notification",'Bidding is not started yet!!');
+      
     }
     if(this.authenticated) {
       this.productService.createEvent('view', this.userdata.username, product).subscribe(data=>{

@@ -33,7 +33,7 @@
                       
                     </div>
                     <div class="flex-shrink-1 bg-primary rounded py-2 px-3 mr-3">
-                      <div class="font-weight-bold mb-1 text-muted small " >{{msg.username}}</div>
+                      <!-- <div class="font-weight-bold mb-1 text-muted small " >{{msg.username}}</div> -->
                       <h6 style="color: white;">{{msg.message}}</h6>
                     </div>
                     <div class="text-muted small text-nowrap mt-2 ml-20">{{msg.time | date:'shortTime'}}</div>
@@ -48,7 +48,7 @@
                       <div class="font-weight-bold mb-1 text-muted small">Admin</div>
                       <h6>{{msg.message}}</h6>
                     </div>
-                    <div class="text-muted small text-nowrap mt-2 ml-2">2:34 am</div>
+                    <div class="text-muted small text-nowrap mt-2 ml-2">{{msg.time | date:'shortTime'}}</div>
                   </div>
               </div>
                 

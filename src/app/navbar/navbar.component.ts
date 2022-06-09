@@ -68,8 +68,8 @@ export class NavbarComponent implements OnInit {
       this.myTimer(date);
     },1000);
     setInterval(()=>{
-      console.log('bidable '+ this.isBidAble);
-      console.log('one '+this.one);
+      //console.log('bidable '+ this.isBidAble);
+      //console.log('one '+this.one);
       if(!this.isBidAble && this.one)
       {
         this.one=false;
@@ -78,6 +78,9 @@ export class NavbarComponent implements OnInit {
         this.userService.setWinnerProducts(this.winningProducts);
         this.newNotify.type = 'win';
         this.newNotify.msg = 'Congratulations!! Yoy have won the bid/s. Click the Link to Pay for getting the product.';
+        
+        
+
         this.newNotify.time = this.date;
         this.notification.push(this.newNotify);
         
@@ -116,7 +119,7 @@ export class NavbarComponent implements OnInit {
   {
     if(this.authenticated)
     {
-      this.router.navigate(['userprofile']);
+      
     }
     else
     {
@@ -228,7 +231,7 @@ export class NavbarComponent implements OnInit {
     //console.log(date);
     let difference = d.getTime() - date.getTime();
     
-    if(date.getHours()<=9 || date.getHours()>=23)
+    if(date.getHours()>9 || date.getHours()>=23)
     {
       this.isBidAble = false;
       this.userService.setIsBidAble(this.isBidAble);

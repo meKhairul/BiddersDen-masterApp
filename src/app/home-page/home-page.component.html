@@ -207,7 +207,7 @@
       </div>
     </div>
 
-    <div *ngIf="isBidAble && authenticated && found" class="container mt-2">
+    <div *ngIf="isBidAble && authenticated" class="container mt-2">
         <h3 class="fs-4 fw-bold some-space"><b>Recommended Products</b></h3>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
           <div *ngFor="let product of recommendedProducts;" >

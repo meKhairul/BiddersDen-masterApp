@@ -81,7 +81,7 @@ export class AdminNavbarComponent implements OnInit {
   logout(): void {
     this.userService.logout().subscribe(() => this.authenticated = false);
     this.user = new User();
-    this.router.navigate(['../admin-login']);
+    this.router.navigate(['../signin']);
   }
 
   toggle()

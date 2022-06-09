@@ -5,6 +5,7 @@ import { Bid } from '../bid';
 import { Emitters } from '../emiiters/Emitter';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bids',
@@ -24,7 +25,7 @@ export class BidsComponent implements OnInit {
   productShow = this.productService.getBidProductToBeShown();
   
   minBid = Math.max(this.productShow.current_price,5);
-  constructor(private productService:ProductService,private userService:UserService,private router:Router,private aroute:ActivatedRoute) { 
+  constructor(private productService:ProductService,private userService:UserService,private router:Router,private aroute:ActivatedRoute,private toastr:ToastrService) { 
     
     
     for(let i=this.minBid;this.bids.length<=50;i+=(this.minBid/10))
@@ -98,7 +99,8 @@ export class BidsComponent implements OnInit {
 
     if(this.bid_price<=this.minBid)
     {
-      alert("You can't bid less than current price!!");
+      this.toastr.success('Notification', 'You can not bid less than current price');
+      //alert("You can't bid less than current price!!");
     }
     else{
     this.newBid.bidderId = this.user.username;
@@ -106,7 +108,8 @@ export class BidsComponent implements OnInit {
     this.newBid.bidAmount = parseInt(this.bid_price.toString(),10);
     this.productShow.current_price = parseInt(this.bid_price.toString(),10);
     this.productService.setBid(this.newBid).subscribe(response=>{
-      alert(response.toString())
+      //alert(response.toString())
+      this.toastr.success('Notification', 'Bidd added successfully');
     });
     
     this.productService.createEvent('bid', this.user.username, this.productShow).subscribe(data=>{

@@ -46,14 +46,14 @@ export class SignInComponent implements OnInit {
         password:this.password
       }
       this.userService.login(data).subscribe(response=>{
-        this.toastr.success('Hi,username', 'Login Successfully');
+        this.toastr.success('Notification', 'Login Successfully');
         this.route.navigate(['/'])
       });
     }
     else
     {
       
-        this.toastr.success('Hello world!', 'Toastr fun!');
+      this.toastr.success('Notification', 'Signin Unsuccessfull');
       
       //alert("Username or Password can't be blank!");
     }
@@ -75,7 +75,8 @@ export class SignInComponent implements OnInit {
       password:this.password
     }
     this.userService.addUser(data).subscribe(response=>{
-      alert(response)
+      this.toastr.success('Notification', response.toString());
+      //alert(response)
       this.route.navigate(['signin'])
     });
   }

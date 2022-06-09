@@ -20,17 +20,15 @@
                               
                           </div>
                           <div class="profile-work">
-                            <h6>
-                                <b>{{productShow.product_name}}</b>
+                            <h6 class="ml-2">
+                                <b class="ml-3">{{productShow.product_name}}</b>
                             </h6>
                           </div>
                       </div>
                       <div class="detail-card col-md-8">
                           <p class="product-details fs-4 fw-bold">Product Details</p>
                           <div class="profile-head">
-                                      <pre>
-                                          {{productShow.product_details}}
-                                      </pre>
+                              <pre>{{productShow.product_details}}</pre>
                                       
                                       <h6 class="proile-rating">Current Price : <span>{{productShow.current_price+" Taka"}}</span></h6>
                               
@@ -45,8 +43,8 @@
                                     <label class="input-group-text" for="inputGroupSelect01">Your maximum Bid</label>
                                   </div>
                                   <input type="number" placeholder="Enter bid amount"  [(ngModel)] = "bid_price" [ngModelOptions] = "{standalone: true}">
-                                  <div *ngIf="bid_price<=productShow.current_price" class="red"> You must bid more than current price</div>
-                                  <div *ngIf="bid_price>productShow.current_price" class="green"> Its a valid amount</div>
+                                  <!-- <div *ngIf="bid_price<=productShow.current_price" class="red"> You must bid more than current price</div>
+                                  <div *ngIf="bid_price>productShow.current_price" class="green"> Its a valid amount</div> -->
                                   <!-- <select class="custom-select" id="inputGroupSelect01" [(ngModel)] = "bid_price" [ngModelOptions] = "{standalone: true}" required>
                                     <option selected>Select Bids</option>
                                     

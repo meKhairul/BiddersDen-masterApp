@@ -168,3 +168,9 @@ optgroup{
     margin-left: 50%;
 }
 
+.component{
+    margin-left:20% ;
+    max-width: 1000px;
+    margin-top: 5%;
+  }
+

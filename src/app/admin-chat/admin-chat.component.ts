@@ -74,6 +74,17 @@ export class AdminChatComponent implements OnInit {
      });
   }
 
+  searching(search:String)
+  {
+    for(let user of this.unique_room)
+    {
+      if(user==search)
+      {
+        this.userRoom = user;
+      }
+    }
+  }
+
   authenticate(){
     this.userService.authenticate().subscribe(response => {
       this.userdata = response;

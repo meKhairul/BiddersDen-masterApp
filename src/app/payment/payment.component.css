@@ -78,6 +78,12 @@ body {
     margin: 0;
 }
 
+.component{
+    margin-left:20% ;
+    max-width: 1000px;
+    margin-top: 5%;
+  }
+
 .form-control3:focus {
     box-shadow: none;
     border-bottom: 2px solid #ccc;

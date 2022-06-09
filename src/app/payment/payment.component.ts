@@ -34,7 +34,7 @@ export class PaymentComponent implements OnInit {
   showProduct(product:Product)
   {
     this.productService.setProductToBeShown(product);
-    this.router.navigate(['product']);
+    this.router.navigate(['product', product.uid]);
   }
   getUser()
   {
