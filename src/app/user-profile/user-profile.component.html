@@ -63,26 +63,18 @@
 
     <main class="mt-5 pt-3 stats">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            
-          </div>
-        </div>
+        
         <div class="row mydiv">
           
           
           
-          <div class="col-md-3 mb-3">
-            <div class="card bg-danger text-white h-100">
-              <div class="card-body py-5">Recent Bids</div>
-              <div class="card-footer d-flex">
-                <button (click)="getPreviousBids()" class="view-details btn">View Details</button> 
+          <div class="recent-bids col-md-3 mb-3">
+            
+                <button (click)="getPreviousBids()" class="view-details btn btn-danger">View Recent Bids</button> 
                 <span class="ms-auto">
                   <i class="bi bi-chevron-right"></i>
                 </span>
-              </div>
               
-            </div>
 
           </div>
           <table *ngIf="click" class="table table-bordered ">

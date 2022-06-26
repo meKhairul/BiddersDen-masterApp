@@ -246,12 +246,12 @@ export class HomePageComponent implements OnInit {
     }
     else if(this.authenticated==false)
     {
-      this.toastr.error("Notification",'You are not allowed to bid.Please sign in first!!');
+      this.toastr.error('You are not allowed to bid.Please sign in first!!');
       this.router.navigate(['signin']);
       // alert("You are not allowed to bid.Please sign in first!!");
     }
     else{
-      this.toastr.error("Notification",'Bidding is not started yet!!');
+      this.toastr.error('Bidding is not started yet!!');
       
     }
     if(this.authenticated) {

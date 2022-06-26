@@ -231,7 +231,7 @@ export class NavbarComponent implements OnInit {
     //console.log(date);
     let difference = d.getTime() - date.getTime();
     
-    if(date.getHours()>9 || date.getHours()>=23)
+    if(date.getHours()<9 || date.getHours()>=23)
     {
       this.isBidAble = false;
       this.userService.setIsBidAble(this.isBidAble);
