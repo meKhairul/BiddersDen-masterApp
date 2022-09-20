@@ -22,7 +22,7 @@ This project aims to develop a complete web application that will help sellers t
 ### Technologies
 Front-end:
 HTML, CSS, Typescript (Angular)
-Angular
+Angular <br>
 Back-end:
 Python,Django
 Database:
@@ -30,7 +30,7 @@ SqlLite
 
 ## Deliverables
 
-SRS documentation
+SRS documentation <br>
 Web Application
 
 ## Motivation:
