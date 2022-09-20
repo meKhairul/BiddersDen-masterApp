@@ -1,8 +1,5 @@
 # Bidders-Den-System
-Introduction
-Bidder’s Den will be an online auction place, where people will be able to sell and buy goods online through bidding, sitting from home.
-
-The company will have a dedicated warehouse to store the products. Sellers will send their product details (including photos, purchasing price, purchasing memo, time used, current state, base price etc) to the company. The company will then verify the details and accept/reject the product for auction. If accepted, the seller has to send the product to the company. The company will receive the product, store it in the warehouse and it will be on the website on next auction day. The bidders will then bid for their desired product until the time ends. After the time ends, the product will be handed over to the buyer with courier or other ways they are convenient with.
+Bidder’s Den is an online auction place, where people can sell and buy goods online through bidding, sitting from home.
 
 This project aims to develop a complete web application that will help sellers to sell, buyers to bid and buy through the company. 
 
@@ -52,8 +49,8 @@ Back-end:
 Python,Django
 Database:
 SqlLite
-Deliverables
 
+## Deliverables
 
 SRS documentation
 Web Application
