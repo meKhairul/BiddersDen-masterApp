@@ -19,9 +19,8 @@ This project aims to develop a complete web application that will help sellers t
 12. Users will get product recommendations using machine learning algorithms
 13. The website will be visible both in English and Bangla
 
-### Technologies
+### Framework/Technologies
 Front-end:
-HTML, CSS, Typescript (Angular)
 Angular <br>
 Back-end:
 Django
