@@ -24,9 +24,7 @@ Front-end:
 HTML, CSS, Typescript (Angular)
 Angular <br>
 Back-end:
-Python,Django
-Database:
-SqlLite
+Django
 
 ## Deliverables
 
