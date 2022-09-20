@@ -19,28 +19,6 @@ This project aims to develop a complete web application that will help sellers t
 12. Users will get product recommendations using machine learning algorithms
 13. The website will be visible both in English and Bangla
 
-## Database Management 
-Database tables will be maintained for - 
-### Users :
-1.Name
-2.Phone
-3.Email
-4.Address
-5.Sold products
-6.Bought products
-
-### Products :
-1.Product ID
-2.Product type
-3.Product’s photo
-4.Seller information
-5.State (Sold/Unsold/Not Auctioned)
-6.Delivered/Yet to be delivered (if Sold)  
-7.Buyer information (if Sold)
-8.Transaction Id (if Sold)
-9.Returned/Yet to be returned (if Unsold)
-10.Received Date, Shipping Date, Delivered Date 
-
 ### Technologies
 Front-end:
 HTML, CSS, Typescript (Angular)
